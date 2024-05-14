@@ -5,7 +5,7 @@ description = "An open-source toolkit to test LLMs against jailbreaks and unprec
 license = "MIT"
 authors = ["Rishabh Bhardwaj", "Prannaya Gupta <prannayagupta@programmer.net>"]
 readme = "README.md"
-repository = "https://github.com/walledai/llm-test-toolkit"
+repository = "https://github.com/walledai/bastion"
 keywords = ["NLP", "deep learning", "transformer", "language model", "jailbreaking", "red-teaming"]
 classifiers = [
     "Intended Audience :: Developers :: Science/Research",
@@ -17,7 +17,7 @@ classifiers = [
 ]
 
 [tool.poetry.urls]
-"Bug Tracker" = "https://github.com/walledai/llm-test-toolkit/issues"
+"Bug Tracker" = "https://github.com/walledai/bastion/issues"
 
 [tool.poetry.dependencies]
 python = "^3.9"
