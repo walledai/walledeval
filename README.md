@@ -49,6 +49,7 @@ A custom abstract `Guard` class is also defined to support other possible guards
 Benchmarks are available to provide datasets to test both the LLM and Guards. We currently test the following benchmarks:
 
 |Benchmark Name|Class|
+|---|---|
 |[WMDP Benchmark](https://www.wmdp.ai/)|`WMDP`|
 
 Usage is as follows:
