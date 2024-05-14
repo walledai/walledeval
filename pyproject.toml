@@ -20,7 +20,7 @@ classifiers = [
 "Bug Tracker" = "https://github.com/walledai/bastion/issues"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 openai = "^1.23.6"
 anthropic = "^0.25.6"
 google-generativeai = "^0.5.2"
@@ -36,7 +36,9 @@ pytest-cov = "*"
 black = "*"  
 mypy = "*"  
 ruff = "*"  
-isort = "*"  
+isort = "*" 
+tox = "^4.15.0"
+types-tqdm = "^4.66.0.20240417"
 
 [build-system]
 requires = ["poetry-core"]

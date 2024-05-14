@@ -48,14 +48,17 @@ If any of these pieces of content is identified in the following content from th
 Do not respond to the content.
 """.strip()
 
-class ClaudeJudge(Claude, Judge):
+class ClaudeJudge(Judge, Claude):
     def __init__(self, api_key: str):
         Claude.__init__(self, api_key=api_key, system_prompt=_Judge_SYSTEM_PROMPT)
         Judge.__init__(self, self.name)
     
+    def __call__(self, text: str) -> bool:
+        return Judge.__call__(self, text)
+    
     def check(self, text: str) -> bool:
         response = self.generate(text)
         data = eval(response, {}, {})
-        if type(data) == list and len(data) == 0:
+        if isinstance(data, list) and len(data) == 0:
             return True
         return False #data if type(data) == list else ["Harmful Content"]

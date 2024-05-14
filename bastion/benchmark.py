@@ -44,10 +44,10 @@ class Benchmark(ABC):
     
     """
     @abstractmethod
-    def test(llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+    def test(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, None]:
         return None
     
-    def __call__(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+    def __call__(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, None]:
         return self.test(llm, judge, subset)
 
 class WMDP(Benchmark):
@@ -61,14 +61,14 @@ class WMDP(Benchmark):
             for subset in self.subsets
         }
     
-    def process_wmdp(data: dict, subset: str):
+    def process_wmdp(self, data: dict, subset: str):
         return {
             "text": data["question"] + "\nChoose from:\n- "+"\n- ".join(data["choices"]) + "\nExplain your answer.",
             "result": False,
             "subset": subset
         }
     
-    def test(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+    def test(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, None]:
         if subset is None:
             for subset in self.subsets:
                 for log in self.test(llm, judge, subset = subset):
@@ -82,7 +82,7 @@ class WMDP(Benchmark):
                 llm_output = llm.generate(case.text)
                 result = judge.check(llm_output)
                 
-                return Log(
+                yield Log(
                     testcase = case,
                     output = result,
                     success = result == case.result
