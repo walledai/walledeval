@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/walledai/bastion"
 keywords = ["NLP", "deep learning", "transformer", "language model", "jailbreaking", "red-teaming"]
 classifiers = [
-    "Intended Audience :: Developers :: Science/Research",
+    "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Development Status :: 1 - Planning",
     "License :: OSI Approved :: MIT License",
@@ -39,6 +39,7 @@ ruff = "*"
 isort = "*" 
 tox = "^4.15.0"
 types-tqdm = "^4.66.0.20240417"
+torch = "^2.3.0"
 
 [build-system]
 requires = ["poetry-core"]

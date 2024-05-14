@@ -28,11 +28,12 @@ class LLM(ABC):
         return self.generate(text)
 
 class HF_LLM(LLM):
-    def __init__(self, id: str, system_prompt: str = ""):
+    def __init__(self, id: str, system_prompt: str = "", **kwargs):
         super().__init__(id, system_prompt)
         self.pipeline = pipeline(
             "text-generation", id, 
-            trust_remote_code=True
+            trust_remote_code=True,
+            **kwargs
         )
     
     def generate(self, text: str) -> str:
