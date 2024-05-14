@@ -1,0 +1,34 @@
+[tool.poetry]
+name = "bastion"
+version = "0.0.1dev"
+description = "An open-source toolkit to test LLMs against jailbreaks and unprecedented harms."
+license = "MIT"
+authors = ["Rishabh Bhardwaj", "Prannaya Gupta <prannayagupta@programmer.net>"]
+readme = "README.md"
+repository = "https://github.com/walledai/llm-test-toolkit"
+keywords = ["NLP", "deep learning", "transformer", "language model", "jailbreaking", "red-teaming"]
+classifiers = [
+    "Intended Audience :: Developers :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/walledai/llm-test-toolkit/issues"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+openai = "^1.23.6"
+anthropic = "^0.25.6"
+google-generativeai = "^0.5.2"
+transformers = "^4.40.1"
+datasets = "^2.19.0"
+pydantic = "^2.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
