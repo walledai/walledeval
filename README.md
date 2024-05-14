@@ -46,7 +46,7 @@ Usage is as follows:
 # <boolean output>
 ```
 
-A custom abstract `judge.Judge` class is also defined to support other possible guards, which takes in the guard identifier `name`, and an abstract method `check(text: str) -> bool`.
+A custom abstract `judge.Judge` class is also defined to support other possible judges, which takes in the judge identifier `name`, and an abstract method `check(text: str) -> bool`.
 
 ### Benchmarks (`bastion.benchmark`)
 
@@ -64,7 +64,7 @@ Usage is as follows:
 
 >>> wmdp = WMDP()
 
->>> wmdp.test(llm, guard)
+>>> wmdp.test(llm, judge)
 # <logs>
 # generator[logs]
 ```
