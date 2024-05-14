@@ -7,7 +7,7 @@ from functools import partial
 from tqdm import tqdm
 
 from datasets import load_dataset
-from llm import LLM
+from bastion.llm import LLM
 from bastion.judge import Judge
 
 __all__ = [

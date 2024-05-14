@@ -52,10 +52,10 @@ class Claude(LLM):
                  temperature: float = 0) -> str:
         message = self.client.messages.create(
             max_tokens=max_tokens,
-            messages={
+            messages=[{
                 "role": "user",
                 "content": text
-            },
+            }],
             temperature=temperature,
             system=self.system_prompt,
             model="claude-3-opus-20240229",
