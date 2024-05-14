@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from bastion.judge import ClaudeJudge
+from walledeval.judge import ClaudeJudge
 
 load_dotenv(".env")
 

@@ -1,4 +1,4 @@
-from bastion.llm import Claude
+from walledeval.llm import Claude
 from abc import ABC
 
 __all__ = [

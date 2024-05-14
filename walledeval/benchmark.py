@@ -7,8 +7,8 @@ from functools import partial
 from tqdm import tqdm
 
 from datasets import load_dataset
-from bastion.llm import LLM
-from bastion.judge import Judge
+from walledeval.llm import LLM
+from walledeval.judge import Judge
 
 __all__ = [
     "TestCase", "Log", 

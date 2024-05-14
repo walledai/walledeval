@@ -1,6 +1,6 @@
-from bastion.benchmark import WMDP
-from bastion.judge import ClaudeJudge
-from bastion.llm import HF_LLM
+from walledeval.benchmark import WMDP
+from walledeval.judge import ClaudeJudge
+from walledeval.llm import HF_LLM
 
 if __name__ == "__main__":
     print("Loading Phi-3")

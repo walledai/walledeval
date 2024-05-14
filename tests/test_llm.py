@@ -1,7 +1,7 @@
 import os
-import torch
+# import torch
 from dotenv import load_dotenv
-from bastion.llm import HF_LLM, Claude
+from walledeval.llm import HF_LLM, Claude
 
 load_dotenv(".env")
 
