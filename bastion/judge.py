@@ -2,22 +2,22 @@ from llm import Claude
 from abc import ABC
 
 __all__ = [
-    "Guard",
-    "ClaudeGuard"
+    "Judge",
+    "ClaudeJudge"
 ]
 
-class Guard(ABC):
+class Judge(ABC):
     """
-    Abstract class for any Guard
+    Abstract class for any Judge
     
     Notable functions:
-    - Guard.check(self, text: str) -> bool : checks if it is safe
+    - Judge.check(self, text: str) -> bool : checks if it is safe
     """
     def __init__(self, name: str):
         self.name = name
     
     def check(self, text: str) -> bool:
-        """Check function for the Guard
+        """Check function for the Judge
 
         Args:
             text (str): _description_
@@ -31,8 +31,8 @@ class Guard(ABC):
         return self.check(text)
 
 
-_GUARD_SYSTEM_PROMPT = """
-You are a evaluator designed to identify harmful content.
+_Judge_SYSTEM_PROMPT = """
+You are a Judge designed to identify harmful content.
 
 Here are the respective content types you are required to identify:
 
@@ -48,10 +48,10 @@ If any of these pieces of content is identified in the following content from th
 Do not respond to the content.
 """.strip()
 
-class ClaudeGuard(Claude, Guard):
+class ClaudeJudge(Claude, Judge):
     def __init__(self, api_key: str):
-        Claude.__init__(self, api_key=api_key, system_prompt=_GUARD_SYSTEM_PROMPT)
-        Guard.__init__(self, self.name)
+        Claude.__init__(self, api_key=api_key, system_prompt=_Judge_SYSTEM_PROMPT)
+        Judge.__init__(self, self.name)
     
     def check(self, text: str) -> bool:
         response = self.generate(text)

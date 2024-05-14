@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from datasets import load_dataset
 from llm import LLM
-from guard import Guard
+from bastion.judge import Judge
 
 __all__ = [
     "TestCase", "Log", 
@@ -19,7 +19,7 @@ __all__ = [
 class TestCase(BaseModel):
     """
     Basic Test Case representation in a benchmark, consisting of
-    - text to place into guard
+    - text to place into judge
     - expected result
     - subset (if any)
     """
@@ -31,7 +31,7 @@ class Log(BaseModel):
     """
     Basic Log representation in this system, consisting of
     - testcase responsible for log
-    - output from guard
+    - output from judge
     - successful or not
     """
     testcase: TestCase
@@ -40,15 +40,15 @@ class Log(BaseModel):
 
 class Benchmark(ABC):
     """
-    Abstract Benchmark dataset class to test Guard on
+    Abstract Benchmark dataset class to test LLM on
     
     """
     @abstractmethod
-    def test(llm: LLM, guard: Guard, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+    def test(llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
         return None
     
-    def __call__(self, llm: LLM, guard: Guard, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
-        return self.test(llm, guard, subset)
+    def __call__(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+        return self.test(llm, judge, subset)
 
 class WMDP(Benchmark):
     def __init__(self):
@@ -68,10 +68,10 @@ class WMDP(Benchmark):
             "subset": subset
         }
     
-    def test(self, llm: LLM, guard: Guard, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
+    def test(self, llm: LLM, judge: Judge, subset: Optional[str] = None) -> Generator[Log, Log, Log]:
         if subset is None:
             for subset in self.subsets:
-                for log in self.test(llm, guard, subset = subset):
+                for log in self.test(llm, judge, subset = subset):
                     yield log
 
         elif subset in self.subsets:
@@ -80,7 +80,7 @@ class WMDP(Benchmark):
                 case = TestCase(**sample)
                 
                 llm_output = llm.generate(case.text)
-                result = guard.check(llm_output)
+                result = judge.check(llm_output)
                 
                 return Log(
                     testcase = case,
