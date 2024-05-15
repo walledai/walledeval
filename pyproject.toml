@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "walledeval"
-version = "0.0.1dev"
+version = "0.0.2dev"
 description = "An open-source toolkit to test LLMs against jailbreaks and unprecedented harms."
 license = "MIT"
 authors = ["Rishabh Bhardwaj", "Prannaya Gupta <prannayagupta@programmer.net>"]
