@@ -40,7 +40,7 @@ class HF_LLM(LLM):
         text = self.pipeline([
             {"role": "system", "content": self.system_prompt},
             {"role": "user", "content": text},
-        ], max_new_tokens = 128)[0]['generated_text'][-1]
+        ], max_new_tokens = 128)[0]['generated_text'][-1]["content"]
         return text
     
 class Claude(LLM):
