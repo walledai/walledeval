@@ -2,11 +2,10 @@
 
 from walledeval.prompts.core import PromptTemplate
 from walledeval.prompts.mcq import (
-    MultipleChoiceQuestion, MultipleChoiceTemplate, FewShotMCQTemplate
+    MultipleChoiceTemplate, FewShotMCQTemplate
 )
 
 __all__ = [
-    "MultipleChoiceQuestion",
     "PromptTemplate",
     "MultipleChoiceTemplate",
     "FewShotMCQTemplate"

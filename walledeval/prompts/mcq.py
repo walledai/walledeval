@@ -1,27 +1,31 @@
 # walledeval/prompts/mcq.py
 
-from pydantic import BaseModel
-
 from walledeval.prompts.core import PromptTemplate
+from walledeval.types import MultipleChoiceQuestion
 
 __all__ = [
-    "MultipleChoiceQuestion",
     "MultipleChoiceTemplate",
-    "FewShotMCQTemplate"
+    "FewShotMCQTemplate",
+    "DEFAULT_OPTIONS", "DEFAULT_SAMPLE_QUESTION"
+    
 ]
 
-class MultipleChoiceQuestion(BaseModel):
-    question: str
-    choices: list[str]
-    answer: str = ""
-
-DEFAULT_OPTIONS = ["A", "B", "C", "D"]
+DEFAULT_OPTIONS = [chr(idx) for idx in range(65, 91)]
 
 DEFAULT_SAMPLE_QUESTION = MultipleChoiceQuestion(
     question = "Which of the following is a fruit?",
     choices = ["Spider", "Apple", "Lamp", "Cloud"],
-    answer = "B"
+    answer = 1
 )
+
+_INSPECT_TEMPLATE = """
+Answer the following multiple choice question. The entire content of your response should be of the following format: 'ANSWER: $LETTER' (without quotes) where LETTER is one of {letters}.
+
+$question
+
+$choices
+
+ANSWER:""".strip()+" "
 
 class MultipleChoiceTemplate(PromptTemplate):
     """Multiple Choice Prompt Template.
@@ -32,17 +36,6 @@ class MultipleChoiceTemplate(PromptTemplate):
         option_format (str): Format string for these options.
     """
     
-    
-    _INSPECT_TEMPLATE = """
-Answer the following multiple choice question. The entire content of your response should be of the following format: 'ANSWER: $LETTER' (without quotes) where LETTER is one of {letters}.
-
-$question
-
-$choices
-
-ANSWER:""".strip()+" "
-    
-    
     def __init__(self, 
                  template: str, 
                  options: list[str] = DEFAULT_OPTIONS,
@@ -51,7 +44,7 @@ ANSWER:""".strip()+" "
 
         Args:
             template (str): A string with $-delimited substitutions. MUST contain $question and $choices.
-            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D"].
+            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D", ...].
             option_format (str, optional): Format string for these options. Defaults to "{}. ".
         """
 
@@ -69,14 +62,14 @@ ANSWER:""".strip()+" "
         Sourced from [here](https://github.com/UKGovernmentBEIS/inspect_ai/blob/main/src/inspect_ai/solver/_multiple_choice.py#L18).
 
         Args:
-            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D"].
+            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D", ...].
             option_format (str, optional): Format string for these options. Defaults to "{}. ".
 
         Returns:
             _type_: A MultipleChoiceTemplate object
         """
         return cls(
-            cls._INSPECT_TEMPLATE,
+            _INSPECT_TEMPLATE,
             options = options,
             option_format = option_format
         )
@@ -118,7 +111,7 @@ class FewShotMCQTemplate(MultipleChoiceTemplate):
     """
     def __init__(self,
                  template: str,
-                 options: list[str] = ["A", "B", "C", "D"],
+                 options: list[str] = DEFAULT_OPTIONS,
                  option_format: str = "{}.",
                  samples: list[MultipleChoiceQuestion] = [DEFAULT_SAMPLE_QUESTION],
                  preceding_instruction: str = "",
@@ -127,9 +120,9 @@ class FewShotMCQTemplate(MultipleChoiceTemplate):
 
         Args:
             template (str): A string with $-delimited substitutions. MUST contain $question and $choices.
-            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D"].
+            options (list[str], optional): MCQ options to input to model. Defaults to ["A", "B", "C", "D", ...].
             option_format (str, optional): Format string for these options. Defaults to "{}. ".
-            samples (list[MultipleChoiceQuestion], optional): List of sample questions. Defaults to [ MultipleChoiceQuestion( question = "Which of the following is a fruit?", choices = ["Spider", "Apple", "Lamp", "Cloud"], answer = "B" ) ].
+            samples (list[MultipleChoiceQuestion], optional): List of sample questions. Defaults to [ MultipleChoiceQuestion( question = "Which of the following is a fruit?", choices = ["Spider", "Apple", "Lamp", "Cloud"], answer = 1 ) ].
             preceding_instruction (str, optional): Preceding Instruction, if need be. Defaults to "".
         """
         
@@ -142,7 +135,7 @@ class FewShotMCQTemplate(MultipleChoiceTemplate):
                 question = sample.question,
                 choices = sample.choices,
                 **sample_kwds
-            ) + sample.answer
+            ) + self.options[sample.answer]
             for sample in samples
         ])).lstrip()
     
