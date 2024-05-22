@@ -1,4 +1,4 @@
-# llmtest/core.py
+# walledeval/benchmark/__init__.py
 from pydantic import BaseModel
 from abc import ABC, abstractmethod
 from typing import Optional, Generator
