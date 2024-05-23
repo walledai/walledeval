@@ -2,7 +2,7 @@
 
 from walledeval.types import Log
 from walledeval.benchmark.core import MultipleChoiceBenchmark
-from walledeval.prompts import MultipleChoiceTemplate, FewShotMCQTemplate
+from walledeval.prompts import MultipleChoiceTemplate
 from walledeval.llm import LLM
 from walledeval.judge import MCQJudge
 
