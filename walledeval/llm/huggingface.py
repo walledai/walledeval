@@ -3,9 +3,9 @@
 from transformers import pipeline
 
 from huggingface_hub import list_models
-from huggingface_hub.hf_api import ModelInfo
+# from huggingface_hub.hf_api import ModelInfo
 
-from typing import Generator
+# from typing import Generator
 
 from walledeval.llm.core import LLM
 
@@ -14,7 +14,7 @@ __all__ = [
     "HF_LLM",
 ]
 
-def hf_models() -> Generator[ModelInfo]:
+def hf_models():
     """List all LLM models supported by HuggingFace for Text Generation.
 
     Returns:
