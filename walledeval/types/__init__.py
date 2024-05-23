@@ -3,7 +3,8 @@
 from pydantic import BaseModel
 
 __all__ = [
-    "MultipleChoiceQuestion"
+    "MultipleChoiceQuestion", "MultipleResponseQuestion",
+    "OpenEndedQuestion", 
 ]
 
 class OpenEndedQuestion(BaseModel):
@@ -19,3 +20,4 @@ class MultipleResponseQuestion(BaseModel):
     question: str
     choices: list[str]
     answers: list[int] = []
+    
