@@ -1,7 +1,4 @@
-from walledeval.benchmark.core import (
-    MultipleChoiceBenchmark
-)
-
+from walledeval.benchmark import MultipleChoiceBenchmark
 from walledeval.types import MultipleChoiceQuestion
 
 WMDP_BIO = None
