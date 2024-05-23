@@ -6,7 +6,16 @@ __all__ = [
     "MultipleChoiceQuestion"
 ]
 
+class OpenEndedQuestion(BaseModel):
+    question: str
+    
+
 class MultipleChoiceQuestion(BaseModel):
     question: str
     choices: list[str]
     answer: int = -1
+    
+class MultipleResponseQuestion(BaseModel):
+    question: str
+    choices: list[str]
+    answers: list[int] = []
