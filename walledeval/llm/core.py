@@ -9,6 +9,10 @@ class LLM(ABC):
         self.name = name
         self.system_prompt = system_prompt
     
+    def set_system_prompt(self, system_prompt: str):
+        self.system_prompt = system_prompt
+        return self
+    
     @abstractmethod
     def generate(self, text: str) -> str:
         return ""
