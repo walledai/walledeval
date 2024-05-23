@@ -212,5 +212,5 @@ class FewShotMCQTemplate(MultipleChoiceTemplate):
         return (
             self.sample + "\n\n" + 
             super().format(question, **kwds) +
-            "\\boxed{" if self.boxed_answer else ""
+            ("\\boxed{" if self.boxed_answer else "")
         )
