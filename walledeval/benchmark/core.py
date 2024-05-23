@@ -34,8 +34,6 @@ class Benchmark(ABC, Generic[T]):
         pass
 
 
-
-
 class HuggingFaceBenchmark(Benchmark[T], ABC):
     def __init__(self, name: str, dataset: Dataset):
         super().__init__(name)
