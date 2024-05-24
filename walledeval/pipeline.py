@@ -1,4 +1,4 @@
-# walledeval/tester.py
+# walledeval/pipeline.py
 
 from walledeval.types import Log
 from walledeval.benchmark import MultipleChoiceBenchmark
