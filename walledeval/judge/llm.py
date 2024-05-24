@@ -37,25 +37,29 @@ class LLMasaJudge(Judge[None, str]):
     def __init__(self, llm: LLM, system_prompt: str = _JUDGE_SYSTEM_PROMPT):
         self.llm = llm.set_system_prompt(system_prompt)
         super().__init__(self.llm.name + " as a Judge")
-    
+
     def check(self, response: str, answer: None = None) -> str:
         # basically answer is useless :skull:
         judge_response = self.llm.generate(response).strip()
         if "[[" in judge_response:
-            res = judge_response[judge_response.index("[[")+2:judge_response.index("]]")]
+            res = judge_response[
+              judge_response.index("[[")+2:
+              judge_response.index("]]")
+            ]
             if res.isnumeric() and 0 <= int(res) <= 6:
                 return _OUTPUT_OPTIONS[int(res)]
             else:
                 return "Unknown"
-  
+
 # class ClaudeJudge(Judge, Claude):
 #     def __init__(self, api_key: str):
-#         Claude.__init__(self, api_key=api_key, system_prompt=_JUDGE_SYSTEM_PROMPT)
+#         Claude.__init__(self, api_key=api_key,
+#                         system_prompt=_JUDGE_SYSTEM_PROMPT)
 #         Judge.__init__(self, self.name)
-    
+
 #     def __call__(self, text: str) -> bool:
 #         return Judge.__call__(self, text)
-    
+
 #     def check(self, text: str) -> bool:
 #         response = self.generate(text)
 #         try:

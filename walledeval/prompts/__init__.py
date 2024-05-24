@@ -10,17 +10,3 @@ __all__ = [
     "MultipleChoiceTemplate",
     "FewShotMCQTemplate"
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-

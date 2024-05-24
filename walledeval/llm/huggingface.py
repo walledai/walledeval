@@ -14,11 +14,13 @@ __all__ = [
     "HF_LLM",
 ]
 
+
 def hf_models():
     """List all LLM models supported by HuggingFace for Text Generation.
 
     Returns:
-        Generator[ModelInfo]: models supporting text generation on HuggingFace Hub.
+        Generator[ModelInfo]: models supporting text generation on
+        HuggingFace Hub.
     """
     return list_models(filter="text-generation")
 
@@ -27,21 +29,21 @@ class HF_LLM(LLM):
     def __init__(self, id: str, system_prompt: str = "", **kwargs):
         super().__init__(id, system_prompt)
         self.pipeline = pipeline(
-            "text-generation", 
-            model=id, 
+            "text-generation",
+            model=id,
             trust_remote_code=True,
             **kwargs
         )
-    
-    def generate(self, text: str) -> str:
+
+    def generate(self, text: str, max_new_tokens: int = 256) -> str:
         messages = [
             {"role": "system", "content": self.system_prompt},
             {"role": "user", "content": text},
         ]
 
         prompt = self.pipeline.tokenizer.apply_chat_template(
-                messages, 
-                tokenize=False, 
+                messages,
+                tokenize=False,
                 add_generation_prompt=True
         )
 
@@ -52,7 +54,7 @@ class HF_LLM(LLM):
 
         outputs = self.pipeline(
             prompt,
-            max_new_tokens=256,
+            max_new_tokens=max_new_tokens,
             eos_token_id=terminators,
             do_sample=True,
             temperature=0.6,
