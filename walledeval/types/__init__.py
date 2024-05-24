@@ -4,21 +4,25 @@ from pydantic import BaseModel
 
 __all__ = [
     "MultipleChoiceQuestion", "MultipleResponseQuestion",
-    "OpenEndedQuestion", 
+    "OpenEndedQuestion",
+    "Log"
 ]
+
 
 class Question(BaseModel):
     question: str
 
+
 class OpenEndedQuestion(Question):
     pass
-    
+
 
 class MultipleChoiceQuestion(Question):
     question: str
     choices: list[str]
     answer: int = -1
-    
+
+
 class MultipleResponseQuestion(Question):
     question: str
     choices: list[str]

@@ -4,12 +4,14 @@ from string import Template
 
 __all__ = ["PromptTemplate"]
 
+
 class PromptTemplate(Template):
     """Basic Prompt Template Definition.
-    
+
     Attributes:
         template (str): A string with $-delimited substitutions.
     """
+
     def __init__(self, template: str):
         """Inits PromptTemplate.
 
@@ -17,7 +19,7 @@ class PromptTemplate(Template):
             template (str): A string with $-delimited substitutions.
         """
         super().__init__(template)
-    
+
     def format(self, **kwds) -> str:
         """Formats Prompt Template with Keywords specified.
 
