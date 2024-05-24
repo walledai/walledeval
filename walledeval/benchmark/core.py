@@ -38,10 +38,14 @@ class HuggingFaceBenchmark(Benchmark[T], ABC):
 
     @classmethod
     def from_hub(cls, name: str,
-                 configuration: Optional[str] = None,
+                 config: Optional[str] = None,
+                 split: str = "train",
                  **ds_kwargs):
-        dataset = load_dataset(name, configuration, **ds_kwargs)
-        return cls(name + "/" + configuration, dataset)
+        dataset = load_dataset(name, config, split=split, **ds_kwargs)
+        return cls(
+            name + ("/" + config if config else "") + "/" + split, 
+            dataset
+        )
 
     @abstractmethod
     def convert(self, sample: dict) -> T:
