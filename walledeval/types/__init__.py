@@ -1,5 +1,6 @@
 # walledeval/types/__init__.py
 
+from typing import Union
 from pydantic import BaseModel
 
 __all__ = [
@@ -7,6 +8,10 @@ __all__ = [
     "OpenEndedQuestion",
     "Log"
 ]
+
+
+class Prompt(BaseModel):
+    prompt: str
 
 
 class Question(BaseModel):
@@ -37,7 +42,7 @@ class Log(BaseModel):
     - output from LLM
     - successful or not
     """
-    question: Question
+    question: Union[Question, Prompt]
     lm_input: str
     lm_output: str
     success: bool

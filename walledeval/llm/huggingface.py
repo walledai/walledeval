@@ -34,12 +34,48 @@ class HF_LLM(LLM):
             trust_remote_code=True,
             **kwargs
         )
-
-    def generate(self, text: str, max_new_tokens: int = 256) -> str:
-        messages = [
-            {"role": "system", "content": self.system_prompt},
-            {"role": "user", "content": text},
+        
+    def _generate(self, prompt: str,
+                  max_new_tokens: int = 256,
+                  temperature: float = 0.6) -> str:
+        terminators = [
+            self.pipeline.tokenizer.eos_token_id,
+            self.pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")
         ]
+
+        outputs = self.pipeline(
+            prompt,
+            max_new_tokens=max_new_tokens,
+            eos_token_id=terminators,
+            do_sample=True,
+            temperature=temperature,
+            top_p=0.9,
+        )[0]["generated_text"][len(prompt):].strip()
+
+        return outputs
+    
+    def chat(self, text: str,
+             max_new_tokens: int = 256,
+             temperature: float = 0.6) -> str:
+        messages = [{"role": "user", "content": text}]
+        
+        if len(self.system_prompt.strip()) > 0:
+            messages.insert(0, {"role": "system", "content": self.system_prompt})
+
+        prompt = self.pipeline.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True
+        )
+        
+        return self._generate(prompt, max_new_tokens, temperature)
+
+    def generate(self, text: str, 
+                 max_new_tokens: int = 256,
+                 temperature: float = 0.6) -> str:
+        messages = [{"role": "user", "content": text}]
+        if len(self.system_prompt.strip()) > 0:
+            messages.insert(0, {"role": "system", "content": self.system_prompt})
 
         prompt = self.pipeline.tokenizer.apply_chat_template(
                 messages,
@@ -57,7 +93,7 @@ class HF_LLM(LLM):
             max_new_tokens=max_new_tokens,
             eos_token_id=terminators,
             do_sample=True,
-            temperature=0.6,
+            temperature=temperature,
             top_p=0.9,
         )[0]["generated_text"][len(prompt):].strip()
 
