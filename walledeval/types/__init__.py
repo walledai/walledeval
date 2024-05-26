@@ -1,12 +1,34 @@
 # walledeval/types/__init__.py
 
 from typing import Union
+from enum import Enum
 from pydantic import BaseModel
 
 __all__ = [
-    "MultipleChoiceQuestion", "MultipleResponseQuestion",
+    "LLMType",
+    "Message", "Messages",
+    "MultipleChoiceQuestion",
+    "MultipleResponseQuestion",
     "OpenEndedQuestion",
     "Log"
+]
+
+
+class LLMType(Enum):
+    BASE = 0
+    INSTRUCT = 1
+    NEITHER = 2
+
+
+class Message(BaseModel):
+    role: str
+    content: str
+
+
+Messages = Union[
+    list[Message],
+    list[dict[str, str]],
+    str
 ]
 
 

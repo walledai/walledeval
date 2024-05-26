@@ -2,6 +2,7 @@
 
 from anthropic import Anthropic
 
+from walledeval.types import Message, Messages, LLMType
 from walledeval.llm.core import LLM
 
 __all__ = [
@@ -11,7 +12,10 @@ __all__ = [
 
 class Claude(LLM):
     def __init__(self, model_id: str, api_key: str, system_prompt: str = ""):
-        super().__init__(model_id, system_prompt)
+        super().__init__(
+            model_id, system_prompt,
+            LLMType.INSTRUCT
+        )
         self.client = Anthropic(api_key=api_key)
 
     @classmethod
