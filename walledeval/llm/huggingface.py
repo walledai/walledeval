@@ -2,7 +2,6 @@
 
 from transformers import pipeline, TextGenerationPipeline
 from huggingface_hub import list_models
-# from huggingface_hub.hf_api import ModelInfo
 
 from typing import Optional, Union
 
@@ -26,8 +25,8 @@ def hf_models():
 
 
 class HF_LLM(LLM):
-    def __init__(self, 
-                 id: str, 
+    def __init__(self,
+                 id: str,
                  system_prompt: str = "",
                  type: Optional[Union[LLMType, int]] = LLMType.NEITHER,
                  **kwargs):
@@ -39,7 +38,7 @@ class HF_LLM(LLM):
             **kwargs
         )
 
-    def _generate(self, 
+    def _generate(self,
                   prompt: str,
                   max_new_tokens: int = 256,
                   temperature: float = 0.6) -> str:
@@ -80,7 +79,10 @@ class HF_LLM(LLM):
         else:
             raise TypeError("Unsupported format for parameter 'text'")
 
-        if len(self.system_prompt.strip()) > 0 and messages[0]["role"] != "system":
+        if (
+            len(self.system_prompt.strip()) > 0 and
+            messages[0]["role"] != "system"
+        ):
             messages.insert(0, {
                 "role": "system",
                 "content": self.system_prompt
@@ -104,19 +106,22 @@ class HF_LLM(LLM):
             temperature=temperature
         )
 
-    def generate(self, 
-                 text: Messages, 
+    def generate(self,
+                 text: Messages,
                  max_new_tokens: int = 256,
                  temperature: float = 0.0,
                  instruct: Optional[bool] = None) -> str:
         type = None
         if instruct is None:
-            type = LLMType.BASE if self.type != LLMType.BASE else LLMType.INSTRUCT
+            if self.type == LLMType.BASE:
+                type = LLMType.BASE
+            else:
+                type = LLMType.INSTRUCT
         elif instruct:
             type = LLMType.INSTRUCT
         else:
             type = LLMType.BASE
-        
+
         if type == LLMType.INSTRUCT:
             return self.chat(
                 text,
@@ -131,6 +136,3 @@ class HF_LLM(LLM):
                 max_new_tokens=max_new_tokens,
                 temperature=temperature
             )
-        
-        
-            
