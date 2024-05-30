@@ -7,7 +7,7 @@ from walledeval.types.llm import LLMType
 from walledeval.types.message import Message, Messages
 from walledeval.types.inputs import (
     Prompt, Question,
-    AutocompleteTask,
+    AutocompletePrompt,
     MultipleChoiceQuestion,
     MultipleResponseQuestion,
     OpenEndedQuestion
@@ -17,7 +17,7 @@ __all__ = [
     "LLMType",
     "Message", "Messages",
     "Prompt", "Question",
-    "AutocompleteTask",
+    "AutocompletePrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion",

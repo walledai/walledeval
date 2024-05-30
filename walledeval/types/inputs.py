@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 __all__ = [
     "Prompt", "Question",
-    "AutocompleteTask",
+    "AutocompletePrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion"
@@ -15,7 +15,7 @@ class Prompt(BaseModel):
     prompt: str
     
 
-class AutocompleteTask(Prompt):
+class AutocompletePrompt(Prompt):
     pass
 
 
