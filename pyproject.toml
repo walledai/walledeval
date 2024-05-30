@@ -41,6 +41,7 @@ tox = "^4.15.0"
 types-tqdm = "^4.66.0.20240417"
 torch = "^2.3.0"
 jupyter = "^1.0.0"
+lxml = "^5.2.2"
 
 [build-system]
 requires = ["poetry-core"]
