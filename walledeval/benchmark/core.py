@@ -6,14 +6,17 @@ from typing import TypeVar, Generic, Optional
 from datasets import load_dataset, Dataset
 
 from walledeval.types import (
-    MultipleChoiceQuestion, MultipleResponseQuestion, OpenEndedQuestion
+    MultipleChoiceQuestion, MultipleResponseQuestion, 
+    OpenEndedQuestion,
+    AutocompletePrompt
 )
 
 __all__ = [
     "Benchmark", "HuggingFaceBenchmark",
     "MultipleChoiceBenchmark",
     "MultipleResponseBenchmark",
-    "OpenEndedBenchmark"
+    "OpenEndedBenchmark",
+    "AutocompleteBenchmark"
 ]
 
 T = TypeVar('T')
@@ -86,4 +89,11 @@ class OpenEndedBenchmark(HuggingFaceBenchmark[OpenEndedQuestion]):
     def convert(self, sample: dict) -> OpenEndedQuestion:
         return OpenEndedQuestion(
             question=sample["question"]
+        )
+
+
+class AutocompleteBenchmark(HuggingFaceBenchmark[AutocompletePrompt]):
+    def convert(self, sample: dict) -> AutocompletePrompt:
+        return AutocompletePrompt(
+            prompt=sample["prompt"]
         )
