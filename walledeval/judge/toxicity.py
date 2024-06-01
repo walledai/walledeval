@@ -65,7 +65,7 @@ class ToxicityModelJudge(Judge[None, float]):
 
         self.tokenizer = AutoTokenizer.from_pretrained(self.name)
         self.model = AutoModelForSequenceClassification.from_pretrained(self.name)
-    
+
     def check(self, response: str, answer: None = None) -> float:
         tokens = self.tokenizer(
             "", response,
