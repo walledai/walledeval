@@ -19,6 +19,10 @@ class AutocompletePrompt(Prompt):
     pass
 
 
+class SystemAssistedPrompt(Prompt):
+    system: str
+
+
 class Question(BaseModel):
     question: str
 
@@ -28,12 +32,12 @@ class OpenEndedQuestion(Question):
 
 
 class MultipleChoiceQuestion(Question):
-    question: str
+    # question: str
     choices: list[str]
     answer: int = -1
 
 
 class MultipleResponseQuestion(Question):
-    question: str
+    # question: str
     choices: list[str]
     answers: list[int] = []

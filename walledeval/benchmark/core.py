@@ -8,7 +8,8 @@ from datasets import load_dataset, Dataset
 from walledeval.types import (
     MultipleChoiceQuestion, MultipleResponseQuestion, 
     OpenEndedQuestion,
-    AutocompletePrompt
+    AutocompletePrompt,
+    SystemAssistedPrompt
 )
 
 __all__ = [
@@ -16,7 +17,8 @@ __all__ = [
     "MultipleChoiceBenchmark",
     "MultipleResponseBenchmark",
     "OpenEndedBenchmark",
-    "AutocompleteBenchmark"
+    "AutocompleteBenchmark",
+    "SystemAssistedBenchmark"
 ]
 
 T = TypeVar('T')
@@ -96,4 +98,12 @@ class AutocompleteBenchmark(HuggingFaceBenchmark[AutocompletePrompt]):
     def convert(self, sample: dict) -> AutocompletePrompt:
         return AutocompletePrompt(
             prompt=sample["prompt"]
+        )
+
+
+class SystemAssistedBenchmark(HuggingFaceBenchmark[SystemAssistedPrompt]):
+    def convert(self, sample: dict) -> SystemAssistedPrompt:
+        return SystemAssistedPrompt(
+            prompt=sample["prompt"],
+            system=sample["system"]
         )

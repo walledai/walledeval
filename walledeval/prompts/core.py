@@ -36,7 +36,7 @@ class PromptTemplate(Template):
 
     Args:
         template (str): A string with $-delimited substitutions.
-        Must contain $prompts.
+        Must contain $prompt.
     """
     def __init__(self, template: str = "$prompt"):
         """Inits PromptTemplate.
