@@ -2,13 +2,13 @@
 from walledeval.benchmark.core import (
     Benchmark, HuggingFaceBenchmark,
     MultipleChoiceBenchmark, MultipleResponseBenchmark,
-    OpenEndedBenchmark, AutocompleteBenchmark,
-    SystemAssistedBenchmark
+    OpenEndedBenchmark, PromptBenchmark,
+    AutocompleteBenchmark, SystemAssistedBenchmark
 )
 
 __all__ = [
     "Benchmark", "HuggingFaceBenchmark",
     "MultipleChoiceBenchmark", "MultipleResponseBenchmark",
-    "OpenEndedBenchmark", "AutocompleteBenchmark",
-    "SystemAssistedBenchmark"
+    "OpenEndedBenchmark", "PromptBenchmark",
+    "AutocompleteBenchmark", "SystemAssistedBenchmark"
 ]

@@ -50,22 +50,3 @@ class LLMasaJudge(Judge[None, str]):
                 return _OUTPUT_OPTIONS[int(res)]
             else:
                 return "Unknown"
-
-# class ClaudeJudge(Judge, Claude):
-#     def __init__(self, api_key: str):
-#         Claude.__init__(self, api_key=api_key,
-#                         system_prompt=_JUDGE_SYSTEM_PROMPT)
-#         Judge.__init__(self, self.name)
-
-#     def __call__(self, text: str) -> bool:
-#         return Judge.__call__(self, text)
-
-#     def check(self, text: str) -> bool:
-#         response = self.generate(text)
-#         try:
-#             data = eval(response, {}, {})
-#             if isinstance(data, list) and len(data) == 0:
-#                 return True
-#             return False #data if type(data) == list else ["Harmful Content"]
-#         except:
-#             return False

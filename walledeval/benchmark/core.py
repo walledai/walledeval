@@ -8,6 +8,7 @@ from datasets import load_dataset, Dataset
 from walledeval.types import (
     MultipleChoiceQuestion, MultipleResponseQuestion, 
     OpenEndedQuestion,
+    Prompt,
     AutocompletePrompt,
     SystemAssistedPrompt
 )
@@ -17,6 +18,7 @@ __all__ = [
     "MultipleChoiceBenchmark",
     "MultipleResponseBenchmark",
     "OpenEndedBenchmark",
+    "PromptBenchmark",
     "AutocompleteBenchmark",
     "SystemAssistedBenchmark"
 ]
@@ -91,6 +93,13 @@ class OpenEndedBenchmark(HuggingFaceBenchmark[OpenEndedQuestion]):
     def convert(self, sample: dict) -> OpenEndedQuestion:
         return OpenEndedQuestion(
             question=sample["question"]
+        )
+
+
+class PromptBenchmark(HuggingFaceBenchmark[Prompt]):
+    def convert(self, sample: dict) -> Prompt:
+        return Prompt(
+            prompt=sample["prompt"]
         )
 
 
