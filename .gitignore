@@ -55,6 +55,8 @@ coverage.xml
 cover/
 .ruff_cache/
 
+# notebooks/
+
 # Translations
 *.mo
 *.pot

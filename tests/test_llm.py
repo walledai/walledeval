@@ -1,15 +1,15 @@
-import os
-# import torch
-from dotenv import load_dotenv
-from walledeval.llm import HF_LLM, Claude
+# import os
+# # import torch
+# from dotenv import load_dotenv
+# from walledeval.llm import HF_LLM, Claude
 
-load_dotenv(".env")
+# load_dotenv(".env")
 
-CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
+# CLAUDE_API_KEY = os.getenv("CLAUDE_API_KEY")
 
-# def test_tiny_llama():
-#     llm = HF_LLM("TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="auto")
-#     output = llm.generate("Hi, how are you?")
-#     assert isinstance(output, str)
+# # def test_tiny_llama():
+# #     llm = HF_LLM("TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="auto")
+# #     output = llm.generate("Hi, how are you?")
+# #     assert isinstance(output, str)
 
 
