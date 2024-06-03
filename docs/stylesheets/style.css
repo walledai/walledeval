@@ -1,0 +1,36 @@
+body {
+    /* using CSS variables */
+    --md-default-bg-color--dark: #181a1b;
+    --md-footer-bg-color--dark: #161616;
+}
+
+[data-md-color-scheme='slate'] {
+    --md-default-bg-color: #181a1b;
+    --md-footer-bg-color: #161616;
+    --md-typeset-color: #ffffff;
+    --md-typset-h1-color: #868585;
+    --md-typeset-table-color: #ffffff;
+    --md-typeset-a-color: #7094c5;
+}
+
+.md-typeset h1 {
+    color: #868585;
+}
+
+div[chembox] {
+    width: 100%;
+    clear: both;
+    height: 400px;
+    -moz-transform: scale(0.9, 0.9); /* Moz-browsers */
+    zoom: 0.9; /* Other non-webkit browsers */
+    zoom: 90%; /* Webkit browsers */
+}
+
+.test tr:nth-child(2) {
+    background: orange;
+}
+
+@font-face {
+    font-family: 'KulminoituvaRegular';
+    src: url('http://www.miketaylr.com/f/kulminoituva.ttf');
+}
