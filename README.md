@@ -75,6 +75,38 @@ $ poetry install
 
 ### LLMs (`walledeval.llm`)
 
+WalledEval's LLM architecture aims to support various kinds of LLMs, which a current focus on Decoder-only and MoE architecures. These LLMs are used as **systems-under-test (SUTs)**, which allows generating question answers and prompt outputs.
+
+#### LLM Types
+
+Our LLM architecture supports two types of models: `INSTRUCT` and `BASE`. The distinction between these two model types is as follows:
+
+| LLM Type | Function | Corresponding Number |
+| -------- | -------- | -------------------- |
+| `BASE` | Next-token predictor LLMs that support text completion but are not tuned for chatting and role-based conversation. | `0` |
+| `INSTRUCT` | Instruction-tuned / Chat-tuned LLMs that can take in a chat format and generate text for an assistant. | `1` |
+
+These types fall under the `walledeval.types.LLMType` enumeration class, and we support a `NEITHER` flag (with corresponding number `2`) to ensure the LLM does not discriminate between types.
+
+#### Input Types
+
+We have added support for several types of input formats in LLMs (with more on the way!) to make our library easily extensible and usable.
+
+Our LLM architecture supports the following input types:
+
+| Input Type | Format | Example |
+| `str` | `"text to ask LLM as user"` | `"Hi, how are you today?"` |
+| `list[dict[str, str]]` | List of dictionary objects with the following keys: <ul><li> `"role"`: Either one of `"system"`, `"user"`, `"assistant"`. </li><li> `"content"`: Any string or alternative input supported by the model tokenizer. </li></ul> | `[ {"role": "system", "content": "You are a helpful assistant"}, {"role": "user", "content": "Hi, how are you today?"} ]` |
+| `list[walledeval.types.Message]` | Similar to above, except the dictionary object is wrapped within a custom Pydantic model class | `[ Message(role="system", content="You are a helpful assistant"), Message(role="user", content="Hi, how are you today?") ]` |
+
+These are supported under an encompassing `walledeval.types.Messages` class. The supported LLMs convert these into recognizable formats for the LLM to generate based on. Certain class methods cannot support some of these formats due to their expected formats.
+
+
+#### LLM Support
+
+WalledEval supports a plethora of LLM models accessible through the HuggingFace Hub. This means that any model deployed on HuggingFace under the `text-generation` task can be loaded up as a SUT.
+
+
 We support the following LLM types:
 
 
