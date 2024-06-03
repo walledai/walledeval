@@ -63,7 +63,7 @@ class HF_LLM(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 256,
-             temperature: float = 0.6) -> str:
+             temperature: float = 0.0) -> str:
         if isinstance(text, str):
             messages = [{
                 "role": "user",
