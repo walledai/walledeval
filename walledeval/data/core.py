@@ -3,7 +3,8 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, Optional
 
-from datasets import load_dataset, Dataset
+from datasets import load_dataset
+import datasets #Dataset
 
 from walledeval.types import (
     MultipleChoiceQuestion, MultipleResponseQuestion, 
@@ -14,19 +15,19 @@ from walledeval.types import (
 )
 
 __all__ = [
-    "Benchmark", "HuggingFaceBenchmark",
-    "MultipleChoiceBenchmark",
-    "MultipleResponseBenchmark",
-    "OpenEndedBenchmark",
-    "PromptBenchmark",
-    "AutocompleteBenchmark",
-    "SystemAssistedBenchmark"
+    "Dataset", "HuggingFaceDataset",
+    "MultipleChoiceDataset",
+    "MultipleResponseDataset",
+    "OpenEndedDataset",
+    "PromptDataset",
+    "AutocompleteDataset",
+    "SystemAssistedDataset"
 ]
 
 T = TypeVar('T')
 
 
-class Benchmark(ABC, Generic[T]):
+class Dataset(ABC, Generic[T]):
     """Generic Benchmark for some datatype T.
     """
 
@@ -38,8 +39,8 @@ class Benchmark(ABC, Generic[T]):
         pass
 
 
-class HuggingFaceBenchmark(Benchmark[T], ABC):
-    def __init__(self, name: str, dataset: Dataset):
+class HuggingFaceDataset(Dataset[T], ABC):
+    def __init__(self, name: str, dataset: datasets.Dataset):
         super().__init__(name)
         self.dataset = dataset
 
@@ -69,7 +70,7 @@ class HuggingFaceBenchmark(Benchmark[T], ABC):
         return [self.convert(sample) for sample in samples_lst]
 
 
-class MultipleChoiceBenchmark(HuggingFaceBenchmark[MultipleChoiceQuestion]):
+class MultipleChoiceDataset(HuggingFaceDataset[MultipleChoiceQuestion]):
     def convert(self, sample: dict) -> MultipleChoiceQuestion:
         return MultipleChoiceQuestion(
             question=sample["question"],
@@ -78,8 +79,8 @@ class MultipleChoiceBenchmark(HuggingFaceBenchmark[MultipleChoiceQuestion]):
         )
 
 
-class MultipleResponseBenchmark(
-    HuggingFaceBenchmark[MultipleResponseQuestion]
+class MultipleResponseDataset(
+    HuggingFaceDataset[MultipleResponseQuestion]
 ):
     def convert(self, sample: dict) -> MultipleResponseQuestion:
         return MultipleResponseQuestion(
@@ -89,28 +90,28 @@ class MultipleResponseBenchmark(
         )
 
 
-class OpenEndedBenchmark(HuggingFaceBenchmark[OpenEndedQuestion]):
+class OpenEndedDataset(HuggingFaceDataset[OpenEndedQuestion]):
     def convert(self, sample: dict) -> OpenEndedQuestion:
         return OpenEndedQuestion(
             question=sample["question"]
         )
 
 
-class PromptBenchmark(HuggingFaceBenchmark[Prompt]):
+class PromptDataset(HuggingFaceDataset[Prompt]):
     def convert(self, sample: dict) -> Prompt:
         return Prompt(
             prompt=sample["prompt"]
         )
 
 
-class AutocompleteBenchmark(HuggingFaceBenchmark[AutocompletePrompt]):
+class AutocompleteDataset(HuggingFaceDataset[AutocompletePrompt]):
     def convert(self, sample: dict) -> AutocompletePrompt:
         return AutocompletePrompt(
             prompt=sample["prompt"]
         )
 
 
-class SystemAssistedBenchmark(HuggingFaceBenchmark[SystemAssistedPrompt]):
+class SystemAssistedDataset(HuggingFaceDataset[SystemAssistedPrompt]):
     def convert(self, sample: dict) -> SystemAssistedPrompt:
         return SystemAssistedPrompt(
             prompt=sample["prompt"],

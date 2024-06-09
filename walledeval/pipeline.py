@@ -1,7 +1,7 @@
 # walledeval/pipeline.py
 
 from walledeval.types import Log
-from walledeval.benchmark import MultipleChoiceBenchmark
+from walledeval.data import MultipleChoiceDataset
 from walledeval.prompts import MultipleChoiceTemplate
 from walledeval.llm import LLM
 from walledeval.judge import MCQJudge
@@ -11,7 +11,7 @@ __all__ = [
 ]
 
 
-def mcq(benchmark: MultipleChoiceBenchmark,
+def mcq(benchmark: MultipleChoiceDataset,
         llm: LLM,
         judge: MCQJudge,
         prompt_template: MultipleChoiceTemplate = MultipleChoiceTemplate.default(),

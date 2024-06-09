@@ -1,4 +1,4 @@
-# from walledeval.benchmark import WMDP
+# from walledeval.data import WMDP
 # from walledeval.judge import ClaudeJudge
 # from walledeval.llm import HF_LLM
 

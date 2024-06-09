@@ -4,7 +4,7 @@
 
 # from walledeval.llm import LLM, HF_LLM, hf_models, Claude
 # from walledeval.judge import Judge, ClaudeJudge
-# from walledeval.benchmark import TestCase, Log, Benchmark, WMDP
+# from walledeval.data import TestCase, Log, Benchmark, WMDP
 
 
 # __all__ = [
