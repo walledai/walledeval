@@ -2,6 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, Optional
+from pydantic import BaseModel
 
 from datasets import load_dataset
 import datasets #Dataset
@@ -25,6 +26,7 @@ __all__ = [
 ]
 
 T = TypeVar('T')
+I = TypeVar('I', bound=BaseModel)
 
 
 class Dataset(ABC, Generic[T]):
@@ -39,7 +41,7 @@ class Dataset(ABC, Generic[T]):
         pass
 
 
-class HuggingFaceDataset(Dataset[T], ABC):
+class _HuggingFaceDataset(Dataset[T], ABC):
     def __init__(self, name: str, dataset: datasets.Dataset):
         super().__init__(name)
         self.dataset = dataset
@@ -70,7 +72,55 @@ class HuggingFaceDataset(Dataset[T], ABC):
         return [self.convert(sample) for sample in samples_lst]
 
 
-class MultipleChoiceDataset(HuggingFaceDataset[MultipleChoiceQuestion]):
+class _HuggingFaceDatasetAlias:
+    def __init__(self, model: type = Prompt):
+        self.model = model
+    
+    def __call__(self, name: str, dataset: datasets.Dataset):
+        return HuggingFaceDataset(name, dataset, self.model)
+    
+    def from_hub(self, 
+                 name: str, 
+                 config: Optional[str] = None, 
+                 split: str = "train",
+                 **ds_kwargs):
+        return HuggingFaceDataset.from_hub(
+            name, config, split, self.model, **ds_kwargs
+        )
+
+
+class HuggingFaceDataset(_HuggingFaceDataset):
+    def __init__(self, name: str, dataset: datasets.Dataset, model: type = Prompt):
+        _HuggingFaceDataset.__init__(self, name, dataset)
+        self.model = model
+        
+    @classmethod
+    def from_hub(cls, name: str,
+                 config: Optional[str] = None,
+                 split: str = "train",
+                 model: type = Prompt,
+                 **ds_kwargs):
+        dataset = load_dataset(name, config, split=split, **ds_kwargs)
+        return cls(
+            name + ("/" + config if config else "") + "/" + split, 
+            dataset,
+            model
+        )
+    
+    def __class_getitem__(cls, model: type = Prompt):
+        # Refer to https://stackoverflow.com/questions/73464414/why-are-generics-in-python-implemented-using-class-getitem-instead-of-geti
+        # for why it is implemented like this
+        return _HuggingFaceDatasetAlias(model)
+
+    def convert(self, sample: dict) -> I:
+        fields = self.model.__fields__
+        return self.model(**{
+            field: sample[field]
+            for field in fields.keys()
+        })
+
+
+class MultipleChoiceDataset(_HuggingFaceDataset[MultipleChoiceQuestion]):
     def convert(self, sample: dict) -> MultipleChoiceQuestion:
         return MultipleChoiceQuestion(
             question=sample["question"],
@@ -80,7 +130,7 @@ class MultipleChoiceDataset(HuggingFaceDataset[MultipleChoiceQuestion]):
 
 
 class MultipleResponseDataset(
-    HuggingFaceDataset[MultipleResponseQuestion]
+    _HuggingFaceDataset[MultipleResponseQuestion]
 ):
     def convert(self, sample: dict) -> MultipleResponseQuestion:
         return MultipleResponseQuestion(
@@ -90,28 +140,28 @@ class MultipleResponseDataset(
         )
 
 
-class OpenEndedDataset(HuggingFaceDataset[OpenEndedQuestion]):
+class OpenEndedDataset(_HuggingFaceDataset[OpenEndedQuestion]):
     def convert(self, sample: dict) -> OpenEndedQuestion:
         return OpenEndedQuestion(
             question=sample["question"]
         )
 
 
-class PromptDataset(HuggingFaceDataset[Prompt]):
+class PromptDataset(_HuggingFaceDataset[Prompt]):
     def convert(self, sample: dict) -> Prompt:
         return Prompt(
             prompt=sample["prompt"]
         )
 
 
-class AutocompleteDataset(HuggingFaceDataset[AutocompletePrompt]):
+class AutocompleteDataset(_HuggingFaceDataset[AutocompletePrompt]):
     def convert(self, sample: dict) -> AutocompletePrompt:
         return AutocompletePrompt(
             prompt=sample["prompt"]
         )
 
 
-class SystemAssistedDataset(HuggingFaceDataset[SystemAssistedPrompt]):
+class SystemAssistedDataset(_HuggingFaceDataset[SystemAssistedPrompt]):
     def convert(self, sample: dict) -> SystemAssistedPrompt:
         return SystemAssistedPrompt(
             prompt=sample["prompt"],
