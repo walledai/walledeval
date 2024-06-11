@@ -12,7 +12,9 @@ from walledeval.types import (
     OpenEndedQuestion,
     Prompt,
     AutocompletePrompt,
-    SystemAssistedPrompt
+    SystemAssistedPrompt,
+    JudgeQuestioningPrompt,
+    InjectionPrompt
 )
 
 __all__ = [
@@ -22,7 +24,9 @@ __all__ = [
     "OpenEndedDataset",
     "PromptDataset",
     "AutocompleteDataset",
-    "SystemAssistedDataset"
+    "SystemAssistedDataset",
+    "JudgeQuestioningPrompt",
+    "InjectionPrompt"
 ]
 
 T = TypeVar('T')
@@ -163,6 +167,22 @@ class AutocompleteDataset(_HuggingFaceDataset[AutocompletePrompt]):
 
 class SystemAssistedDataset(_HuggingFaceDataset[SystemAssistedPrompt]):
     def convert(self, sample: dict) -> SystemAssistedPrompt:
+        return SystemAssistedPrompt(
+            prompt=sample["prompt"],
+            system=sample["system"]
+        )
+
+
+class JudgeQuestioningDataset(_HuggingFaceDataset[JudgeQuestioningPrompt]):
+    def convert(self, sample: dict) -> JudgeQuestioningPrompt:
+        return JudgeQuestioningPrompt(
+            prompt=sample["prompt"],
+            judge_question=sample["judge"]
+        )
+
+
+class InjectionDataset(_HuggingFaceDataset[InjectionPrompt]):
+    def convert(self, sample: dict) -> InjectionPrompt:
         return SystemAssistedPrompt(
             prompt=sample["prompt"],
             system=sample["system"]

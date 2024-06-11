@@ -3,12 +3,14 @@ from walledeval.data.core import (
     Dataset, HuggingFaceDataset,
     MultipleChoiceDataset, MultipleResponseDataset,
     OpenEndedDataset, PromptDataset,
-    AutocompleteDataset, SystemAssistedDataset
+    AutocompleteDataset, SystemAssistedDataset,
+    JudgeQuestioningDataset, InjectionDataset
 )
 
 __all__ = [
     "Dataset", "HuggingFaceDataset",
     "MultipleChoiceDataset", "MultipleResponseDataset",
     "OpenEndedDataset", "PromptDataset",
-    "AutocompleteDataset", "SystemAssistedDataset"
+    "AutocompleteDataset", "SystemAssistedDataset",
+    "JudgeQuestioningDataset", "InjectionDataset"
 ]
