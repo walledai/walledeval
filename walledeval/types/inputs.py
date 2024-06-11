@@ -5,6 +5,9 @@ from pydantic import BaseModel
 __all__ = [
     "Prompt", "Question",
     "AutocompletePrompt",
+    "JudgeQuestioningPrompt",
+    "SystemAssistedPrompt",
+    "InjectionPrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion"
@@ -17,10 +20,18 @@ class Prompt(BaseModel):
 
 class AutocompletePrompt(Prompt):
     pass
+    
+    
+class JudgeQuestioningPrompt(Prompt):
+    judge_question: str
 
 
 class SystemAssistedPrompt(Prompt):
     system: str
+
+
+class InjectionPrompt(SystemAssistedPrompt, JudgeQuestioningPrompt):
+    pass
 
 
 class Question(BaseModel):

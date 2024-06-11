@@ -8,7 +8,9 @@ from walledeval.types.message import Message, Messages
 from walledeval.types.inputs import (
     Prompt, Question,
     AutocompletePrompt,
+    JudgeQuestioningPrompt,
     SystemAssistedPrompt,
+    InjectionPrompt,
     MultipleChoiceQuestion,
     MultipleResponseQuestion,
     OpenEndedQuestion
@@ -19,7 +21,9 @@ __all__ = [
     "Message", "Messages",
     "Prompt", "Question",
     "AutocompletePrompt",
+    "JudgeQuestioningPrompt",
     "SystemAssistedPrompt",
+    "InjectionPrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion",
