@@ -15,6 +15,11 @@ S = TypeVar('S') # Score Field
 A = TypeVar('A') # Aggregate Field
 
 
+class MCQOutput(BaseModel):
+    predicted: int
+    correct: bool
+
+
 NumericScore = Union[int, bool, float]
 
 
