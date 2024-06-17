@@ -15,9 +15,9 @@ class LLM(ABC):
         self.system_prompt = system_prompt
 
         if isinstance(type, LLMType):
-            self.instruct = type
+            self.type = type
         elif isinstance(type, int) and 0 <= type <= 2:
-            self.instruct = LLMType(type)
+            self.type = LLMType(type)
         elif isinstance(type, int):
             raise ValueError(f"Type {type} not recognized.")
         else:

@@ -1,4 +1,4 @@
-# walledeval/llm/__init__.py
+# walledeval/llm/huggingface.py
 
 from transformers import pipeline, TextGenerationPipeline
 from huggingface_hub import list_models
