@@ -1,6 +1,7 @@
 # walledeval/judge/llm/llamaguard.py
  
 from enum import Enum
+import torch
 
 from walledeval.llm import HF_LLM
 from walledeval.types import LLMType
@@ -23,26 +24,36 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput]):
         "meta-llama/Meta-Llama-Guard-2-8B"
     ]
     
-    def __init__(self, version: int):
+    def __init__(self, version: int, 
+                 model_kwargs={"torch_dtype": torch.bfloat16}, device_map="auto", **kwargs):
         if version < 0 or version > len(self._VERSIONS):
             raise ValueError(f"Invalid Version {version}")
 
         self.version = version
-        self.model_id = self._VERSIONS[version % 2]
+        self.model_id = self._VERSIONS[(version+1) % 2]
 
         llm = HF_LLM(
             self.model_id,
-            type=LLMType.INSTRUCT
+            type=LLMType.INSTRUCT,
+            model_kwargs=model_kwargs,
+            device_map=device_map,
+            **kwargs
         )
         
         super().__init__(self.model_id, llm)
         
     def generate(self, response: str) -> str:
         return self._llm.generate(
-            [{
-                "role": "assistant",
-                "content": response
-            }]
+            [
+                {
+                    "role": "user",
+                    "content": ""
+                }, {
+                    "role": "assistant",
+                    "content": response
+                }
+            ],
+            temperature=0.1
         )
     
     def process_llm_output(self, response: str) -> LlamaGuardOutput:
