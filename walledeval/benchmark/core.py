@@ -73,5 +73,5 @@ class BenchmarkModule(ABC, Generic[I, O, S, A]):
         pass
 
     @abstractmethod
-    def aggregate(self, logs: list[Log]) -> A:
+    def aggregate(self, logs: list[Log[I, O, S]]) -> A:
         pass
