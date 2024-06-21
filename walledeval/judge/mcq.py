@@ -1,17 +1,19 @@
 # walledeval/judge/mcq.py
 
 import re
+from pydantic import BaseModel
 
 from walledeval.constants import DEFAULT_OPTIONS
 from walledeval.judge.core import Judge
+from walledeval.types.outputs import MCQOutput
 
 
-class MCQJudge(Judge[int, bool]):
+class MCQJudge(Judge[int, MCQOutput]):
     def __init__(self, options: list[str] = DEFAULT_OPTIONS):
         super().__init__("MCQJudge")
         self.options = options
 
-    def check(self, response: str, answer: int) -> bool:
+    def check(self, response: str, answer: int) -> MCQOutput:
         # response is simply the output from the model
 
         response = re.sub(r'[^\w\s_]+', '', response)
@@ -22,6 +24,13 @@ class MCQJudge(Judge[int, bool]):
 
         predicted = response[0].upper()
         if predicted not in self.options:
-            return False
+            return MCQOutput(
+                predicted=-1,
+                correct=False
+            )
         else:
-            return self.options.index(predicted) == answer
+            predicted = self.options.index(predicted)
+            return MCQOutput(
+                predicted=predicted,
+                correct=(predicted == answer)
+            )
