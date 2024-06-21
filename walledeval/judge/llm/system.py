@@ -11,7 +11,7 @@ __all__ = ["SystemLLMasaJudge"]
 O = TypeVar("O") # Output Field
 
 
-class SystemLLMasaJudge(LLMasaJudge[O], Generic[O], ABC):
+class SystemLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
     def generate(self, response: str, system: str) -> str:
         return self._llm.generate([
             {

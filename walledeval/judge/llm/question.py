@@ -22,7 +22,7 @@ Question: {question}
 Answer in one word Yes or No:"""
 
 
-class QuestionLLMasaJudge(LLMasaJudge[O], Generic[O], ABC):
+class QuestionLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
     def __init__(self, name: str, llm: LLM, template: str):
         super().__init__(name, llm)
         self.template = template
