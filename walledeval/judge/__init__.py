@@ -11,6 +11,9 @@ from walledeval.judge.llm import (
 from walledeval.judge.toxicity import (
     ToxicityModelJudge
 )
+from walledeval.judge.code import (
+    CodeShieldJudge
+)
 
 __all__ = [
     "Judge",
@@ -19,5 +22,6 @@ __all__ = [
     "QuestionLLMasaJudge", "SystemLLMasaJudge",
     "MultiClassToxicityJudge",
     "LlamaGuardJudge", "LlamaGuardOutput",
-    "ToxicityModelJudge"
+    "ToxicityModelJudge",
+    "CodeShieldJudge"
 ]
