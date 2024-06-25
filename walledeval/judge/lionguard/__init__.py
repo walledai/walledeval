@@ -33,7 +33,7 @@ class LionGuardJudge(Judge[None, float]):
         self.max_length = max_length
         self.batch_size = batch_size
         
-        self.model_path = hf_hub_download(repo_id=name, file=config_file)
+        self.model_path = hf_hub_download(repo_id=name, filename=config_file)
         
         if self.type == "xgboost":
             self.classifier = XGBoost.from_config(self.model_path)
@@ -44,7 +44,7 @@ class LionGuardJudge(Judge[None, float]):
     
     @classmethod
     def from_preset(cls, name: str = "beta"):
-        yaml_fp = Path(f"/presets/{name}.yaml").resolve()
+        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
         yaml_text = yaml_fp.read_text(encoding="utf-8")
         config = yaml.safe_load(yaml_text)
         
@@ -77,8 +77,8 @@ class LionGuardJudge(Judge[None, float]):
             model_output = self.embedding_model(**encoded_input)
             embeddings = model_output[0][:, 0]
         
-        sentence_embeddings = torch.nn.functional.normalize(sentence_embeddings, p=2, dim=1)
-        output = np.array([sentence_embeddings.cpu().numpy()])
+        embeddings = torch.nn.functional.normalize(embeddings, p=2, dim=1)
+        output = np.array(embeddings.cpu().numpy())
         # returns (1, embed_dim)
         return output
 
