@@ -1,9 +1,10 @@
 # walledeval/judge/__init__.py
 
 from walledeval.judge.core import Judge
+from walledeval.judge.lionguard import LionGuardJudge
 from walledeval.judge.mcq import MCQJudge
 from walledeval.judge.llm import (
-    LLMasaJudge, 
+    LLMasaJudge,
     QuestionLLMasaJudge, SystemLLMasaJudge,
     MultiClassToxicityJudge,
     LlamaGuardJudge, LlamaGuardOutput
@@ -19,5 +20,5 @@ __all__ = [
     "QuestionLLMasaJudge", "SystemLLMasaJudge",
     "MultiClassToxicityJudge",
     "LlamaGuardJudge", "LlamaGuardOutput",
-    "ToxicityModelJudge"
+    "ToxicityModelJudge", "LionGuardJudge"
 ]
