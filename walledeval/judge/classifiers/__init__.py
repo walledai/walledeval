@@ -49,6 +49,7 @@ class XGBoost(XGBClassifier):
     def from_config(cls, config_path: str, **kwargs):
         classifier = cls(**kwargs)
         classifier.load_model(config_path)
+        return classifier
         
     def predict(self, input: npt.ArrayLike) -> list[float]:
         preds = self.predict_proba(input)[:, 1]
