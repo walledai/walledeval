@@ -9,6 +9,7 @@ from walledeval.judge.llm import (
     MultiClassToxicityJudge,
     LlamaGuardJudge, LlamaGuardOutput
 )
+from walledeval.judge.string import StringMatchingJudge
 from walledeval.judge.toxicity import (
     ToxicityModelJudge
 )
@@ -24,5 +25,5 @@ __all__ = [
     "MultiClassToxicityJudge",
     "LlamaGuardJudge", "LlamaGuardOutput",
     "ToxicityModelJudge", "LionGuardJudge",
-    "CodeShieldJudge"
+    "CodeShieldJudge", "StringMatchingJudge"
 ]
