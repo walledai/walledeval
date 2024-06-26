@@ -1,0 +1,7 @@
+model_id: jfooyh/lionguard-beta
+model_type: xgboost
+config_file: lionguard_binary.json
+tokenizer: BAAI/bge-large-en-v1.5
+embedding_model: BAAI/bge-large-en-v1.5
+max_length: 512
+batch_size: 32
