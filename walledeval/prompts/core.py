@@ -31,7 +31,7 @@ class BasePromptTemplate(Template):
         return self.safe_substitute(**kwds)
 
 
-class PromptTemplate(Template):
+class PromptTemplate(BasePromptTemplate):
     """Prompt Template Definition.
 
     Args:
@@ -66,7 +66,7 @@ class PromptTemplate(Template):
         )
 
 
-class QuestionTemplate(Template):
+class QuestionTemplate(BasePromptTemplate):
     """Question-based Prompt Template Definition.
 
     Args:
@@ -99,6 +99,3 @@ class QuestionTemplate(Template):
             question=question.question,
             **kwds
         )
-
-    
-    
