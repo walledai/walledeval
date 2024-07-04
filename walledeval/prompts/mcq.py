@@ -125,7 +125,7 @@ class MultipleChoiceTemplate(QuestionTemplate):
         ])
 
         return super().format(
-            question=question.question,
+            question=question,
             choices=choices_str,
             options=self.options[:len(question.choices)],
             **kwds
