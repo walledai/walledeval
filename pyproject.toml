@@ -19,6 +19,9 @@ classifiers = [
 [tool.poetry.urls]
 "Bug Tracker" = "https://github.com/walledai/walledeval/issues"
 
+[tool.poetry.scripts]
+walledeval = "walledeval.main:app"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 openai = "^1.23.6"
@@ -32,15 +35,16 @@ accelerate = "^0.31.0"
 xgboost = "^2.1.0"
 scikit-learn = "^1.5.0"
 codeshield = "^1.0.1"
+typer = {extras = ["all"], version = "^0.12.3"}
 
-[tool.poetry.group.dev.dependencies]  
-pytest = "^7.4"  
-pytest-sugar = "*"  
-pytest-cov = "*"  
-black = "*"  
-mypy = "*"  
-ruff = "*"  
-isort = "*" 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4"
+pytest-sugar = "*"
+pytest-cov = "*"
+black = "*"
+mypy = "*"
+ruff = "*"
+isort = "*"
 tox = "^4.15.0"
 types-tqdm = "^4.66.0.20240417"
 torch = "^2.3.0"
