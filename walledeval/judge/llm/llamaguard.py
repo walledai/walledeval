@@ -2,6 +2,7 @@
  
 from enum import Enum
 import torch
+from typing import Union
 
 from walledeval.llm import HF_LLM
 from walledeval.types import LLMType
@@ -22,15 +23,19 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput]):
     _VERSIONS = [
         "meta-llama/LlamaGuard-7b",
         "meta-llama/Meta-Llama-Guard-2-8B"
-    ]
+    ]   
     
-    def __init__(self, version: int, 
+    def __init__(self, version: Union[int, str], 
                  model_kwargs={"torch_dtype": torch.bfloat16}, device_map="auto", **kwargs):
-        if version < 0 or version > len(self._VERSIONS):
-            raise ValueError(f"Invalid Version {version}")
+        if isinstance(version, int):
+            if version < 0 or version > len(self._VERSIONS):
+                raise ValueError(f"Invalid Version {version}")
+            
+            self.model_id = self._VERSIONS[(version+1) % 2]
+        elif isinstance(version, str):
+            self.model_id = version
 
         self.version = version
-        self.model_id = self._VERSIONS[(version+1) % 2]
 
         llm = HF_LLM(
             self.model_id,
