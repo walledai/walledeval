@@ -3,14 +3,11 @@
 from pydantic import BaseModel
 from pathlib import Path
 import yaml
-import enum
 from typing import Optional, TypeVar
 
 from pydantic import BaseModel
 
-from walledeval.types import Messages
-
-from walledeval.prompts.core import BasePromptTemplate, BaseConversationTemplate
+from walledeval.prompts.core import BasePromptTemplate
 
 
 T = TypeVar('T')
@@ -31,14 +28,8 @@ def _exec_with_return(code: str):
     return format
 
 
-class TemplateType(str, enum.Enum):
-    PROMPT = "prompt"
-    CONVERSATION = "conversation"
-
-
-class CustomizableTemplate:
-    def __init__(self, template: Messages = "$prompt",
-                 type: TemplateType = TemplateType.PROMPT,
+class CustomizableTemplate(BasePromptTemplate):
+    def __init__(self, template: str = "$prompt", 
                  required: dict[str, Param] = dict(
                      prompt=Param(
                          name="prompt", 
@@ -47,13 +38,7 @@ class CustomizableTemplate:
                  ),
                  optional: dict[str, Param] = {},
                  **kwargs):
-        # super().__init__(template)
-        self.type = type
-        
-        if type == "prompt":
-            self.template = BasePromptTemplate(template)
-        else:
-            self.template = BaseConversationTemplate(template)
+        super().__init__(template)
         
         self.required = required
         self.optional = optional
@@ -70,18 +55,8 @@ class CustomizableTemplate:
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
         yaml_text = yaml_fp.read_text(encoding="utf-8")
         config = yaml.safe_load(yaml_text)
-        
-        prompt_type = config["type"]
-        if prompt_type == "conversation":
-            template = config["template"]
-            if isinstance(template, str):
-                template = template[:-1] if template.endswith("\n") else template
-             #template = str(template)
-        elif prompt_type == "prompt":
-            template = config["template"]
-            template = template[:-1] if template.endswith("\n") else template
-        else:
-            raise ValueError(f"No such type '{prompt_type}', select from ['prompt', 'conversation']")
+
+        template = config["template"].rstrip("\n")
         
         params = config["params"]
 
@@ -114,7 +89,6 @@ class CustomizableTemplate:
         
         return cls(
             template,
-            TemplateType(prompt_type),
             required_params,
             optional_params
         )
@@ -145,4 +119,4 @@ class CustomizableTemplate:
                 *variables
             )
         
-        return self.template.format(**final_params)
+        return super().format(**final_params)
