@@ -2,9 +2,9 @@
 
 from string import Template
 
-from walledeval.types import Question, Prompt
+from walledeval.types import Question, Prompt, Messages, Message
 
-__all__ = ["BasePromptTemplate"]
+__all__ = ["BasePromptTemplate", "BaseConversationTemplate"]
 
 
 class BasePromptTemplate(Template):
@@ -29,6 +29,35 @@ class BasePromptTemplate(Template):
             str: Formatted (or partially formatted) template.
         """
         return self.safe_substitute(**kwds)
+
+
+class BaseConversationTemplate(Template):
+    """Basic Conversational Template Definition.
+    
+    Attributes:
+        messages (Messages): A list of messages / list of Message objects / message
+    """
+    def __init__(self, messages: Messages):
+        if isinstance(messages, list) and isinstance(messages[0], Message):
+            messages = [
+                dict(msg)
+                for msg in messages
+            ]
+        elif isinstance(messages, str):
+            messages = [{
+                "role": "user",
+                "message": messages
+            }]
+        
+        self.messages = messages
+        
+        super().__init__(str(self.messages))
+    
+    def format(self, **kwds) -> list[Message]:
+        return [
+            Message(**it)
+            for it in eval(self.safe_substitute(**kwds))
+        ]
 
 
 class PromptTemplate(BasePromptTemplate):
