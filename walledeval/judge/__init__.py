@@ -21,6 +21,8 @@ try:
     from walledeval.judge.code import CodeShieldJudge
 except ImportError:
     warnings.warn("CodeShieldJudge could not be imported, not supported on Windows OS", ImportWarning, stacklevel=2)
+except OSError:
+    warnings.warn("CodeShieldJudge could not be imported, not supported on Windows OS", ImportWarning, stacklevel=2)
 
 __all__ = [
     "Judge",
