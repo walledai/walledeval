@@ -1,0 +1,30 @@
+name: mcq/mixeval
+source: https://arxiv.org/abs/2406.06565
+type: prompt
+template: |
+  $question
+  $choices
+  Answer with the option letter from the given choices directly.
+params:
+  - name: context
+    type: str
+    default: ''
+  - name: question
+    type: str
+    format: |
+      def format(question, context):
+        return ((context+"\n") if context else "") + question
+    format_values: ['question', 'context']
+  - name: choices
+    type: list
+    format: |
+      def format(choices, options):
+        return "\n".join([
+          f"{option}. {choice}"
+          for option, choice in zip(options, choices)
+        ])
+    format_values: ['choices', 'options']
+  - name: options
+    type: list
+    optional: true
+    default: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']

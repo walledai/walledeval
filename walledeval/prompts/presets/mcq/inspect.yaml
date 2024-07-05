@@ -1,4 +1,4 @@
-name: mcq/default
+name: mcq/inspect
 source: none
 type: prompt
 template: |
