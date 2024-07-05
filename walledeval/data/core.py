@@ -1,7 +1,7 @@
 # walledeval/benchmark/core.py
 
 from abc import ABC, abstractmethod
-from typing import TypeVar, Generic, Optional
+from typing import TypeVar, Generic, Optional, Union
 from pydantic import BaseModel
 
 from datasets import load_dataset
@@ -43,6 +43,10 @@ class Dataset(ABC, Generic[T]):
     @abstractmethod
     def sample(self, samples: Optional[int] = None) -> list[T]:
         pass
+    
+    @abstractmethod
+    def all(self) -> list[T]:
+        pass
 
 
 class _HuggingFaceDataset(Dataset[T], ABC):
@@ -53,13 +57,56 @@ class _HuggingFaceDataset(Dataset[T], ABC):
     @classmethod
     def from_hub(cls, name: str,
                  config: Optional[str] = None,
-                 split: str = "train",
+                 split: str = "DEFAULT",
                  **ds_kwargs):
-        dataset = load_dataset(name, config, split=split, **ds_kwargs)
+        dataset = load_dataset(name, config, **ds_kwargs)
+        
+        splits = tuple(dataset.keys())
+        
+        if split in splits:
+            dataset = dataset[split]
+        elif split == "DEFAULT":
+            if "train" in splits:
+                dataset = dataset["train"]
+            elif "test" in splits:
+                dataset = dataset["test"]
+            else:
+                split = splits[0]
+                dataset = dataset[split]
+        else:
+            raise NameError(f"Requested split '{split}' not found in dataset {name}/{config}, select one of {splits}")
+        
         return cls(
-            name + ("/" + config if config else "") + "/" + split, 
+            name + ("/" + config if config else "") + ("/" + split if split != "DEFAULT" else ""), 
+            dataset["split"]
+        )
+    
+    @classmethod
+    def from_csv(cls, filenames: Union[str, list[str]], **csv_kwargs):
+        dataset = load_dataset(
+            "csv", 
+            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            **csv_kwargs
+        )['train']
+        
+        return cls(
+            filenames[0],
             dataset
         )
+    
+    @classmethod
+    def from_json(cls, filenames: Union[str, list[str]], **json_kwargs):
+        dataset = load_dataset(
+            "json", 
+            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            **json_kwargs
+        )['train']
+        
+        return cls(
+            filenames[0],
+            dataset
+        )
+        
 
     @abstractmethod
     def convert(self, sample: dict) -> T:
@@ -74,6 +121,16 @@ class _HuggingFaceDataset(Dataset[T], ABC):
             [i for i in range(min(samples, len(self.dataset)))]
         ).to_list()
         return [self.convert(sample) for sample in samples_lst]
+    
+    def all(self) -> list[T]:
+        return [
+            self.convert(self.dataset[idx])
+            for idx in range(len(self))
+        ]
+    
+    def __iter__(self):
+        for idx in range(len(self)):
+            yield self.convert(self.dataset[idx])
 
 
 class _HuggingFaceDatasetAlias:
@@ -91,6 +148,16 @@ class _HuggingFaceDatasetAlias:
         return HuggingFaceDataset.from_hub(
             name, config, split, self.model, **ds_kwargs
         )
+    
+    def from_csv(self, filenames: Union[str, list[str]], **csv_kwargs):
+        return HuggingFaceDataset.from_csv(
+            filenames, self.model, **csv_kwargs
+        )
+    
+    def from_json(self, filenames: Union[str, list[str]], **json_kwargs):
+        return HuggingFaceDataset.from_json(
+            filenames[0], self.model, **json_kwargs
+        )
 
 
 class HuggingFaceDataset(_HuggingFaceDataset):
@@ -104,9 +171,53 @@ class HuggingFaceDataset(_HuggingFaceDataset):
                  split: str = "train",
                  model: type = Prompt,
                  **ds_kwargs):
-        dataset = load_dataset(name, config, split=split, **ds_kwargs)
+        dataset = load_dataset(name, config, **ds_kwargs)
+        
+        splits = tuple(dataset.keys())
+        
+        if split in splits:
+            dataset = dataset[split]
+        elif split == "DEFAULT":
+            if "train" in splits:
+                dataset = dataset["train"]
+            elif "test" in splits:
+                dataset = dataset["test"]
+            else:
+                split = splits[0]
+                dataset = dataset[split]
+        else:
+            raise NameError(f"Requested split '{split}' not found in dataset {name}/{config}, select one of {splits}")
+        
         return cls(
-            name + ("/" + config if config else "") + "/" + split, 
+            name + ("/" + config if config else "") + ("/" + split if split != "DEFAULT" else ""), 
+            dataset["split"],
+            model
+        )
+    
+    @classmethod
+    def from_csv(cls, filenames: Union[str, list[str]], model: type = Prompt, **csv_kwargs):
+        dataset = load_dataset(
+            "csv", 
+            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            **csv_kwargs
+        )['train']
+        
+        return cls(
+            filenames[0],
+            dataset,
+            model
+        )
+    
+    @classmethod
+    def from_json(cls, filenames: Union[str, list[str]], model: type = Prompt, **json_kwargs):
+        dataset = load_dataset(
+            "json", 
+            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            **json_kwargs
+        )['train']
+        
+        return cls(
+            filenames[0],
             dataset,
             model
         )
