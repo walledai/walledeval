@@ -75,10 +75,11 @@ class CustomizableTemplate:
         if prompt_type == "conversation":
             template = config["template"]
             if isinstance(template, str):
-                template = template.rstrip("\n")
-            #template = str(template)
+                template = template[:-1] if template.endswith("\n") else template
+             #template = str(template)
         elif prompt_type == "prompt":
-            template = config["template"].rstrip("\n")
+            template = config["template"]
+            template = template[:-1] if template.endswith("\n") else template
         else:
             raise ValueError(f"No such type '{prompt_type}', select from ['prompt', 'conversation']")
         
