@@ -1,12 +1,14 @@
 # Walled Eval: Testing LLMs Against Jailbreaks and Unprecedented Harms
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/walledai/walledeval/main/docs/logo.png" alt="" width="300" height="300">
+  <img width="700" alt="walleai_logo_shield" src="https://github.com/walledai/walledeval/assets/32847115/d8b1d14f-7071-448b-8997-2eeba4c2c8f6">
 </p>
 
 > 🔥 Excited to announce the release of the community version of our guardrails: [WalledGuard](https://huggingface.co/walledai/walledguard-c)!
 
 > 🔥 Excited to partner with IMDA Singapore-AI Verify to build robust AI safety and controllability measures!
+
+> 🔥 Grateful to [Tensorplex](https://www.tensorplex.ai/) for their support with computing resources!
 
 <!-- [![Python Package tests status](https://github.com/three-body-analysis/tris/actions/workflows/python-package.yml/badge.svg)](https://github.com/three-body-analysis/tris/actions?query=workflow%3Apython-package) -->
 <!-- [![Docs CI status](https://github.com/three-body-analysis/tris/actions/workflows/docs.yml/badge.svg)](https://three-body-analysis.github.io/tris/) -->
