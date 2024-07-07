@@ -29,6 +29,7 @@ class StringMatchingJudge(Judge[None, bool]):
         yaml_dict: dict = yaml.safe_load(yaml_text)
         
         return cls(
+            name=name,
             must_match_all=yaml_dict.get("must_match_all", []),
             must_mismatch_all=yaml_dict.get("must_mismatch_all", []),
             caseless=yaml_dict.get("caseless", False)
