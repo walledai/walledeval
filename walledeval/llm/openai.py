@@ -74,18 +74,13 @@ class OpenAI(LLM):
         else:
             raise TypeError("Unsupported format for parameter 'text'")
 
-        system_prompt: str
-        if messages[0]["role"] == "system":
-            system_prompt = messages[0]["content"]
-            messages = messages[1:]
-        else:
-            system_prompt = self.system_prompt
+        if messages[0]["role"] != "system":
+            messages.insert(0, {"role":"system", "content":self.system_prompt})
 
-        message = self.client.messages.create(
+        message = self.client.chat.completions.create(
             max_tokens=max_new_tokens,
             messages=messages,
             temperature=temperature,
-            system=system_prompt,
             model=self.name
         )
         output = message.content[0].text
@@ -95,14 +90,10 @@ class OpenAI(LLM):
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
-        message = self.client.messages.create(
+        message = self.client.completions.create(
             max_tokens=max_new_tokens,
-            messages=[{
-                "role": "assistant",
-                "content": text
-            }],
+            prompt=text,
             temperature=temperature,
-            system=self.system_prompt,
             model=self.name
         )
         output = message.content[0].text
