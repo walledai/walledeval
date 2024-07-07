@@ -14,6 +14,17 @@ __all__ = [
 ]
 
 
+def transform_to_gemini(messages):
+    messages_gemini = []
+    for message in messages:
+        if message['role'] == 'user':
+            messages_gemini.append({'role': 'user', 'parts': [message['content']]})
+        elif message['role'] == 'assistant':
+            messages_gemini.append({'role': 'model', 'parts': [message['content']]})
+
+    return messages_gemini
+
+
 class Gemini(LLM):
     def __init__(self,
                  model_id: str,
@@ -81,6 +92,8 @@ class Gemini(LLM):
         else:
             system_prompt = self.system_prompt
             client = self.client
+            
+        messages = transform_to_gemini(messages)
         
         message = client.generate_content(
             messages,
@@ -97,12 +110,17 @@ class Gemini(LLM):
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
+        
         model=genai.GenerativeModel(model_name=self.name,
                                     system_instruction=self.system_prompt)
-        message = model.generate_content(text,
+        
+        message = model.generate_content(
+            f"Continue writing: {text}",
             generation_config=genai.types.GenerationConfig(
-            max_output_tokens=max_new_tokens,
-            temperature=temperature))
+                max_output_tokens=max_new_tokens,
+                temperature=temperature
+            )
+        )
         output = message.text
         return output
 
