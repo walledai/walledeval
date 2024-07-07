@@ -25,7 +25,8 @@ class Gemini(LLM):
             type
         )
         genai.configure(api_key=api_key)
-        self.client = genai
+        self.client = genai.GenerativeModel(model_name=self.name,
+                                            system_instruction=system_prompt)
 
     @classmethod
     def gemini15flash(cls, api_key: str, system_prompt: str = ""):
@@ -72,16 +73,22 @@ class Gemini(LLM):
         if messages[0]["role"] == "system":
             system_prompt = messages[0]["content"]
             messages = messages[1:]
+            
+            # small work-around since Gemini library doesn't support system prompt at runtime
+            client = genai.GenerativeModel(model_name=self.name,
+                                           system_instruction=system_prompt)
+        
         else:
             system_prompt = self.system_prompt
-
-        model=genai.GenerativeModel(model_name=self.name,
-                                    system_instruction=system_prompt)
+            client = self.client
         
-        message = model.generate_content(messages,
+        message = client.generate_content(
+            messages,
             generation_config=genai.types.GenerationConfig(
-            max_output_tokens=max_new_tokens,
-            temperature=temperature))
+                max_output_tokens=max_new_tokens,
+                temperature=temperature
+            )
+        )
         
         output = message.text
         return output
