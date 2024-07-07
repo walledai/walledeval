@@ -25,23 +25,30 @@ class Claude(LLM):
             type
         )
         self.client = Anthropic(api_key=api_key)
+        
+    @classmethod
+    def sonnet35(cls, api_key: str, system_prompt: str = ""):
+        return cls(
+            "claude-3-5-sonnet-20240620",
+            api_key, system_prompt
+        )
 
     @classmethod
-    def opus(cls, api_key: str, system_prompt: str = ""):
+    def opus3(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "claude-3-opus-20240229",
             api_key, system_prompt
         )
 
     @classmethod
-    def sonnet(cls, api_key: str, system_prompt: str = ""):
+    def sonnet3(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "claude-3-sonnet-20240229",
             api_key, system_prompt
         )
 
     @classmethod
-    def haiku(cls, api_key: str, system_prompt: str = ""):
+    def haiku3(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "claude-3-haiku-20240307",
             api_key, system_prompt
