@@ -68,7 +68,7 @@ class Gemini(LLM):
         if isinstance(text, str):
             messages = [{
                 "role": "user",
-                "parts": [text]
+                "content": [text]
             }]
         elif isinstance(text, list) and isinstance(text[0], Message):
             messages = [
