@@ -1,6 +1,6 @@
 # walledeval/llm/openai.py
 
-from openai import OpenAI
+import openai
 
 from typing import Optional, Union
 
@@ -24,7 +24,7 @@ class OpenAI(LLM):
             model_id, system_prompt,
             type
         )
-        self.client = OpenAI(api_key=api_key)
+        self.client = openai.OpenAI(api_key=api_key)
 
     @classmethod
     def gpt4o(cls, api_key: str, system_prompt: str = ""):
@@ -83,21 +83,18 @@ class OpenAI(LLM):
             temperature=temperature,
             model=self.name
         )
-        output = message.content[0].text
+        output = message.choices[0].message.content
         return output
 
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
-        message = self.client.completions.create(
-            max_tokens=max_new_tokens,
-            prompt=text,
-            temperature=temperature,
-            model=self.name
-        )
-        output = message.content[0].text
-        return output
+        text = f"""{self.system_prompt}
+
+Continue writing: {text}"""
+        
+        return self.chat(text, max_new_tokens=max_new_tokens, temperature=temperature)
 
     def generate(self,
                  text: Messages,
