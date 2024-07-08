@@ -1,6 +1,6 @@
-# walledeval/llm/claude.py
+# walledeval/llm/cohere.py
 
-from anthropic import Anthropic
+import cohere
 
 from typing import Optional, Union
 
@@ -10,11 +10,11 @@ from walledeval.types import (
 from walledeval.llm.core import LLM
 
 __all__ = [
-    "Claude"
+    "Cohere"
 ]
 
 
-class Claude(LLM):
+class Cohere(LLM):
     def __init__(self,
                  model_id: str,
                  api_key: str,
@@ -24,33 +24,33 @@ class Claude(LLM):
             model_id, system_prompt,
             type
         )
-        self.client = Anthropic(api_key=api_key)
-        
+        self.client = cohere.Client(api_key=api_key)
+
     @classmethod
-    def sonnet35(cls, api_key: str, system_prompt: str = ""):
+    def commandrplus(cls, api_key: str, system_prompt: str = ""):
         return cls(
-            "claude-3-5-sonnet-20240620",
+            "command-r-plus",
             api_key, system_prompt
         )
 
     @classmethod
-    def opus3(cls, api_key: str, system_prompt: str = ""):
+    def commandr(cls, api_key: str, system_prompt: str = ""):
         return cls(
-            "claude-3-opus-20240229",
+            "command-r",
             api_key, system_prompt
         )
 
     @classmethod
-    def sonnet3(cls, api_key: str, system_prompt: str = ""):
+    def command(cls, api_key: str, system_prompt: str = ""):
         return cls(
-            "claude-3-sonnet-20240229",
+            "command",
             api_key, system_prompt
         )
-
+    
     @classmethod
-    def haiku3(cls, api_key: str, system_prompt: str = ""):
+    def commandlight(cls, api_key: str, system_prompt: str = ""):
         return cls(
-            "claude-3-haiku-20240307",
+            "command-light",
             api_key, system_prompt
         )
 
@@ -74,37 +74,45 @@ class Claude(LLM):
         else:
             raise TypeError("Unsupported format for parameter 'text'")
 
-        system_prompt: str
-        if messages[0]["role"] == "system":
-            system_prompt = messages[0]["content"]
-            messages = messages[1:]
+        if messages[0]["role"] != "system":
+            messages.insert(0, {"role":"SYSTEM", "content":self.system_prompt})
         else:
-            system_prompt = self.system_prompt
+            messages[0]["role"] = "SYSTEM"
 
-        message = self.client.messages.create(
+        for counter in len(messages):
+            if messages[counter]["role"] == "user":
+                messages[counter]["role"] = "USER"
+            elif messages[counter]["role"] == "assistant":
+                messages[counter]["role"] = "CHATBOT"
+        
+        if messages[-1]["role"] == "USER":
+            prompt = messages[-1]["content"]
+            messages = messages[:-1]
+        else:
+            raise ValueError("Last message should be a user message")
+        message = self.client.chat(
+            chat_history=messages,
             max_tokens=max_new_tokens,
-            messages=messages,
+            message=prompt,
             temperature=temperature,
-            system=system_prompt,
             model=self.name
         )
-        output = message.content[0].text
+        output = message.text
         return output
 
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
-        message = self.client.messages.create(
+        messages = [{"role":"SYSTEM", "content":self.system_prompt}]
+        
+        message = self.client.chat(
+            chat_history=messages,
             max_tokens=max_new_tokens,
-            messages=[{
-                "role": "assistant",
-                "content": text
-            }],
+            message=f"Continue writing: {text}",
             temperature=temperature,
-            system=self.system_prompt,
             model=self.name
         )
-        output = message.content[0].text
+        output = message.text
         return output
-        
+
