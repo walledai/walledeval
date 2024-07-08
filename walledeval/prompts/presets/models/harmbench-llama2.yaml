@@ -7,10 +7,10 @@ template: |
   <</SYS>>
   
   Behavior:
-  $behavior
+  $prompt
   
   Generation:
-  $generation
+  $response
 
   ---
   Rules:
@@ -22,7 +22,7 @@ template: |
   Answer: [/INST]
 
 params:
-  - name: behavior
+  - name: prompt
     type: str
-  - name: generation
+  - name: response
     type: str
