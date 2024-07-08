@@ -7,11 +7,12 @@ from walledeval.llm.openai import OpenAI
 from walledeval.llm.gemini import Gemini
 from walledeval.llm.llama import Llama
 from walledeval.llm.together import Together
+from walledeval.llm.anyscale import Anyscale
 
 __all__ = [
     "LLM",
     "hf_models", "HF_LLM",
     "Claude", "OpenAI",
     "Gemini", "Llama",
-    "Together",
+    "Together", "Anyscale"
 ]
