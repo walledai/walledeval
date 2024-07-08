@@ -90,9 +90,7 @@ class OpenAI(LLM):
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
-        text = f"""{self.system_prompt}
-
-Continue writing: {text}"""
+        text = f"Continue writing: {text}"
         
         return self.chat(text, max_new_tokens=max_new_tokens, temperature=temperature)
 
