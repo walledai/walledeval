@@ -38,6 +38,23 @@ class Llama(LLM):
             type = type
         )
     
+    @classmethod
+    def from_file(cls,
+                  model_path: str,
+                  system_prompt: str = "",
+                  type: Optional[Union[LLMType, int]] = LLMType.NEITHER,
+                  **kwargs):
+        llm = llama_cpp.Llama(
+            model_path=model_path,
+            **kwargs
+        )
+        raise cls(
+            name=model_path.split("/")[-1].split("\\")[-1].split(".")[0],
+            model=llm,
+            system_prompt=system_prompt,
+            type=type
+        )
+    
     def chat(self,
              text: Messages,
              max_new_tokens: int = 512,
