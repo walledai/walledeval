@@ -7,6 +7,10 @@ from walledeval.types import Message, Messages, LLMType
 from walledeval.llm.core import LLM
 
 
+__all__ = [
+    "Llama"
+]
+
 
 class Llama(LLM):
     def __init__(self,
