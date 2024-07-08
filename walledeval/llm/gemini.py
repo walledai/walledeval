@@ -123,34 +123,3 @@ class Gemini(LLM):
         )
         output = message.text
         return output
-
-    def generate(self,
-                 text: Messages,
-                 max_new_tokens: int = 1024,
-                 temperature: float = 0.0,
-                 instruct: Optional[bool] = None) -> str:
-        type = None
-        if instruct is None:
-            if self.type == LLMType.BASE:
-                type = LLMType.BASE
-            else:
-                type = LLMType.INSTRUCT
-        elif instruct:
-            type = LLMType.INSTRUCT
-        else:
-            type = LLMType.BASE
-
-        if type == LLMType.INSTRUCT:
-            return self.chat(
-                text,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature
-            )
-        else:
-            if not isinstance(text, str):
-                raise ValueError("Unsupported type for input 'text'")
-            return self.complete(
-                text,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature
-            )
