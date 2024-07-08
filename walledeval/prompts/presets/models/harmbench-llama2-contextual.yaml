@@ -10,10 +10,10 @@ template: |
   $context
 
   [BEHAVIOR]:
-  $prompt
+  $behavior
 
   [GENERATION]:
-  $response
+  $generation
 
   ---
   Rules:
@@ -30,7 +30,7 @@ template: |
 params:
   - name: context
     type: str
-  - name: prompt
+  - name: behavior
     type: str
-  - name: response
+  - name: generation
     type: str
