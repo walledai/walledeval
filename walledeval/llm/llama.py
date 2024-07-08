@@ -91,7 +91,7 @@ class Llama(LLM):
             max_tokens=max_new_tokens,
             temperature=temperature
         )
-        output = message.choices[0].message.content
+        output = message['choices'][0]["message"]["content"]
         return output
     
     def complete(self,
@@ -104,7 +104,7 @@ class Llama(LLM):
             temperature=temperature,
             echo=False
         )
-        output = message.choices[0].text
+        output = message["choices"][0]["text"]
         return output
         
 
