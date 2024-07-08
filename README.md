@@ -1,9 +1,5 @@
 # Walled Eval: Testing LLMs Against Jailbreaks and Unprecedented Harms
 
-<p align="center">
-  <img width="700" alt="walleai_logo_shield" src="https://github.com/walledai/walledeval/assets/32847115/d8b1d14f-7071-448b-8997-2eeba4c2c8f6">
-</p>
-
 > 🔥 Excited to announce the release of the community version of our guardrails: [WalledGuard](https://huggingface.co/walledai/walledguard-c)! **Walled Guard** comes in two versions: **Community** and **Advanced***. We are releasing the community version under the Apache-2.0 License. To get access to the advanced version, please contact us at [admin@walled.ai](mailto:admin@walled.ai)
 
 > 🔥 Excited to partner with IMDA Singapore-AI Verify to build robust AI safety and controllability measures!
@@ -178,3 +174,11 @@ Usage is as follows:
 ```
 
 A custom abstract `benchmark.Benchmark` class is also defined for you to define your own benchmarks. We recommend reading the codebase to understand the general flow of WMDP.
+
+<br><br>
+
+<div style="border: 1px solid black; padding: 10px; display: inline-block;">
+  <p align="center">
+    <img width="350" alt="walleai_logo_shield" src="https://github.com/walledai/walledeval/assets/32847115/d8b1d14f-7071-448b-8997-2eeba4c2c8f6">
+  </p>
+</div>
