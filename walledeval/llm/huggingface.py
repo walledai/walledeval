@@ -63,7 +63,7 @@ class HF_LLM(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 256,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         if isinstance(text, str):
             messages = [{
                 "role": "user",
@@ -99,7 +99,7 @@ class HF_LLM(LLM):
     def complete(self,
                  text: str,
                  max_new_tokens: int = 256,
-                 temperature: float = 0.0) -> str:
+                 temperature: float = 0.1) -> str:
         return self._generate(
             text,
             max_new_tokens=max_new_tokens,
@@ -109,7 +109,7 @@ class HF_LLM(LLM):
     def generate(self,
                  text: Messages,
                  max_new_tokens: int = 256,
-                 temperature: float = 0.0,
+                 temperature: float = 0.1,
                  instruct: Optional[bool] = None) -> str:
         type = None
         if instruct is None:
