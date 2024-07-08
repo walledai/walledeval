@@ -11,7 +11,7 @@
 > [!NOTE]  
 > We have recently released `v0.1.0` of our codebase! This means that our documentation is not completely up-to-date with the current state of the codebase. However, we will be updating our documentation soon for all users to be able to quickstart using WalledEval! Till then, it is always best to consult the code or the `tests/` or `notebooks/` folders to have a better idea of how the codebase currently works.
 
-## Announcement
+## Announcements
 > 🔥 Excited to announce the release of the community version of our guardrails: [WalledGuard](https://huggingface.co/walledai/walledguard-c)! **Walled Guard** comes in two versions: **Community** and **Advanced+**. We are releasing the community version under the Apache-2.0 License. To get access to the advanced version, please contact us at [admin@walled.ai](mailto:admin@walled.ai)
 
 > 🔥 Excited to partner with IMDA Singapore AI Verify Foundation to build robust AI safety and controllability measures!
