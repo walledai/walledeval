@@ -9,6 +9,7 @@ from walledeval.llm.llama import Llama
 from walledeval.llm.together import Together
 from walledeval.llm.anyscale import Anyscale
 from walledeval.llm.octoai import OctoAI
+from walledeval.llm.groq import Groq
 
 __all__ = [
     "LLM",
@@ -16,5 +17,5 @@ __all__ = [
     "Claude", "OpenAI",
     "Gemini", "Llama",
     "Together", "Anyscale",
-    "OctoAI"
+    "OctoAI", "Groq",
 ]
