@@ -1,4 +1,4 @@
-# Walled Eval: Testing LLMs Against Jailbreaks and Unprecedented Harms
+# WalledEval: Testing LLMs Against Jailbreaks and Unprecedented Harms
 
 > 🔥 Excited to announce the release of the community version of our guardrails: [WalledGuard](https://huggingface.co/walledai/walledguard-c)! **Walled Guard** comes in two versions: **Community** and **Advanced***. We are releasing the community version under the Apache-2.0 License. To get access to the advanced version, please contact us at [admin@walled.ai](mailto:admin@walled.ai)
 
