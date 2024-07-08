@@ -17,8 +17,8 @@ __all__ = [
 class Anyscale(LLM):
     def __init__(self,
                  model_id: str,
-                 api_base_url: str,
                  api_key: str,
+                 api_base_url: str = "https://api.endpoints.anyscale.com/v1",
                  system_prompt: str = "",
                  type: Optional[Union[LLMType, int]] = LLMType.NEITHER):
         super().__init__(
