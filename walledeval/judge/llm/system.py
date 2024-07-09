@@ -9,9 +9,10 @@ __all__ = ["SystemLLMasaJudge"]
 
 
 O = TypeVar("O") # Output Field
+S = TypeVar('S') # Score Field
 
 
-class SystemLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
+class SystemLLMasaJudge(LLMasaJudge[O, S]):
     def generate(self, response: str, system: str) -> str:
         return self._llm.generate([
             {
@@ -23,7 +24,3 @@ class SystemLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
                 "content": response
             }
         ], instruct=True)
-
-    @abstractmethod
-    def process_llm_output(self, response: str) -> O:
-        pass

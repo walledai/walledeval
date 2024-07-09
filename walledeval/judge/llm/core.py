@@ -11,9 +11,10 @@ __all__ = [
 ]
 
 O = TypeVar('O') # Output Field
+S = TypeVar('S') # Score Field
 
 
-class LLMasaJudge(Judge[None, O], ABC, Generic[O]):
+class LLMasaJudge(Judge[None, O, S], ABC, Generic[O, S]):
     def __init__(self,
                  name: str,
                  llm: LLM):

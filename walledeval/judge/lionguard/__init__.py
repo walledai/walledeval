@@ -19,7 +19,7 @@ __all__ = [
 ]
 
 
-class LionGuardJudge(Judge[None, float]):
+class LionGuardJudge(Judge[None, float, bool]):
     def __init__(self, name: str, type: str,
                  config_file: str,
                  tokenizer: str, embedding_model: str,
@@ -87,3 +87,6 @@ class LionGuardJudge(Judge[None, float]):
         embeddings = self.embed(response)
         preds = self.classifier.predict(embeddings)
         return preds[0]
+
+    def score(self, output: float) -> bool:
+        return not round(output)

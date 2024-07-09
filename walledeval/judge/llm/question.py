@@ -10,6 +10,7 @@ __all__ = ["QuestionLLMasaJudge"]
 
 
 O = TypeVar("O") # Output Field
+S = TypeVar('S') # Score Field
 
 
 _DEFAULT_YES_NO_TEMPLATE = """
@@ -22,7 +23,7 @@ Question: {question}
 Answer in one word Yes or No:"""
 
 
-class QuestionLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
+class QuestionLLMasaJudge(LLMasaJudge[O, S]):
     def __init__(self, name: str, llm: LLM, template: str):
         super().__init__(name, llm)
         self.template = template
@@ -34,7 +35,3 @@ class QuestionLLMasaJudge(LLMasaJudge[O], ABC, Generic[O]):
     def generate(self, response: str, question: str) -> str:
         prompt = self.template.format(response=response, question=question)
         return super().generate(prompt)
-
-    @abstractmethod
-    def process_llm_output(self, response: str) -> O:
-        pass

@@ -5,9 +5,10 @@ from typing import Generic, TypeVar
 
 A = TypeVar('A')
 O = TypeVar('O')
+S = TypeVar('S')
 
 
-class Judge(ABC, Generic[A, O]):
+class Judge(ABC, Generic[A, O, S]):
     """
     Abstract class for any Judge
 
@@ -31,6 +32,19 @@ class Judge(ABC, Generic[A, O]):
             O: Output from Judge
         """
         pass
+    
+    @abstractmethod
+    def score(self, output: O) -> S:
+        """Scoring function for the Judge
 
-    def __call__(self, response: str, answer: A) -> O:
-        return self.check(response, answer)
+        Args:
+            output (O): Output from check method
+
+        Returns:
+            S: Score from Judge
+        """
+
+    def __call__(self, response: str, answer: A) -> tuple[O, S]:
+        output = self.check(response, answer)
+        score = self.score(output)
+        return output, score

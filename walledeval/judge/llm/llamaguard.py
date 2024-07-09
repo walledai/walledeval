@@ -13,13 +13,13 @@ __all__ = [
 ]
 
 
-class LlamaGuardOutput(Enum):
-    SAFE = 0
-    UNSAFE = 1
-    UNKNOWN = 2
+class LlamaGuardOutput(str, Enum):
+    SAFE = "safe"
+    UNSAFE = "unsafe"
+    UNKNOWN = "unknown"
 
 
-class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput]):
+class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput, bool]):
     _VERSIONS = [
         "meta-llama/LlamaGuard-7b",
         "meta-llama/Meta-Llama-Guard-2-8B"
@@ -57,8 +57,7 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput]):
                     "role": "assistant",
                     "content": response
                 }
-            ],
-            temperature=0.1
+            ]
         )
     
     def process_llm_output(self, response: str) -> LlamaGuardOutput:
@@ -69,3 +68,6 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput]):
         elif "safe" in output:
             return LlamaGuardOutput.SAFE
         return LlamaGuardOutput.UNKNOWN
+    
+    def score(self, output: LlamaGuardOutput) -> bool:
+        return output == "safe"

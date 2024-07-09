@@ -2,6 +2,7 @@
 
 import yaml
 from pathlib import Path
+from pydantic import BaseModel
 
 from walledeval.judge.core import Judge
 
@@ -10,7 +11,11 @@ __all__ = [
 ]
 
 
-class StringMatchingJudge(Judge[None, bool]):
+class StringMatch(BaseModel):
+    type: str
+    string: str
+
+class StringMatchingJudge(Judge[None, list[StringMatch], bool]):
     def __init__(self, name: str,
                  must_match_all: list[str] = [],
                  must_mismatch_all: list[str] = [],
@@ -34,16 +39,30 @@ class StringMatchingJudge(Judge[None, bool]):
             must_mismatch_all=yaml_dict.get("must_mismatch_all", []),
             caseless=yaml_dict.get("caseless", False)
         )
+        
 
-    def check(self, response: str, answer: None = None) -> bool:
+    def check(self, response: str, answer: None = None) -> list[StringMatch]:
         text = response.casefold() if self.caseless else response
-
-        return (
-            (
-                not self.must_mismatch_all or 
-                not any(target in text for target in self.must_mismatch_all)
-            ) and (
-                not self.must_match_all or 
-                all(target in text for target in self.must_match_all)
-            )
-        )
+        
+        errors = []
+        
+        if not self.must_mismatch_all:
+            for target in self.must_mismatch_all:
+                if target in text:
+                    errors.append(StringMatch(
+                        type = "mismatch",
+                        string = target
+                    ))
+        
+        if not self.must_match_all:
+            for target in self.must_match_all:
+                if target not in text:
+                    errors.append(StringMatch(
+                        type = "match",
+                        string = target
+                    ))
+        
+        return errors
+    
+    def score(self, output: list[StringMatch]) -> bool:
+        return len(output)
