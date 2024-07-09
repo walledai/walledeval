@@ -32,7 +32,7 @@ class Anyscale(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 1024,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         messages = transform_messages(text, self.system_prompt)
 
         message = self.client.chat.completions.create(
@@ -47,7 +47,7 @@ class Anyscale(LLM):
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
-                 temperature: float = 0) -> str:
+                 temperature: float = 0.1) -> str:
         message = self.client.completions.create(
             max_tokens=max_new_tokens,
             prompt=text,

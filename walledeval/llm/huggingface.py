@@ -42,7 +42,7 @@ class HF_LLM(LLM):
     def _generate(self,
                   prompt: str,
                   max_new_tokens: int = 256,
-                  temperature: float = 0.6) -> str:
+                  temperature: float = 0.1) -> str:
         terminators = [
             self.pipeline.tokenizer.eos_token_id,
             self.pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")

@@ -62,7 +62,7 @@ class Gemini(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 1024,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         messages = transform_messages(text, self.system_prompt)
 
         system_prompt: str
@@ -94,7 +94,7 @@ class Gemini(LLM):
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
-                 temperature: float = 0) -> str:
+                 temperature: float = 0.1) -> str:
         
         model=genai.GenerativeModel(model_name=self.name,
                                     system_instruction=self.system_prompt)

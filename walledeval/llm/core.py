@@ -31,20 +31,20 @@ class LLM(ABC):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 256,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         pass
 
     @abstractmethod
     def complete(self,
                  text: str,
                  max_new_tokens: int = 256,
-                 temperature: float = 0.0) -> str:
+                 temperature: float = 0.1) -> str:
         pass
 
     def generate(self,
                  text: Messages,
                  max_new_tokens: int = 256,
-                 temperature: float = 0.0,
+                 temperature: float = 0.1,
                  instruct: Optional[bool] = None) -> str:
         type = None
         if instruct is None:
@@ -75,7 +75,7 @@ class LLM(ABC):
     def __call__(self,
                  text: Messages,
                  max_new_tokens: int = 256,
-                 temperature: float = 0.0,
+                 temperature: float = 0.1,
                  instruct: Optional[bool] = None) -> str:
         return self.generate(text, max_new_tokens,
                              temperature, instruct)

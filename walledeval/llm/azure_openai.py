@@ -38,7 +38,7 @@ class AzureOpenAI(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 1024,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         messages = transform_messages(text, self.system_prompt)
 
         message = self.client.chat.completions.create(
@@ -53,7 +53,7 @@ class AzureOpenAI(LLM):
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
-                 temperature: float = 0) -> str:
+                 temperature: float = 0.1) -> str:
         text = f"Continue writing: {text}"
         
         return self.chat(text, max_new_tokens=max_new_tokens, temperature=temperature)

@@ -70,7 +70,7 @@ class Cohere(LLM):
     def chat(self,
              text: Messages,
              max_new_tokens: int = 1024,
-             temperature: float = 0.0) -> str:
+             temperature: float = 0.1) -> str:
         messages = transform_messages(text)
         
         prompt, messages = convert_to_cohere(messages)
@@ -89,7 +89,7 @@ class Cohere(LLM):
     def complete(self,
                  text: str,
                  max_new_tokens: int = 1024,
-                 temperature: float = 0) -> str:
+                 temperature: float = 0.1) -> str:
         messages = [{"role":"SYSTEM", "content": self.system_prompt}]
         
         message = self.client.chat(
