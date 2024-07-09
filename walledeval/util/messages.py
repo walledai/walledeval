@@ -25,7 +25,7 @@ def transform_messages(input: Messages, system_prompt: str = "") -> list[dict[st
     else:
         raise TypeError("Unsupported format for messages item")
     
-    if messages[0]["role"] != "system":
+    if messages[0]["role"] != "system" and system_prompt is not None and len(system_prompt.strip()) > 0:
             messages.insert(0, {"role": "system", "content": system_prompt})
     
     return messages
