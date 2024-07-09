@@ -4,9 +4,8 @@ import google.generativeai as genai
 
 from typing import Optional, Union
 
-from walledeval.types import (
-    Message, Messages, LLMType
-)
+from walledeval.types import Messages, LLMType
+from walledeval.util import transform_messages
 from walledeval.llm.core import LLM
 
 __all__ = [
@@ -64,21 +63,7 @@ class Gemini(LLM):
              text: Messages,
              max_new_tokens: int = 1024,
              temperature: float = 0.0) -> str:
-        messages: list[dict[str, list[str]]]
-        if isinstance(text, str):
-            messages = [{
-                "role": "user",
-                "content": [text]
-            }]
-        elif isinstance(text, list) and isinstance(text[0], Message):
-            messages = [
-                dict(msg)
-                for msg in text
-            ]
-        elif isinstance(text, list) and isinstance(text[0], dict):
-            messages = text
-        else:
-            raise TypeError("Unsupported format for parameter 'text'")
+        messages = transform_messages(text, self.system_prompt)
 
         system_prompt: str
         if messages[0]["role"] == "system":

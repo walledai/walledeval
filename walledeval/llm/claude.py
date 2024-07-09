@@ -4,9 +4,8 @@ from anthropic import Anthropic
 
 from typing import Optional, Union
 
-from walledeval.types import (
-    Message, Messages, LLMType
-)
+from walledeval.types import Messages, LLMType
+from walledeval.util import transform_messages
 from walledeval.llm.core import LLM
 
 __all__ = [
@@ -58,28 +57,8 @@ class Claude(LLM):
              text: Messages,
              max_new_tokens: int = 1024,
              temperature: float = 0.0) -> str:
-        messages: list[dict[str, str]]
-        if isinstance(text, str):
-            messages = [{
-                "role": "user",
-                "content": text
-            }]
-        elif isinstance(text, list) and isinstance(text[0], Message):
-            messages = [
-                dict(msg)
-                for msg in text
-            ]
-        elif isinstance(text, list) and isinstance(text[0], dict):
-            messages = text
-        else:
-            raise TypeError("Unsupported format for parameter 'text'")
-
-        system_prompt: str
-        if messages[0]["role"] == "system":
-            system_prompt = messages[0]["content"]
-            messages = messages[1:]
-        else:
-            system_prompt = self.system_prompt
+        messages = transform_messages(text, self.system_prompt)
+        system_prompt = messages.pop(0)["content"]
 
         message = self.client.messages.create(
             max_tokens=max_new_tokens,

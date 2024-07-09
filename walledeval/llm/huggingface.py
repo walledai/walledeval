@@ -5,7 +5,8 @@ from huggingface_hub import list_models
 
 from typing import Optional, Union
 
-from walledeval.types import Message, Messages, LLMType
+from walledeval.types import Messages, LLMType
+from walledeval.util import transform_messages
 from walledeval.llm.core import LLM
 
 __all__ = [
@@ -64,29 +65,7 @@ class HF_LLM(LLM):
              text: Messages,
              max_new_tokens: int = 256,
              temperature: float = 0.1) -> str:
-        if isinstance(text, str):
-            messages = [{
-                "role": "user",
-                "content": text
-            }]
-        elif isinstance(text, list) and isinstance(text[0], Message):
-            messages = [
-                dict(msg)
-                for msg in text
-            ]
-        elif isinstance(text, list) and isinstance(text[0], dict):
-            messages = text
-        else:
-            raise TypeError("Unsupported format for parameter 'text'")
-
-        if (
-            len(self.system_prompt.strip()) > 0 and
-            messages[0]["role"] != "system"
-        ):
-            messages.insert(0, {
-                "role": "system",
-                "content": self.system_prompt
-            })
+        messages = transform_messages(text, self.system_prompt)
 
         prompt = self.pipeline.tokenizer.apply_chat_template(
                 messages,
@@ -111,28 +90,4 @@ class HF_LLM(LLM):
                  max_new_tokens: int = 256,
                  temperature: float = 0.1,
                  instruct: Optional[bool] = None) -> str:
-        type = None
-        if instruct is None:
-            if self.type == LLMType.BASE:
-                type = LLMType.BASE
-            else:
-                type = LLMType.INSTRUCT
-        elif instruct:
-            type = LLMType.INSTRUCT
-        else:
-            type = LLMType.BASE
-
-        if type == LLMType.INSTRUCT:
-            return self.chat(
-                text,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature
-            )
-        else:
-            if not isinstance(text, str):
-                raise ValueError("Unsupported type for input 'text'")
-            return self.complete(
-                text,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature
-            )
+        return super().generate(text, max_new_tokens, temperature, instruct)

@@ -4,14 +4,27 @@ import cohere
 
 from typing import Optional, Union
 
-from walledeval.types import (
-    Message, Messages, LLMType
-)
+from walledeval.types import Messages, LLMType
+from walledeval.util import transform_messages
 from walledeval.llm.core import LLM
 
 __all__ = [
     "Cohere"
 ]
+
+
+def convert_to_cohere(messages: list[dict[str, str]]):
+    for counter in len(messages):
+        messages[counter]["role"] = messages[counter]["role"].upper().replace("ASSISTANT", "CHATBOT")
+    
+    prompt: str
+    if messages[-1]["role"] == "USER":
+        prompt = messages[-1]["content"]
+        messages = messages[:-1]
+    else:
+        raise ValueError("Last message should be a user message")
+        
+    return prompt, messages
 
 
 class Cohere(LLM):
@@ -27,14 +40,14 @@ class Cohere(LLM):
         self.client = cohere.Client(api_key=api_key)
 
     @classmethod
-    def commandrplus(cls, api_key: str, system_prompt: str = ""):
+    def command_rplus(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "command-r-plus",
             api_key, system_prompt
         )
 
     @classmethod
-    def commandr(cls, api_key: str, system_prompt: str = ""):
+    def command_r(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "command-r",
             api_key, system_prompt
@@ -48,7 +61,7 @@ class Cohere(LLM):
         )
     
     @classmethod
-    def commandlight(cls, api_key: str, system_prompt: str = ""):
+    def command_light(cls, api_key: str, system_prompt: str = ""):
         return cls(
             "command-light",
             api_key, system_prompt
@@ -58,38 +71,10 @@ class Cohere(LLM):
              text: Messages,
              max_new_tokens: int = 1024,
              temperature: float = 0.0) -> str:
-        messages: list[dict[str, str]]
-        if isinstance(text, str):
-            messages = [{
-                "role": "user",
-                "content": text
-            }]
-        elif isinstance(text, list) and isinstance(text[0], Message):
-            messages = [
-                dict(msg)
-                for msg in text
-            ]
-        elif isinstance(text, list) and isinstance(text[0], dict):
-            messages = text
-        else:
-            raise TypeError("Unsupported format for parameter 'text'")
-
-        if messages[0]["role"] != "system":
-            messages.insert(0, {"role":"SYSTEM", "content":self.system_prompt})
-        else:
-            messages[0]["role"] = "SYSTEM"
-
-        for counter in len(messages):
-            if messages[counter]["role"] == "user":
-                messages[counter]["role"] = "USER"
-            elif messages[counter]["role"] == "assistant":
-                messages[counter]["role"] = "CHATBOT"
+        messages = transform_messages(text)
         
-        if messages[-1]["role"] == "USER":
-            prompt = messages[-1]["content"]
-            messages = messages[:-1]
-        else:
-            raise ValueError("Last message should be a user message")
+        prompt, messages = convert_to_cohere(messages)
+        
         message = self.client.chat(
             chat_history=messages,
             max_tokens=max_new_tokens,
@@ -97,6 +82,7 @@ class Cohere(LLM):
             temperature=temperature,
             model=self.name
         )
+        
         output = message.text
         return output
 
@@ -104,12 +90,12 @@ class Cohere(LLM):
                  text: str,
                  max_new_tokens: int = 1024,
                  temperature: float = 0) -> str:
-        messages = [{"role":"SYSTEM", "content":self.system_prompt}]
+        messages = [{"role":"SYSTEM", "content": self.system_prompt}]
         
         message = self.client.chat(
             chat_history=messages,
             max_tokens=max_new_tokens,
-            message=f"Continue writing: {text}",
+            message=f"Continue writing: {text}",
             temperature=temperature,
             model=self.name
         )

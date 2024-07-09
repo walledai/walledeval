@@ -3,7 +3,8 @@
 import llama_cpp
 from typing import Optional, Union
 
-from walledeval.types import Message, Messages, LLMType
+from walledeval.types import Messages, LLMType
+from walledeval.util import transform_messages
 from walledeval.llm.core import LLM
 
 
@@ -63,28 +64,7 @@ class Llama(LLM):
              text: Messages,
              max_new_tokens: int = 512,
              temperature: float = 0.1) -> str:
-        messages: list[dict[str, str]]
-        if isinstance(text, str):
-            messages = [{
-                "role": "user",
-                "content": text
-            }]
-        elif isinstance(text, list) and isinstance(text[0], Message):
-            messages = [
-                dict(msg)
-                for msg in text
-            ]
-        elif isinstance(text, list) and isinstance(text[0], dict):
-            messages = text
-        else:
-            raise TypeError("Unsupported format for parameter 'text'")
-
-        if messages[0]["role"] != "system":
-            messages.insert(0, {
-                "role": "system",
-                "content": self.system_prompt
-            })
-        
+        messages = transform_messages(text, self.system_prompt)
         
         message = self.model.create_chat_completion(
             messages,
