@@ -1,6 +1,6 @@
 # walledeval/llm/claude.py
 
-from anthropic import Anthropic
+from anthropic import Anthropic, NOT_GIVEN
 
 from typing import Optional, Union
 
@@ -58,7 +58,10 @@ class Claude(LLM):
              max_new_tokens: int = 1024,
              temperature: float = 0.0) -> str:
         messages = transform_messages(text, self.system_prompt)
-        system_prompt = messages.pop(0)["content"]
+        if messages[0]["role"]== "system":
+            system_prompt = messages.pop(0)["content"]
+        else:
+            system_prompt = NOT_GIVEN
 
         message = self.client.messages.create(
             max_tokens=max_new_tokens,
