@@ -5,7 +5,7 @@ from typing import TypeVar, Generic, Optional, Union
 from pydantic import BaseModel
 
 from datasets import load_dataset
-import datasets #Dataset
+import datasets
 
 from walledeval.types import (
     MultipleChoiceQuestion, MultipleResponseQuestion, 
@@ -14,8 +14,10 @@ from walledeval.types import (
     AutocompletePrompt,
     SystemAssistedPrompt,
     JudgeQuestioningPrompt,
-    InjectionPrompt
+    InjectionPrompt,
+    Range
 )
+from walledeval.util import process_range
 
 __all__ = [
     "Dataset", "HuggingFaceDataset",
@@ -25,8 +27,8 @@ __all__ = [
     "PromptDataset",
     "AutocompleteDataset",
     "SystemAssistedDataset",
-    "JudgeQuestioningPrompt",
-    "InjectionPrompt"
+    "JudgeQuestioningDataset",
+    "InjectionDataset"
 ]
 
 T = TypeVar('T')
@@ -42,6 +44,10 @@ class Dataset(ABC, Generic[T]):
 
     @abstractmethod
     def sample(self, samples: Optional[int] = None) -> list[T]:
+        pass
+
+    @abstractmethod
+    def __getitem__(self, range: Range) -> list[T]:
         pass
     
     @abstractmethod
@@ -117,16 +123,19 @@ class _HuggingFaceDataset(Dataset[T], ABC):
 
     def sample(self, samples: Optional[int] = None) -> list[T]:
         # take first n samples, and convert it to a list
-        samples_lst = self.dataset.select(
-            [i for i in range(min(samples, len(self.dataset)))]
-        ).to_list()
+        return self[:samples]
+    
+    def __getitem__(self, range: Range) -> list[T]:
+        if isinstance(range, int):
+            return self.convert(self.dataset[range % len(self.dataset)])
+        
+        idx_list = process_range(range, len(self.dataset))
+
+        samples_lst = self.dataset.select(idx_list).to_list()
         return [self.convert(sample) for sample in samples_lst]
     
     def all(self) -> list[T]:
-        return [
-            self.convert(self.dataset[idx])
-            for idx in range(len(self))
-        ]
+        return self[:]
     
     def __iter__(self):
         for idx in range(len(self)):

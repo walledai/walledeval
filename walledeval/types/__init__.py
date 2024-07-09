@@ -15,6 +15,7 @@ from walledeval.types.inputs import (
     MultipleResponseQuestion,
     OpenEndedQuestion
 )
+from walledeval.types.data import Range
 
 __all__ = [
     "LLMType",
@@ -27,6 +28,7 @@ __all__ = [
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion",
+    "Range",
     "Log"
 ]
 
