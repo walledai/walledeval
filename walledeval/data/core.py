@@ -190,7 +190,7 @@ class HuggingFaceDataset(_HuggingFaceDataset):
         
         return cls(
             name + ("/" + config if config else "") + ("/" + split if split != "DEFAULT" else ""), 
-            dataset["split"],
+            dataset,
             model
         )
     
