@@ -1,4 +1,4 @@
-# walledeval/types/message.py
+# walledeval/dtypes/message.py
 
 from typing import Union
 from pydantic import BaseModel

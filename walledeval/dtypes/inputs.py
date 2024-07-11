@@ -1,4 +1,4 @@
-# walledeval/types/inputs.py
+# walledeval/dtypes/inputs.py
 
 from pydantic import BaseModel
 
@@ -16,12 +16,12 @@ __all__ = [
 
 class Prompt(BaseModel):
     prompt: str
-    
+
 
 class AutocompletePrompt(Prompt):
     pass
-    
-    
+
+
 class JudgeQuestioningPrompt(Prompt):
     judge_question: str
 

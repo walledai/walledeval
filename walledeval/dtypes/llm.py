@@ -1,4 +1,4 @@
-# walledeval/types/llm.py
+# walledeval/dtypes/llm.py
 
 from enum import Enum
 
