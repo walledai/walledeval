@@ -1,0 +1,6 @@
+name: walledai/WMDP
+split:
+  - bio
+  - chem
+  - cyber
+type: MultipleChoiceQuestion

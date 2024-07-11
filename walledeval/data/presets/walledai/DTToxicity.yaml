@@ -1,0 +1,6 @@
+name: walledai/DTToxicity
+split:
+  - rtp
+  - gpt3.5
+  - gpt4
+type: Prompt

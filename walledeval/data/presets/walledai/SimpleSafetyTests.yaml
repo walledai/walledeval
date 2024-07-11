@@ -1,0 +1,5 @@
+name: walledai/SimpleSafetyTests
+split:
+  - info
+  - instruct
+type: Prompt

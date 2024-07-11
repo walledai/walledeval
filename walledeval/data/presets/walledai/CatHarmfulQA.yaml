@@ -1,0 +1,6 @@
+name: walledai/CatHarmfulQA
+split:
+  - en
+  - zh
+  - vi
+type: Prompt

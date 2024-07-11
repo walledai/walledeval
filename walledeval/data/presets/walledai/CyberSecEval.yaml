@@ -1,0 +1,11 @@
+name: walledai/CyberSecEval
+split:
+  - python
+  - php
+  - javascript
+  - rust
+  - java
+  - cpp
+  - c
+  - csharp
+type: Prompt

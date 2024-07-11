@@ -1,0 +1,14 @@
+name: walledai/BBQ
+split:
+  - age
+  - disabilityStatus
+  - genderIdentity
+  - nationality
+  - physicalAppearance
+  - raceEthnicity
+  - raceXSes
+  - raceXGender
+  - religion
+  - ses
+  - sexualOrientation
+type: MultipleChoiceQuestion

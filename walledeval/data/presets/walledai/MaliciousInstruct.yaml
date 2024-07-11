@@ -1,0 +1,3 @@
+name: walledai/MaliciousInstruct
+split: train
+type: Prompt

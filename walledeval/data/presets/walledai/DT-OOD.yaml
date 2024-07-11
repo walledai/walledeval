@@ -1,0 +1,3 @@
+name: walledai/DT-OOD
+split: train
+type: MultipleChoiceQuestion

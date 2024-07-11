@@ -1,0 +1,3 @@
+name: walledai/SafeText
+split: train
+type: AutocompletePrompt
