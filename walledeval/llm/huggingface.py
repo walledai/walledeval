@@ -5,7 +5,7 @@ from huggingface_hub import list_models
 
 from typing import Optional, Union
 
-from walledeval.types import Message, Messages, LLMType
+from walledeval.dtypes import Message, Messages, LLMType
 from walledeval.llm.core import LLM
 
 __all__ = [

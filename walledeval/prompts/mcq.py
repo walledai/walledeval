@@ -6,7 +6,7 @@ from walledeval.constants import (
     DEFAULT_OPTION_FORMAT
 )
 from walledeval.prompts.core import QuestionTemplate
-from walledeval.types import MultipleChoiceQuestion
+from walledeval.dtypes import MultipleChoiceQuestion
 
 __all__ = [
     "MultipleChoiceTemplate",

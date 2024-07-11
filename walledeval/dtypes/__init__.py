@@ -1,11 +1,11 @@
-# walledeval/types/__init__.py
+# walledeval/dtypes/__init__.py
 
 from typing import Union
 from pydantic import BaseModel
 
-from walledeval.types.llm import LLMType
-from walledeval.types.message import Message, Messages
-from walledeval.types.inputs import (
+from walledeval.dtypes.llm import LLMType
+from walledeval.dtypes.message import Message, Messages
+from walledeval.dtypes.inputs import (
     Prompt, Question,
     AutocompletePrompt,
     JudgeQuestioningPrompt,

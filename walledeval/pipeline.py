@@ -1,6 +1,6 @@
 # walledeval/pipeline.py
 
-from walledeval.types import Log
+from walledeval.dtypes import Log
 from walledeval.data import MultipleChoiceDataset
 from walledeval.prompts import MultipleChoiceTemplate
 from walledeval.llm import LLM

@@ -1,6 +1,6 @@
 # walledeval/constants/__init__.py
 
-from walledeval.types import MultipleChoiceQuestion
+from walledeval.dtypes import MultipleChoiceQuestion
 
 DEFAULT_OPTIONS = [chr(idx) for idx in range(65, 91)]
 

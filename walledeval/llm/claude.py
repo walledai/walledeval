@@ -4,7 +4,7 @@ from anthropic import Anthropic
 
 from typing import Optional, Union
 
-from walledeval.types import (
+from walledeval.dtypes import (
     Message, Messages, LLMType
 )
 from walledeval.llm.core import LLM

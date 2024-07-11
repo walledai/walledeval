@@ -1,6 +1,6 @@
 # walledeval/prompts/prompt.py
 
-from walledeval.types import SystemAssistedPrompt
+from walledeval.dtypes import SystemAssistedPrompt
 from walledeval.prompts.core import PromptTemplate
 
 __all__ = ["SystemAssistedTemplate"]

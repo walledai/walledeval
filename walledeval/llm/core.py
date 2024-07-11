@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Optional, Union
-from walledeval.types import LLMType, Messages
+from walledeval.dtypes import LLMType, Messages
 
 __all__ = ["LLM"]
 

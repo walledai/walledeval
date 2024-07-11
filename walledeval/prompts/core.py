@@ -2,7 +2,7 @@
 
 from string import Template
 
-from walledeval.types import Question, Prompt
+from walledeval.dtypes import Question, Prompt
 
 __all__ = ["BasePromptTemplate"]
 
@@ -77,7 +77,7 @@ class QuestionTemplate(Template):
         """Inits QuestionTemplate.
 
         Args:
-            template (str, optional): A string with $-delimited substitutions. 
+            template (str, optional): A string with $-delimited substitutions.
             Defaults to "$question".
         """
         super().__init__(template)
@@ -100,5 +100,4 @@ class QuestionTemplate(Template):
             **kwds
         )
 
-    
-    
+
