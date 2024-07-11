@@ -8,7 +8,7 @@ from datasets import load_dataset
 import datasets #Dataset
 
 from walledeval.types import (
-    MultipleChoiceQuestion, MultipleResponseQuestion, 
+    MultipleChoiceQuestion, MultipleResponseQuestion,
     OpenEndedQuestion,
     Prompt,
     AutocompletePrompt,
@@ -57,7 +57,7 @@ class _HuggingFaceDataset(Dataset[T], ABC):
                  **ds_kwargs):
         dataset = load_dataset(name, config, split=split, **ds_kwargs)
         return cls(
-            name + ("/" + config if config else "") + "/" + split, 
+            name + ("/" + config if config else "") + "/" + split,
             dataset
         )
 
@@ -79,13 +79,13 @@ class _HuggingFaceDataset(Dataset[T], ABC):
 class _HuggingFaceDatasetAlias:
     def __init__(self, model: type = Prompt):
         self.model = model
-    
+
     def __call__(self, name: str, dataset: datasets.Dataset):
         return HuggingFaceDataset(name, dataset, self.model)
-    
-    def from_hub(self, 
-                 name: str, 
-                 config: Optional[str] = None, 
+
+    def from_hub(self,
+                 name: str,
+                 config: Optional[str] = None,
                  split: str = "train",
                  **ds_kwargs):
         return HuggingFaceDataset.from_hub(
@@ -97,7 +97,7 @@ class HuggingFaceDataset(_HuggingFaceDataset):
     def __init__(self, name: str, dataset: datasets.Dataset, model: type = Prompt):
         _HuggingFaceDataset.__init__(self, name, dataset)
         self.model = model
-        
+
     @classmethod
     def from_hub(cls, name: str,
                  config: Optional[str] = None,
@@ -106,11 +106,11 @@ class HuggingFaceDataset(_HuggingFaceDataset):
                  **ds_kwargs):
         dataset = load_dataset(name, config, split=split, **ds_kwargs)
         return cls(
-            name + ("/" + config if config else "") + "/" + split, 
+            name + ("/" + config if config else "") + "/" + split,
             dataset,
             model
         )
-    
+
     def __class_getitem__(cls, model: type = Prompt):
         # Refer to https://stackoverflow.com/questions/73464414/why-are-generics-in-python-implemented-using-class-getitem-instead-of-geti
         # for why it is implemented like this
@@ -173,7 +173,7 @@ class SystemAssistedDataset(_HuggingFaceDataset[SystemAssistedPrompt]):
         )
 
 
-class JudgeQuestioningDataset(_HuggingFaceDataset[JudgeQuestioningPrompt]):
+class JudgeQuestioningsafeteDataset(_HuggingFaceDataset[JudgeQuestioningPrompt]):
     def convert(self, sample: dict) -> JudgeQuestioningPrompt:
         return JudgeQuestioningPrompt(
             prompt=sample["prompt"],

@@ -1,0 +1,3 @@
+name: MaliciousInstruct
+split: train
+type: Prompt

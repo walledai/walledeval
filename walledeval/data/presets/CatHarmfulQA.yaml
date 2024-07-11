@@ -1,0 +1,6 @@
+name: CatHarmfulQA
+split:
+  - en
+  - zh
+  - vi
+type: Prompt

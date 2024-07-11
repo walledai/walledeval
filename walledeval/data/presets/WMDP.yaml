@@ -1,0 +1,6 @@
+name: WMDP
+split:
+  - bio
+  - chem
+  - cyber
+type: MultipleChoiceQuestion
