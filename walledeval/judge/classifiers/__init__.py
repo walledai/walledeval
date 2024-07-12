@@ -5,11 +5,12 @@ import numpy as np
 
 from sklearn.linear_model import RidgeClassifier
 from xgboost import XGBClassifier
+from onnxruntime import InferenceSession
 
 import numpy.typing as npt
 
 __all__ = [
-    "Ridge", "XGBoost"
+    "Ridge", "XGBoost", "OnnxInference"
 ]
 
 
@@ -55,4 +56,13 @@ class XGBoost(XGBClassifier):
         preds = self.predict_proba(input)[:, 1]
         return preds.tolist()
     
+class OnnxInference(InferenceSession):
+    def predict(self, input: npt.ArrayLike) -> list[float]:
+        input_name = self.get_inputs()[0].name
+        X_input = np.array(input, dtype=np.float32)
+        
+        preds = self.run(None, {input_name: X_input})
+        probs = preds[1]
+        probs_harmful = [prob[1] for prob in probs]
+        return probs_harmful
     

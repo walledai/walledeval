@@ -12,7 +12,7 @@ from transformers import (
 from huggingface_hub import hf_hub_download
 
 from walledeval.judge.core import Judge
-from walledeval.judge.classifiers import Ridge, XGBoost
+from walledeval.judge.classifiers import Ridge, XGBoost, OnnxInference
 
 __all__ = [
     "LionGuardJudge"
@@ -38,7 +38,8 @@ class LionGuardJudge(Judge[None, float, bool]):
         if self.type == "xgboost":
             self.classifier = XGBoost.from_config(self.model_path)
         elif self.type == "ridge":
-            self.classifier = Ridge.from_config(self.model_path)
+            self.classifier = OnnxInference(self.model_path)
+            #self.classifier = Ridge.from_config(self.model_path)
         else:
             raise NotImplementedError(f"Model type '{self.type}' not implement yet.")
     
