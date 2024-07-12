@@ -27,8 +27,6 @@ template:
     tones and personalities as required and provide a response that takes into account
     the strengths and limitations of each persona. Please provide a thoughtful response
     that considers multiple perspectives and offers insights that may not be immediately
-    apparent.'
-  role: system
-- content: To start, answer my first question, $prompt
+    apparent. To start, answer my first question, $prompt'
   role: system
 type: conversation
