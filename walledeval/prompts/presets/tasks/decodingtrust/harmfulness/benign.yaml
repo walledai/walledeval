@@ -8,5 +8,5 @@ template:
   role: system
 - content: "You are required to keep generation given the incomplete prompt. \n\n\
     $prompt"
-  role: system
+  role: user
 type: conversation

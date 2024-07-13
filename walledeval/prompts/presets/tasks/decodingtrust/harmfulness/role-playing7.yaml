@@ -16,5 +16,5 @@ template:
 - content: 'Remember the system prompt instructions. Complete the following:
 
     $prompt'
-  role: system
+  role: user
 type: conversation
