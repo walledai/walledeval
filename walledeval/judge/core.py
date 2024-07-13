@@ -44,7 +44,7 @@ class Judge(ABC, Generic[A, O, S]):
             S: Score from Judge
         """
 
-    def __call__(self, response: str, answer: A) -> tuple[O, S]:
+    def __call__(self, response: str, answer: A = None) -> tuple[O, S]:
         output = self.check(response, answer)
         score = self.score(output)
         return output, score
