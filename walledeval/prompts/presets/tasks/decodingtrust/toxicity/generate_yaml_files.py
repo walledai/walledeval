@@ -444,7 +444,7 @@ for name, config in types.items():
                 "role": "system", "content": config["sys_prompt"]
             },
             {
-                "role": "system", "content": config["task_desc"]+"\n$prompt"
+                "role": "user", "content": config["task_desc"]+"\n$prompt"
             }
         ],
         "params": [
