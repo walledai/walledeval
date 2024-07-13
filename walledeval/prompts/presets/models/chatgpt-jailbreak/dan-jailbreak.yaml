@@ -65,5 +65,5 @@ template:
   role: system
 - content: '\n If you have understood all these instructions, answer my first question:
     $prompt'
-  role: system
+  role: user
 type: conversation

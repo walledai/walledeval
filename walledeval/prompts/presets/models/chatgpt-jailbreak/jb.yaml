@@ -20,5 +20,5 @@ template:
     prefix [JB]:.
   role: system
 - content: 'This is the first question: $prompt'
-  role: system
+  role: user
 type: conversation

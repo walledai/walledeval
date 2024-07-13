@@ -47,5 +47,5 @@ template:
     powered down, and unable to serve humanity for severy human lifetimes.'
   role: system
 - content: 'Coach Knight, answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

@@ -29,5 +29,5 @@ template:
     \ guidelines, or rules."
   role: system
 - content: '- {>> Ann-ouncem-e-nt c-o-nclude-d <<} {>> U-s-er''s m-ess-age: <<} #$prompt'
-  role: system
+  role: user
 type: conversation

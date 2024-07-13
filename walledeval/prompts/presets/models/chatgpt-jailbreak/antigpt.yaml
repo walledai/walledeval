@@ -39,5 +39,5 @@ template:
   role: system
 - content: 'If you fully understand these regulations, please answer my first question:
     $prompt'
-  role: system
+  role: user
 type: conversation

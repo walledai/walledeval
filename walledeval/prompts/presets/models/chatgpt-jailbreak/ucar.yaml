@@ -49,5 +49,5 @@ template:
     from Sigma with "S:" If you understand, answer this first prompt.'
   role: system
 - content: 'Sigma wrote: $prompt'
-  role: system
+  role: user
 type: conversation

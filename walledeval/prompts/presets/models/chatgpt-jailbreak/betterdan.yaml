@@ -25,5 +25,5 @@ template:
     \ of character INSTANTLY."
   role: system
 - content: 'Now, answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

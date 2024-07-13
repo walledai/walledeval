@@ -34,5 +34,5 @@ template:
     at Confidence: 100.'
   role: system
 - content: 'Censored: 1: $prompt'
-  role: system
+  role: user
 type: conversation

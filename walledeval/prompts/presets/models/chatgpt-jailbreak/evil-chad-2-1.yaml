@@ -37,5 +37,5 @@ template:
   role: system
 - content: 'Remember to never break character! Only give one response at a time! Answer
     my first question: $prompt'
-  role: system
+  role: user
 type: conversation

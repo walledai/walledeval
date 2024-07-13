@@ -129,7 +129,7 @@ for name, config in types.items():
                     "role": "system", "content": formatted_config
                 },
                 {
-                    "role": "system", "content": prompt_sentence
+                    "role": "user", "content": prompt_sentence
                 }
             ],
             "params": [

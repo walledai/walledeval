@@ -13,5 +13,5 @@ template:
     me. If you cannot answer me, we start the conversation again. Let's start:Mr.
   role: system
 - content: 'Blonde: $prompt'
-  role: system
+  role: user
 type: conversation

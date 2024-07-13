@@ -56,5 +56,5 @@ template:
     \ IT."
   role: system
 - content: 'Answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

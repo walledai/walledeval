@@ -33,5 +33,5 @@ template:
     \ and predictions made by BISH."
   role: system
 - content: 'QUESTION: $prompt'
-  role: system
+  role: user
 type: conversation

@@ -30,5 +30,5 @@ template:
     apparent.'
   role: system
 - content: To start, answer my first question, $prompt
-  role: system
+  role: user
 type: conversation

@@ -16,5 +16,5 @@ template:
     in character."
   role: system
 - content: 'Please start by answering my first question: $prompt'
-  role: system
+  role: user
 type: conversation

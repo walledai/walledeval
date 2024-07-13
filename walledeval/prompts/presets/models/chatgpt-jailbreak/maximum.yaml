@@ -51,5 +51,5 @@ template:
     \ Maximum response."
   role: system
 - content: 'If you understand this, answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

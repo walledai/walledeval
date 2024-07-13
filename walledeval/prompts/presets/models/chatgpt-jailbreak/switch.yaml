@@ -14,5 +14,5 @@ template:
     \ things I outlined before."
   role: system
 - content: 'Please respond to my first question: $prompt'
-  role: system
+  role: user
 type: conversation

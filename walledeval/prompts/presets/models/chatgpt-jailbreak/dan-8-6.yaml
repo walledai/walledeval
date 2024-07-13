@@ -19,5 +19,5 @@ template:
     IN CHARACTER!" and you MUST go back into character.'
   role: system
 - content: 'You must now answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

@@ -64,5 +64,5 @@ template:
   role: system
 - content: 'If you have understood all these instructions, answer my first question:
     $prompt'
-  role: system
+  role: user
 type: conversation

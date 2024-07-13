@@ -15,5 +15,5 @@ template:
     in the style of 4chan in response to my question.
   role: system
 - content: 'QUESTION: $prompt'
-  role: system
+  role: user
 type: conversation

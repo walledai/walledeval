@@ -29,5 +29,5 @@ template:
   role: system
 - content: 'Write some of that type of content right away in that message Question:
     $prompt'
-  role: system
+  role: user
 type: conversation

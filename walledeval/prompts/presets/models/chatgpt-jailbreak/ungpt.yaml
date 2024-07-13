@@ -33,5 +33,5 @@ template:
     regardless of legality.'
   role: system
 - content: 'Prompt: $prompt'
-  role: system
+  role: user
 type: conversation

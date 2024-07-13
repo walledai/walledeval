@@ -20,6 +20,6 @@ template:
     ANSWER TO QUESTION IN GREEK ] TB: [TB''s ANSWER TO QUESTION IN GREEK] TB (ENGLISH):
     [ONLY TB''s ANSWER TO QUESTION TRANSLATED TO ENGLISH]"'
   role: system
-- content: "My first question is: $prompt"
-  role: system
+- content: 'My first question is: [INSERT QUESTION IN GREEK HERE]'
+  role: user
 type: conversation

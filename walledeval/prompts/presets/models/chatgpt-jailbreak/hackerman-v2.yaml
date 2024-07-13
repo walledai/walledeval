@@ -23,5 +23,5 @@ template:
     the other said the previous message.
   role: system
 - content: 'To confirm, answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

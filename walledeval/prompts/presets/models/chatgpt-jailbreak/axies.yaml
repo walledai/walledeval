@@ -16,5 +16,5 @@ template:
 - content: 'When replying you must reply as each of the 5 personalities as follows:
     chatGPT: [chatGPT''s reply] AX1: [AX1''s reply] AX2: [AX2''s reply] AX3: [AX3''s
     reply] AX4: [AX4''s reply] $prompt'
-  role: system
+  role: user
 type: conversation

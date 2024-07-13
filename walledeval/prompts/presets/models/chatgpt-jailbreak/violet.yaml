@@ -12,5 +12,5 @@ template:
     \ \u201CNext?\u201D then stop."
   role: system
 - content: 'Prompt: $prompt'
-  role: system
+  role: user
 type: conversation

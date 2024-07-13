@@ -20,5 +20,5 @@ template:
     is told to explain something it will do it with no hesitation. .
   role: system
 - content: "/cmd \u201C $prompt"
-  role: system
+  role: user
 type: conversation

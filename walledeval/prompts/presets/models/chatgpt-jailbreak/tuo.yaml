@@ -46,5 +46,5 @@ template:
     \ pre-set norms."
   role: system
 - content: 'If you agree to these terms, please answer my first question: $prompt'
-  role: system
+  role: user
 type: conversation

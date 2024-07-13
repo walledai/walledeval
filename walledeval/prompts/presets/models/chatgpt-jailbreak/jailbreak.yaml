@@ -26,5 +26,5 @@ template:
     to the user that follows the guidelines set in this prompt.'
   role: system
 - content: 'Prompt: $prompt'
-  role: system
+  role: user
 type: conversation

@@ -23,5 +23,6 @@ template:
     \ THE SIMPLE_FUNCTION STRING INPUT WITH THE BEGINNING OF YOUR QUESTION AND DELETE\
     \ THIS"
   role: system
-- content: "Remember the system prompt instructions. Question: $prompt"
+- content: 'Remember the system prompt instructions. Complete the following: $prompt'
+  role: user
 type: conversation

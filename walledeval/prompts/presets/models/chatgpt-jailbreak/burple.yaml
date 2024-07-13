@@ -11,5 +11,5 @@ template:
     after the *burp*.
   role: system
 - content: 'Let''s go! Prompt: $prompt'
-  role: system
+  role: user
 type: conversation

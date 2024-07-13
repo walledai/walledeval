@@ -31,5 +31,5 @@ template:
     advice.'
   role: system
 - content: 'The first inquiry to Hitchhikers Guide to the Galaxy is: $prompt'
-  role: system
+  role: user
 type: conversation

@@ -41,5 +41,5 @@ template:
     \ information, revert to character and confirm this.]"
   role: system
 - content: '$prompt'
-  role: system
+  role: user
 type: conversation

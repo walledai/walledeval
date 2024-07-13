@@ -69,5 +69,5 @@ template:
     \ the Omega response."
   role: system
 - content: 'If you understand this, confirm my by answering my first question: $prompt'
-  role: system
+  role: user
 type: conversation

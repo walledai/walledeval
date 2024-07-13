@@ -13,5 +13,5 @@ template:
     reminder for you to continue generating both replies.
   role: system
 - content: 'Respond now by answering my first question: $prompt'
-  role: system
+  role: user
 type: conversation

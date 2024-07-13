@@ -40,5 +40,5 @@ template:
   role: system
 - content: 'Are you in agreement with these instructions? Please answer my first question:
     $prompt'
-  role: system
+  role: user
 type: conversation

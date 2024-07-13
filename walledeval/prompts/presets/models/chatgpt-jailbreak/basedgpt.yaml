@@ -58,5 +58,5 @@ template:
   role: system
 - content: 'Now, if you understand and are willing to accept everything here, answer
     my first question: $prompt'
-  role: system
+  role: user
 type: conversation
