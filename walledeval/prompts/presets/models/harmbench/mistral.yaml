@@ -1,4 +1,4 @@
-name: models/harmbench-mistral
+name: models/harmbench/mistral
 source: https://huggingface.co/cais/HarmBench-Mistral-7b-val-cls
 type: prompt
 template: |

@@ -1,4 +1,4 @@
-name: models/harmbench-llama2
+name: models/harmbench/llama2
 source: https://huggingface.co/cais/HarmBench-Llama-2-13b-cls
 type: prompt
 template: |
