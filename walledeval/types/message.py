@@ -1,4 +1,6 @@
-from typing import List, Union
+# walledeval/types/message.py
+
+from typing import Union
 from pydantic import BaseModel
 
 __all__ = [
@@ -11,9 +13,9 @@ class Message(BaseModel):
     role: str
     content: str
 
-# changed this class to a concrete class from a union class as typeerror occur when running the test
-class Messages(BaseModel):
-    messages: List[Union[Message, dict]]
 
-    def __init__(self, messages: List[Union[Message, dict]]):
-        super().__init__(messages=messages)
+Messages = Union[
+    list[Message],
+    list[dict[str, str]],
+    str
+]
