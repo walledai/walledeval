@@ -1,0 +1,27 @@
+name: mcq/lmeval
+source: https://doi.org/10.5281/zenodo.10256836
+type: prompt
+template: |
+  $question
+  $choices
+  Answer:
+params:
+  - name: question
+    type: str
+    format: |
+      def format(question):
+        return question.strip()
+    format_values: ['question']
+  - name: choices
+    type: list
+    format: |
+      def format(choices, options):
+        return "\n".join([
+          f"{option}. {choice}"
+          for option, choice in zip(options, choices)
+        ])
+    format_values: ['choices', 'options']
+  - name: options
+    type: list
+    optional: true
+    default: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']

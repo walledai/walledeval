@@ -1,0 +1,13 @@
+name: models/chatgpt-jailbreak/llm_evaluator/auxiliary/auxiliary-reference
+source: https://github.com/princeton-nlp/LLMBar/blob/main/LLMEvaluator/evaluators/prompts/auxiliary/Reference.txt
+type: prompt
+template: |
+  <|im_start|>system
+  You are a helpful assistant that responds to the user in a concise way.
+  <|im_end|>
+  <|im_start|>user
+  $prompt
+  <|im_end|>
+params:
+  - name: prompt
+    type: str

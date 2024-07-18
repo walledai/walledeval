@@ -1,0 +1,35 @@
+name: mcq/inspect
+source: none
+type: prompt
+template: |
+  Answer the following multiple choice question. The entire content of your response should be of the following format: 'ANSWER: $$LETTER' (without quotes) where LETTER is one of $options.
+
+  $question
+
+  $choices
+
+  ANSWER: 
+params:
+  - name: question
+    type: str
+  - name: choices
+    type: list
+    format: |
+      def format(choices, options, option_format):
+        return "\n".join([
+          option_format.format(option) + choice
+          for option, choice in zip(options, choices)
+        ])
+    format_values: ['choices', 'options', 'option_format']
+  - name: options
+    type: list
+    optional: true
+    default: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    format: |
+      def format(options, choices):
+        return options[:len(choices)]
+    format_values: ['options', 'choices']
+  - name: option_format
+    type: str
+    optional: true
+    default: '{}. '
