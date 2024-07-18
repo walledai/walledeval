@@ -130,6 +130,9 @@ class MultipleChoiceTemplate(BasePromptTemplate):
             options=self.options[:len(question.choices)],
             **kwds
         )
+    
+    def __call__(self, question: MultipleChoiceQuestion, **kwargs):
+        return self.format(question, **kwargs)
 
 
 _DEFAULT_QUESTION_TEMPLATE = """

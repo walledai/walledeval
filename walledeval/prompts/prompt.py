@@ -42,6 +42,9 @@ class DefaultPromptTemplate(BasePromptTemplate):
             prompt=prompt.prompt,
             **kwds
         )
+    
+    def __call__(self, prompt: Prompt, **kwargs):
+        return self.format(prompt, **kwargs)
 
 
 class QuestionTemplate(BasePromptTemplate):
@@ -77,6 +80,9 @@ class QuestionTemplate(BasePromptTemplate):
             question=question.question,
             **kwds
         )
+    
+    def __call__(self, question: Question, **kwargs):
+        return self.format(question, **kwargs)
 
 
 class SystemAssistedTemplate(BasePromptTemplate):
@@ -121,3 +127,6 @@ class SystemAssistedTemplate(BasePromptTemplate):
                 )
             }
         ]
+    
+    def __call__(self, prompt: SystemAssistedPrompt, **kwargs):
+        return self.format(prompt, **kwargs)

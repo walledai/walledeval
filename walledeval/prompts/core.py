@@ -220,3 +220,6 @@ class PromptTemplate(AbstractPromptTemplate):
             )
         
         return self.template.format(**final_params)
+    
+    def __call__(self, input: object, **kwargs):
+        return self.format(input, **kwargs)
