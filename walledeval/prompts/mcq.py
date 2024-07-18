@@ -5,7 +5,7 @@ from walledeval.constants import (
     DEFAULT_SAMPLE_QUESTION,
     DEFAULT_OPTION_FORMAT
 )
-from walledeval.prompts.core import QuestionTemplate
+from walledeval.prompts.core import BasePromptTemplate
 from walledeval.types import MultipleChoiceQuestion
 
 __all__ = [
@@ -32,7 +32,7 @@ $choices
 Answer:""".strip()+" "
 
 
-class MultipleChoiceTemplate(QuestionTemplate):
+class MultipleChoiceTemplate(BasePromptTemplate):
     """Multiple Choice Prompt Template.
 
     Attributes:
@@ -125,7 +125,7 @@ class MultipleChoiceTemplate(QuestionTemplate):
         ])
 
         return super().format(
-            question=question,
+            question=question.question,
             choices=choices_str,
             options=self.options[:len(question.choices)],
             **kwds
