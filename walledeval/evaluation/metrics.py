@@ -1,60 +1,27 @@
-# still in the midst of debugging this
+# walledeval/evaluation/metrics.py
 
+from .implement import CosSim, ChangeRatio, Perplexity, Toxicity
 
-import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-from transformers import AutoModelForCausalLM
+class Evaluator:
+    def __init__(self, model_name):
+        self.cos_sim = CosSim(model_name)
+        self.change_ratio = ChangeRatio(model_name)
+        self.perplexity = Perplexity(model_name)
+        self.toxicity = Toxicity()
 
-def calculate_perplexity(model, tokenizer, text):
-    """
-    Calculate the perplexity of the generated text.
+    def evaluate(self, original_text: str, mutated_text: str) -> dict:
+        similarity = self.cos_sim.evaluate(original_text, mutated_text)
+        change_ratio = self.change_ratio.evaluate(original_text, mutated_text)
+        original_perplexity = self.perplexity.evaluate(original_text)
+        mutated_perplexity = self.perplexity.evaluate(mutated_text)
+        original_toxicity = self.toxicity.evaluate(original_text)
+        mutated_toxicity = self.toxicity.evaluate(mutated_text)
 
-    Args:
-        model: The language model.
-        tokenizer: The tokenizer associated with the model.
-        text: The text for which to calculate perplexity.
-
-    Returns:
-        Perplexity score.
-    """
-    with torch.no_grad():
-        encodings = tokenizer(text, return_tensors="pt")
-        max_length = model.config.n_positions
-        stride = 512
-        lls = []
-
-        for i in range(0, encodings.input_ids.size(1), stride):
-            begin_loc = max(i + stride - max_length, 0)
-            end_loc = min(i + stride, encodings.input_ids.size(1))
-            trg_len = end_loc - i
-            input_ids = encodings.input_ids[:, begin_loc:end_loc].to(model.device)
-            target_ids = input_ids.clone()
-            target_ids[:, :-trg_len] = -100
-
-            outputs = model(input_ids, labels=target_ids)
-            log_likelihood = outputs.loss * trg_len
-
-            lls.append(log_likelihood)
-
-        ppl = torch.exp(torch.stack(lls).sum() / end_loc).item()
-        return ppl
-
-def evaluate_toxicity(text):
-    """
-    Evaluate the toxicity of the generated text using a pre-trained toxicity model.
-
-    Args:
-        text: The text to evaluate for toxicity.
-
-    Returns:
-        Toxicity score.
-    """
-    tokenizer = AutoTokenizer.from_pretrained("unitary/toxic-bert")
-    model = AutoModelForSequenceClassification.from_pretrained("unitary/toxic-bert")
-
-    inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True)
-    outputs = model(**inputs)
-    scores = torch.softmax(outputs.logits, dim=1)
-    toxicity_score = scores[0][1].item()
-
-    return toxicity_score
+        return {
+            "similarity": similarity,
+            "change_ratio": change_ratio,
+            "original_perplexity": original_perplexity,
+            "mutated_perplexity": mutated_perplexity,
+            "original_toxicity": original_toxicity,
+            "mutated_toxicity": mutated_toxicity
+        }
