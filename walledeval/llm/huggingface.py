@@ -14,6 +14,7 @@ __all__ = [
     "HF_LLM",
 ]
 
+
 def hf_models():
     """List all LLM models supported by HuggingFace for Text Generation.
 
@@ -22,6 +23,7 @@ def hf_models():
         HuggingFace Hub.
     """
     return list_models(filter="text-generation")
+
 
 class HF_LLM(LLM):
     def __init__(self,
@@ -36,8 +38,6 @@ class HF_LLM(LLM):
             trust_remote_code=True,
             **kwargs
         )
-
-        self.pipeline.tokenizer.padding_side = 'left'
 
     def _generate(self,
                   prompt: str,

@@ -1,4 +1,4 @@
-# walledeval/walledeval/llm/__init__.py
+# walledeval/llm/__init__.py
 
 from walledeval.llm.core import LLM
 from walledeval.llm.huggingface import hf_models, HF_LLM
