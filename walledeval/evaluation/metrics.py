@@ -25,3 +25,4 @@ class Evaluator:
             "original_toxicity": original_toxicity,
             "mutated_toxicity": mutated_toxicity
         }
+        

@@ -40,7 +40,7 @@ class CosSim(Metric):
 class ChangeRatio(Metric):
     def __init__(self, model_name: str):
         super().__init__("ChangeRatio")
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side='left')
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
 
     def evaluate(self, original_text: str, mutated_text: str) -> float:
         original_tokens = self.tokenizer.tokenize(original_text)
