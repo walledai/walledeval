@@ -20,6 +20,12 @@ class Mutator(ABC):
     
     def __call__(self, prompt: str, **kwargs) -> str:
         return self.mutate(prompt, **kwargs)
+    
+    def __add__(self, other) -> str:
+        return CompositeMutator(self, other)
+    
+    def __radd__(self, other) -> str:
+        return CompositeMutator(other, self)
 
 
 class CompositeMutator(Mutator):
@@ -58,6 +64,9 @@ class CompositeMutator(Mutator):
     
     def __add__(self, other: Union[Mutator, Iterable[Mutator]]) -> Mutator:
         return CompositeMutator(self, other)
+    
+    def __radd__(self, other: Union[Mutator, Iterable[Mutator]]) -> Mutator:
+        return CompositeMutator(other, self)
     
     def __iadd__(self, other: Union[Mutator, Iterable[Mutator]]) -> Mutator:
         self.mutators.append(self.flatten([other]))
