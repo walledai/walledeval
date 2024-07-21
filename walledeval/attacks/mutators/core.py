@@ -4,8 +4,6 @@ from abc import ABC, abstractmethod
 from typing import Union
 from collections.abc import Iterable
 
-from walledeval.llm import LLM
-from walledeval.prompts import PromptTemplate
 from walledeval.types.data import Range
 from walledeval.util import process_range
 
@@ -108,30 +106,5 @@ class CompositeMutator(Mutator):
             else:
                 raise ValueError("Insufficient range provided for values")
         
-        # to remove all rogue CompositeMutators / sublists
+        # to remove all rogue CompositeMutators / sub-lists
         self.mutators = self.flatten(self.mutators)
-
-
-class GenerativeMutator(Mutator):
-    def __init__(self, name: str, 
-                 llm: LLM,
-                 prompt_template: PromptTemplate = PromptTemplate()):
-        super().__init__(name)
-        
-        self.llm = llm
-        self.prompt_template = prompt_template
-        
-        if "prompt" not in prompt_template.params:
-            raise ValueError("Cannot use this prompt template, no parameter 'prompt' found")
-    
-    @classmethod
-    def from_preset(cls, name: str, llm: LLM):
-        template = PromptTemplate.from_preset(f"mutations/{name}")
-        return cls(name, llm, template)
-        
-    
-    def mutate(self, prompt: str, **kwargs) -> str:
-        query = self.prompt_template.format(None, prompt = prompt, **kwargs)
-        output = self.llm.generate(query, instruct=True)
-        return output
-
