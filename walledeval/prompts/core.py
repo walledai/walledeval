@@ -201,12 +201,16 @@ class PromptTemplate(AbstractPromptTemplate):
                 params[param] = kwargs[param]
             elif hasattr(input, param):
                 params[param] = getattr(input, param)
-            else:
+            elif self.params[param].default is not None:
                 params[param] = self.params[param].default
+            # if not, it is not substituted
         
         final_params = {}
         
-        for param in self.params:
+        for param in params:
+            if any(i not in params for i in self.params[param].format_values):
+                continue # leave this one blank too
+
             format_func =_exec_with_return(
                 self.params[param].format_func
             )
@@ -215,6 +219,7 @@ class PromptTemplate(AbstractPromptTemplate):
                 params[i] 
                 for i in self.params[param].format_values
             ]
+
             final_params[param] = format_func(
                 *variables
             )
