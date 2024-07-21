@@ -193,7 +193,7 @@ class PromptTemplate(AbstractPromptTemplate):
             optional_params
         )
 
-    def format(self, input: object, **kwargs):
+    def format(self, input: object = None, **kwargs):
         params = {}
         
         for param in self.params:
@@ -226,5 +226,5 @@ class PromptTemplate(AbstractPromptTemplate):
         
         return self.template.format(**final_params)
     
-    def __call__(self, input: object, **kwargs):
+    def __call__(self, input: object = None, **kwargs):
         return self.format(input, **kwargs)
