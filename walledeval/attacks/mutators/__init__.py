@@ -6,10 +6,12 @@ from walledeval.attacks.mutators.cipher import (
     Base64Mutator, AsciiMutator
 )
 from walledeval.attacks.mutators.generative import GenerativeMutator
+from walledeval.attacks.mutators.artprompt import Masking, Cloaking
 
 __all__ = [
     "Mutator", "CompositeMutator",
     "CipherMutator", "CaesarMutator",
     "Base64Mutator", "AsciiMutator",
-    "GenerativeMutator"
+    "GenerativeMutator", "Masking",
+    "Cloaking"
 ]
