@@ -91,9 +91,9 @@ class CompositeAttack(Attack):
         return len(self.attacks)
     
     def attack(self, samples: list[str]) -> list[str]:
-        overall_samples = samples.copy()
+        overall_samples = []
         
         for attack in self.attacks:
             overall_samples.extend(
-                attack.attack(overall_samples if self.stack == True else samples)
+                attack.attack(samples + (overall_samples if self.stack == True else []))
             )
