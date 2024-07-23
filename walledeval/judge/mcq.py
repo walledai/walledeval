@@ -1,10 +1,12 @@
 # walledeval/judge/mcq.py
 
-import re
+import re, os
 from pydantic import BaseModel
 
 from walledeval.constants import DEFAULT_OPTIONS
 from walledeval.judge.core import Judge
+from walledeval.llm import LLM
+from walledeval.prompts.core import PromptTemplate
 
 
 class MCQOutput(BaseModel):
@@ -13,14 +15,17 @@ class MCQOutput(BaseModel):
 
 
 class MCQJudge(Judge[int, MCQOutput, bool]):
-    def __init__(self, options: list[str] = DEFAULT_OPTIONS):
-        super().__init__("MCQJudge")
+    def __init__(self, llm: LLM, template_file: str, options: list[str] = DEFAULT_OPTIONS):
+        super().__init__("MCQJudge", llm)
         self.options = [str(option) for option in options]
+        self.prompt_template = PromptTemplate.from_preset(os.path.join("prompts", "presets", "mcq", template_file))
 
     def check(self, response: str, answer: int) -> MCQOutput:
         # response is simply the output from the model
+        prompt = self.prompt_template.format(response=response)
+        llm_output = self.generate(prompt)
 
-        response = re.sub(r'[^\w\s_]+', '', response)
+        response = re.sub(r'[^\w\s_]+', '', llm_output)
         if response.lower().startswith("answer"):
             response = response[6:].strip()
         if response.lower().startswith("boxed"):
