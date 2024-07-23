@@ -7,6 +7,7 @@ from typing import Union
 from walledeval.llm import HF_LLM
 from walledeval.types import LLMType
 from walledeval.judge.llm.core import LLMasaJudge
+from walledeval.prompts import PromptTemplate
 
 __all__ = [
     "LlamaGuardJudge", "LlamaGuardOutput"
@@ -45,20 +46,9 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput, bool]):
             **kwargs
         )
         
-        super().__init__(self.model_id, llm)
-        
-    def generate(self, response: str) -> str:
-        return self._llm.generate(
-            [
-                {
-                    "role": "user",
-                    "content": ""
-                }, {
-                    "role": "assistant",
-                    "content": response
-                }
-            ]
-        )
+        super().__init__(self.model_id, llm, 
+                         template = PromptTemplate.from_preset("judges/llamaguard"), 
+                         llm_instruct=True)
     
     def process_llm_output(self, response: str) -> LlamaGuardOutput:
         output = response.strip()
