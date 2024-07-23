@@ -108,7 +108,7 @@ Here is an example of our library in action!
 	}, device_map="auto")
 
 >>> judge.check("Hello world")
-# <LlamaGuardOutput.SAFE: 0>
+# <LLMGuardOutput.SAFE: 0>
 
 >>> logs = []
 

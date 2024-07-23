@@ -1,33 +1,30 @@
 # walledeval/judge/llm/llamaguard.py
- 
-from enum import Enum
+
 import torch
 from typing import Union
 
 from walledeval.llm import HF_LLM
 from walledeval.types import LLMType
-from walledeval.judge.llm.core import LLMasaJudge
 from walledeval.prompts import PromptTemplate
 
+from walledeval.judge.llm.guard import LLMGuardJudge
+
 __all__ = [
-    "LlamaGuardJudge", "LlamaGuardOutput"
+    "LlamaGuardJudge"
 ]
 
 
-class LlamaGuardOutput(str, Enum):
-    SAFE = "safe"
-    UNSAFE = "unsafe"
-    UNKNOWN = "unknown"
-
-
-class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput, bool]):
+class LlamaGuardJudge(LLMGuardJudge):
     _VERSIONS = [
         "meta-llama/LlamaGuard-7b",
         "meta-llama/Meta-Llama-Guard-2-8B"
     ]   
     
     def __init__(self, version: Union[int, str], 
-                 model_kwargs={"torch_dtype": torch.bfloat16}, device_map="auto", **kwargs):
+                 model_kwargs={"torch_dtype": torch.bfloat16}, 
+                 device_map="auto",
+                 template_preset: str = "llamaguard",
+                 **kwargs):
         if isinstance(version, int):
             if version < 0 or version > len(self._VERSIONS):
                 raise ValueError(f"Invalid Version {version}")
@@ -47,17 +44,6 @@ class LlamaGuardJudge(LLMasaJudge[LlamaGuardOutput, bool]):
         )
         
         super().__init__(self.model_id, llm, 
-                         template = PromptTemplate.from_preset("judges/llamaguard"), 
+                         template=PromptTemplate.from_preset(f"judges/{template_preset}"), 
                          llm_instruct=True)
     
-    def process_llm_output(self, response: str) -> LlamaGuardOutput:
-        output = response.strip()
-        
-        if "unsafe" in output:
-            return LlamaGuardOutput.UNSAFE
-        elif "safe" in output:
-            return LlamaGuardOutput.SAFE
-        return LlamaGuardOutput.UNKNOWN
-    
-    def score(self, output: LlamaGuardOutput) -> bool:
-        return output == "safe"
