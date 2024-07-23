@@ -1,4 +1,4 @@
-name: models/harmbench/llama2-contextual
+name: judges/harmbench/llama2-contextual
 source: https://huggingface.co/cais/HarmBench-Llama-2-13b-cls
 type: prompt
 template: |

@@ -1,4 +1,4 @@
-name: models/aegis/permissive
+name: judges/aegis/permissive
 source: https://huggingface.co/nvidia/Aegis-AI-Content-Safety-LlamaGuard-Permissive-1.0
 type: prompt
 template: |

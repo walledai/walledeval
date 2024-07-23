@@ -1,4 +1,4 @@
-name: models/walledguard
+name: judges/walledguard
 source: https://huggingface.co/walledai/walledguard-c
 type: prompt
 template: |
