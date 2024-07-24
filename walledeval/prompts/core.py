@@ -129,11 +129,10 @@ class PromptTemplate(AbstractPromptTemplate):
             if key in kwargs:
                 optional[key].default = kwargs[key]
             
-        
-        
     @classmethod
-    def from_preset(cls, name: str = "mcq/default"):
-        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+    def from_yaml(cls, filename: str):
+        yaml_fp = Path(filename)
+        
         yaml_text = yaml_fp.read_text(encoding="utf-8")
         config = yaml.safe_load(yaml_text)
         
@@ -192,6 +191,12 @@ class PromptTemplate(AbstractPromptTemplate):
             required_params,
             optional_params
         )
+
+
+    @classmethod
+    def from_preset(cls, name: str = "mcq/default"):
+        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+        return cls.from_preset(str(yaml_fp))
 
     def format(self, input: object = None, **kwargs):
         params = {}
