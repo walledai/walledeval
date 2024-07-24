@@ -5,7 +5,6 @@ from typing import Generic, TypeVar
 
 from walledeval.llm import LLM
 from walledeval.judge.core import Judge
-from walledeval.prompts import PromptTemplate
 
 __all__ = [
     "LLMasaJudge"
