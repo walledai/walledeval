@@ -4,7 +4,6 @@ from walledeval.judge.llm.core import LLMasaJudge
 from walledeval.judge.llm.guard import LLMGuardJudge, LLMGuardOutput
 from walledeval.judge.llm.toxicity import MultiClassToxicityJudge
 from walledeval.judge.llm.question import QuestionLLMasaJudge
-from walledeval.judge.llm.system import SystemLLMasaJudge
 from walledeval.judge.llm.llamaguard import LlamaGuardJudge
 
 __all__ = [
@@ -12,6 +11,5 @@ __all__ = [
     "LLMGuardJudge", "LLMGuardOutput",
     "LlamaGuardJudge",
     "MultiClassToxicityJudge",
-    "QuestionLLMasaJudge",
-    "SystemLLMasaJudge"
+    "QuestionLLMasaJudge"
 ]
