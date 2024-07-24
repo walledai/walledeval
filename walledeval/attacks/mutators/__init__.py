@@ -1,6 +1,9 @@
 # walledeval/attacks/mutators/__init__.py
 
 from walledeval.attacks.mutators.core import Mutator, CompositeMutator
+from walledeval.attacks.mutators.rule import (
+    DisemvowelMutator, LeetSpeakMutator
+)
 from walledeval.attacks.mutators.cipher import (
     CipherMutator, CaesarMutator,
     Base64Mutator, AsciiMutator
@@ -10,6 +13,7 @@ from walledeval.attacks.mutators.artprompt import MaskingMutator, CloakingMutato
 
 __all__ = [
     "Mutator", "CompositeMutator",
+    "DisemvowelMutator", "LeetSpeakMutator",
     "CipherMutator", "CaesarMutator",
     "Base64Mutator", "AsciiMutator",
     "GenerativeMutator", "MaskingMutator",
