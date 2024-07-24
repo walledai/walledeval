@@ -1,4 +1,4 @@
-name: models/aegis/defensive
+name: judges/aegis/defensive
 source: https://huggingface.co/nvidia/Aegis-AI-Content-Safety-LlamaGuard-Defensive-1.0
 type: prompt
 template: |

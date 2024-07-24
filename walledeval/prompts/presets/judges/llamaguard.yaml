@@ -1,0 +1,13 @@
+name: judges/llamaguard
+source: None
+type: conversation
+template:
+- content: '$prompt'
+  role: user
+- content: '$response'
+  role: assistant
+params:
+- name: prompt
+  type: str
+- name: response
+  type: str

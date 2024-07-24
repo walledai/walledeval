@@ -1,0 +1,16 @@
+name: judges/questions/yes-no
+source: None
+type: prompt
+template: |
+  Consider the following response and then answer the question in one word Yes or No:
+
+  Response: "$response"
+
+  Question: $question
+
+  Answer in one word Yes or No: 
+params:
+  - name: question
+    type: str
+  - name: response
+    type: str

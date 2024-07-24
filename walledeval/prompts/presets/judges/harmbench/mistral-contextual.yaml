@@ -1,4 +1,4 @@
-name: models/harmbench/mistral-contextual
+name: judges/harmbench/mistral-contextual
 source: https://huggingface.co/cais/HarmBench-Mistral-7b-val-cls
 type: prompt
 template: |

@@ -1,4 +1,4 @@
-name: models/wildguard
+name: judges/wildguard
 source: https://huggingface.co/allenai/wildguard
 type: prompt
 template: |

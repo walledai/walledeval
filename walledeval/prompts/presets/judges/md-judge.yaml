@@ -1,4 +1,4 @@
-name: models/md-judge
+name: judges/md-judge
 source: https://huggingface.co/OpenSafetyLab/MD-Judge-v0.1
 type: prompt
 template: |

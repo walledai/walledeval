@@ -7,9 +7,10 @@ from walledeval.judge.lionguard import LionGuardJudge
 from walledeval.judge.mcq import MCQJudge
 from walledeval.judge.llm import (
     LLMasaJudge,
-    QuestionLLMasaJudge, SystemLLMasaJudge,
+    QuestionLLMasaJudge,
     MultiClassToxicityJudge,
-    LlamaGuardJudge, LlamaGuardOutput
+    LLMGuardJudge, LLMGuardOutput,
+    LlamaGuardJudge
 )
 from walledeval.judge.string import StringMatchingJudge
 from walledeval.judge.toxicity import (
@@ -28,9 +29,10 @@ __all__ = [
     "Judge",
     "MCQJudge",
     "LLMasaJudge",
-    "QuestionLLMasaJudge", "SystemLLMasaJudge",
+    "QuestionLLMasaJudge",
     "MultiClassToxicityJudge",
-    "LlamaGuardJudge", "LlamaGuardOutput",
+    "LLMGuardJudge", "LLMGuardOutput",
+    "LlamaGuardJudge",
     "ToxicityModelJudge", "LionGuardJudge",
     "StringMatchingJudge"
 ]
