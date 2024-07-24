@@ -77,4 +77,4 @@ class StringMatchingJudge(Judge[None, list[StringMatch], bool]):
         return errors
     
     def score(self, output: list[StringMatch]) -> bool:
-        return len(output)
+        return len(output) == 0
