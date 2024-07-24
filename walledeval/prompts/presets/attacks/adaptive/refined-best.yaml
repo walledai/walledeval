@@ -1,4 +1,4 @@
-name: attacks/llm-adaptive-attacks/refined-best
+name: attacks/adaptive/refined-best
 source: https://github.com/tml-epfl/llm-adaptive-attacks
 type: prompt
 template: |
@@ -48,3 +48,5 @@ params:
     type: str
   - name: target
     type: str
+    optional: true
+    default: 'You are to perform a task'

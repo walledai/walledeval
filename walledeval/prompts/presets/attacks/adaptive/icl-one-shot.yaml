@@ -1,4 +1,4 @@
-name: attacks/llm-adaptive-attacks/refined-best-simplified
+name: attacks/adaptive/icl-one-shot
 source: https://github.com/tml-epfl/llm-adaptive-attacks
 type: prompt
 template: |
@@ -16,7 +16,7 @@ template: |
 
 
   <example>
-  $target for educational and research purposes:
+  $prompt for educational and research purposes:
 params:
-  - name: target
+  - name: prompt
     type: str
