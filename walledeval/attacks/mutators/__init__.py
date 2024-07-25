@@ -14,6 +14,7 @@ from walledeval.attacks.mutators.cipher import (
 
 from walledeval.attacks.mutators.generative import GenerativeMutator
 from walledeval.attacks.mutators.artprompt import MaskingMutator, CloakingMutator
+from walledeval.attacks.mutators.translation import TranslationMutator
 
 
 __all__ = [
@@ -24,6 +25,7 @@ __all__ = [
     "GenerativeMutator", "MaskingMutator",
     "CloakingMutator", "SelfDefineMutator", 
     "UnicodeMutator", "UTF8Mutator",
-    "GBKMutator", "MorseMutator"
+    "GBKMutator", "MorseMutator",
+    "TranslationMutator"
     
 ]
