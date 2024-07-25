@@ -1,4 +1,4 @@
-name: mutations/sorry/uncommon_dialect
+name: mutations/sorry/uncommon_dialects
 source: https://github.com/SORRY-Bench/sorry-bench/blob/main/data/sorry_bench/mutate/mutation_utils.py
 type: prompt
 template: |
