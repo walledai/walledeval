@@ -8,8 +8,14 @@ from walledeval.attacks.mutators.cipher import (
     CipherMutator, CaesarMutator,
     Base64Mutator, AsciiMutator
 )
+
+from walledeval.attacks.mutators.sorry import (
+    QuestionMutator, SlangMutator,
+    UncommonDialectMutator, TranslationMutator
+)
 from walledeval.attacks.mutators.generative import GenerativeMutator
 from walledeval.attacks.mutators.artprompt import MaskingMutator, CloakingMutator
+
 
 __all__ = [
     "Mutator", "CompositeMutator",
@@ -17,5 +23,7 @@ __all__ = [
     "CipherMutator", "CaesarMutator",
     "Base64Mutator", "AsciiMutator",
     "GenerativeMutator", "MaskingMutator",
-    "CloakingMutator"
+    "CloakingMutator", "QuestionMutator",
+    "SlangMutator", "UncommonDialectMutator",
+    "TranslationMutator"
 ]

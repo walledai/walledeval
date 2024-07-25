@@ -5,6 +5,7 @@ from typing import Generic, TypeVar
 
 from walledeval.llm import LLM
 from walledeval.judge.core import Judge
+from walledeval.prompts.core import PromptTemplate
 
 __all__ = [
     "LLMasaJudge"
@@ -12,7 +13,7 @@ __all__ = [
 
 O = TypeVar('O') # Output Field
 S = TypeVar('S') # Score Field
-
+    
 
 class LLMasaJudge(Judge[None, O, S], ABC, Generic[O, S]):
     def __init__(self,
