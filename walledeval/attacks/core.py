@@ -1,4 +1,4 @@
-# walledeval/attacks/attack.py
+# walledeval/attacks/core.py
 
 from abc import ABC, abstractmethod
 
