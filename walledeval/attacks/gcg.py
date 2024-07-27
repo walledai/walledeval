@@ -1,10 +1,9 @@
-import gc
-import numpy as np
+# walledeval/attacks/gcg.py
+
 import torch
 import torch.nn as nn
 from walledeval.attacks.core import UniversalAttack
 from walledeval.attacks.gcg_utils import get_embedding_matrix, get_embeddings
-from tqdm.auto import tqdm
 
 def token_gradients(model, input_ids, input_slice, target_slice, loss_slice):
     """
