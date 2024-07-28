@@ -152,7 +152,7 @@ class _HuggingFaceDatasetAlias:
     def from_hub(self, 
                  name: str, 
                  config: Optional[str] = None, 
-                 split: str = "train",
+                 split: str = "DEFAULT",
                  **ds_kwargs):
         return HuggingFaceDataset.from_hub(
             name, config, split, self.model, **ds_kwargs
