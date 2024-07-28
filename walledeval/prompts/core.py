@@ -71,12 +71,28 @@ class BaseConversationTemplate(Template, AbstractPromptTemplate):
         self.messages = messages
         
         Template.__init__(self, json.dumps(self.messages))
+        
+        self.messages = [
+            {
+                "role": Template(message["role"]),
+                "content": Template(message["content"])
+            }
+            for message in self.messages
+        ]
     
     def format(self, **kwds) -> list[Message]:
         return [
-            Message(**it)
-            for it in eval(self.safe_substitute(**kwds))
+            Message(
+                role = message["role"].safe_substitute(**kwds),
+                content = message["content"].safe_substitute(**kwds)
+            ) for message in self.messages
         ]
+        
+        
+        # return [
+        #     Message(**it)
+        #     for it in json.loads(self.safe_substitute(**kwds))
+        # ]
 
 
 T = TypeVar('T')
