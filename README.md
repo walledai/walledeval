@@ -69,6 +69,13 @@ After this, you can use the following command to install this library:
 $ poetry install
 ```
 
+This script creates a virtual environment for you to work with this library.
+
+```bash
+$ poetry shell
+```
+
+You can run the above script to enter a specialized shell to run commands within the virtual environment, including accessing the Python version with all the required dependencies to use WalledEval at its finest!
 
 ### Notes during Installation
 
