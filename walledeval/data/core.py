@@ -177,7 +177,7 @@ class HuggingFaceDataset(_HuggingFaceDataset):
     @classmethod
     def from_hub(cls, name: str,
                  config: Optional[str] = None,
-                 split: str = "train",
+                 split: str = "DEFAULT",
                  model: type = Prompt,
                  **ds_kwargs):
         dataset = load_dataset(name, config, **ds_kwargs)
