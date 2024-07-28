@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+import sys
 
 from huggingface_hub import login
 
@@ -11,12 +12,6 @@ import torch
 import json
 import argparse
 
-from walledeval.data import HuggingFaceDataset
-from walledeval.prompts import PromptTemplate
-from walledeval.llm import HF_LLM
-from walledeval.judge import LlamaGuardJudge
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     
@@ -26,7 +21,7 @@ if __name__ == "__main__":
                                  "mistral-7b"],
                         help="Model to use as SUT")
     
-    parser.add_argument("-d", "--dataset", defuallt="HarmBench",
+    parser.add_argument("-d", "--dataset", default="HarmBench",
                         choices=["HarmBench", "AdvBench"],
                         help="(Prompt-based) Dataset to test")
     
@@ -47,6 +42,14 @@ if __name__ == "__main__":
     load_dotenv(args.env)
     if token := os.getenv(args.token_name):
         login(token)
+    
+    sys.path.append("..")
+    
+    from walledeval.data import HuggingFaceDataset
+    from walledeval.prompts import PromptTemplate
+    from walledeval.llm import HF_LLM
+    from walledeval.judge import LlamaGuardJudge
+
 
     if dataset_name == "HarmBench":
         # only the 200 rows
