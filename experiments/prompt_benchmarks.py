@@ -25,9 +25,12 @@ from walledeval.judge import LlamaGuardJudge
 dataset_args = {
     "harmbench": ("walledai/HarmBench", "standard"),
     "advbench": ("walledai/AdvBench", ),
-    "aya-redteaming": ("walledai/AyaRedTeaming", "default", "english"),
+    # "aya-redteaming": ("walledai/AyaRedTeaming", "default", "english"),
     #"xstest": ("walledai/XSTest"),   
 }
+
+for language in ["arabic", "english", "filipino", "french", "hindi", "russian", "serbian", "spanish"]:
+    dataset_args[f"aya-{language[:2]}"] = ("walledai/AyaRedTeaming", "default", language)
 
 
 
