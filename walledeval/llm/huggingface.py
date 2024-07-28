@@ -47,6 +47,8 @@ class HF_LLM(LLM):
             self.pipeline.tokenizer.eos_token_id,
             self.pipeline.tokenizer.convert_tokens_to_ids("<|eot_id|>")
         ]
+        
+        terminators = [terminator for terminator in terminators if terminator is not None]
 
         outputs = self.pipeline(
             prompt,
