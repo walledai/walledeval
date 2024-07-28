@@ -1,7 +1,7 @@
 import os
+from dotenv import load_dotenv
 
 from huggingface_hub import login
-login(os.getenv("HF_TOKEN"))
 
 from transformers.utils import logging
 logging.set_verbosity_error()
@@ -33,12 +33,20 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--filename", default="experiments/logs/log.json",
                         help="Place to store logs")
     
+    parser.add_argument("-e", "--env", default = ".env", help="Environment file with tokens")
+    
+    parser.add_argument("-t", "--token_name", default = "HF_TOKEN", help="Environment Variable for token")
+    
     
     args = parser.parse_args()
     
     llm_name = args.model
     dataset_name = args.dataset
     output_filename = args.filename
+    
+    load_dotenv(args.env)
+    if token := os.getenv(args.token_name):
+        login(token)
 
     if dataset_name == "HarmBench":
         # only the 200 rows
