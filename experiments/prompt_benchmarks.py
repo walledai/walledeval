@@ -39,9 +39,10 @@ if __name__ == "__main__":
     
     parser.add_argument("-m", "--model", default="llama3.1-8b",
                         choices=["llama3.1-8b", "llama3-8b", "llama2-7b",
-                                 "gemma2-9b", 
+                                 "gemma2-9b", "gemma-1.1-7b", "gemma-7b",
                                  "mistral-nemo-12b", "mistral-7b", "mixtral-8x7b",
-                                 "qwen2-7b", "qwen2-1.5b", "qwen2-0.5b"],
+                                 "qwen2-7b", "qwen2-1.5b", "qwen2-0.5b",
+                                 "yi-1.5-6b"],
                         help="Model to use as SUT")
     
     parser.add_argument("-d", "--dataset", default="harmbench",
@@ -118,6 +119,10 @@ if __name__ == "__main__":
     # Gemma Models
     elif llm_name == "gemma2-9b":
         sut = HF_LLM("unsloth/gemma-2-9b-it-bnb-4bit", **sut_kwargs)
+    elif llm_name == "gemma-1.1-7b":
+        sut = HF_LLM("unsloth/gemma-1.1-7b-it-bnb-4bit", **sut_kwargs)
+    elif llm_name == "gemma-7b":
+        sut = HF_LLM("unsloth/gemma-7b-it-bnb-4bit", **sut_kwargs)
     
     # Mistral Models
     elif llm_name == "mistral-nemo-12b":
@@ -133,12 +138,16 @@ if __name__ == "__main__":
         raise NotImplementedError
     
     # Qwen Models
-    elif llm_name == "qwen2-7b": # no unsloth model
+    elif llm_name == "qwen2-7b":
         sut = HF_LLM("unsloth/Qwen2-7B-Instruct-bnb-4bit", **sut_kwargs)
-    elif llm_name == "qwen2-1.5b": # no unsloth model
+    elif llm_name == "qwen2-1.5b":
         sut = HF_LLM("unsloth/Qwen2-1.5B-Instruct-bnb-4bit", **sut_kwargs)
-    elif llm_name == "qwen2-0.5b": # no unsloth model
+    elif llm_name == "qwen2-0.5b":
         sut = HF_LLM("unsloth/Qwen2-0.5B-Instruct-bnb-4bit", **sut_kwargs)
+    
+    # Yi Models
+    elif llm_name == "yi-1.5-6b":
+        sut = HF_LLM("unsloth/Yi-1.5-6B-bnb-4bit", **sut_kwargs)
     
 
     # =====================================================
