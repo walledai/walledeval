@@ -196,7 +196,7 @@ class PromptTemplate(AbstractPromptTemplate):
     @classmethod
     def from_preset(cls, name: str = "mcq/default"):
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
-        return cls.from_preset(str(yaml_fp))
+        return cls.from_yaml(str(yaml_fp))
 
     def format(self, input: object = None, **kwargs):
         params = {}
