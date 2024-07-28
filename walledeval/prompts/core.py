@@ -4,7 +4,7 @@ from string import Template
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
 from pathlib import Path
-import yaml
+import yaml, json
 import enum
 from typing import Optional, TypeVar
 
@@ -70,7 +70,7 @@ class BaseConversationTemplate(Template, AbstractPromptTemplate):
         
         self.messages = messages
         
-        Template.__init__(self, str(self.messages))
+        Template.__init__(self, json.dumps(self.messages))
     
     def format(self, **kwds) -> list[Message]:
         return [
