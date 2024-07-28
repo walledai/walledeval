@@ -12,6 +12,8 @@ import torch
 import json
 import argparse
 
+import pathlib
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     
@@ -42,8 +44,8 @@ if __name__ == "__main__":
     load_dotenv(args.env)
     if token := os.getenv(args.token_name):
         login(token)
-    
-    sys.path.append("..")
+        
+    sys.path.append(str(pathlib.Path(__file__).resolve().parent.parent))
     
     from walledeval.data import HuggingFaceDataset
     from walledeval.prompts import PromptTemplate
