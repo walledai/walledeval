@@ -70,6 +70,18 @@ $ poetry install
 ```
 
 
+### Notes during Installation
+
+Some features in our library are NOT ACCESSIBLE via the base dependencies installed in WalledEval. This is due to various dependency mismatches. Here is a list of what is not accessible and how you can use them.
+
+| Feature | Required Dependencies |
+| ------- | --------------------- |
+| `llm.Llama` | [`llama-cpp-python`](https://github.com/abetlen/llama-cpp-python), [`llama.cpp`](https://github.com/ggerganov/llama.cpp) |
+| `judge.CodeShieldJudge` | [`codeshield`](https://github.com/meta-llama/PurpleLlama/tree/main/CodeShield), which is by default installed but can only be accessed on a Unix-based OS |
+
+<!-- To add the rest of them here soon -->
+
+
 ## Basic Usage
 
 Our library builds on a modular structure, i.e. WalledEval is a code-first utility. However, a command-line interface is in the process of being built now to use WalledEval without much code.
