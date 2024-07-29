@@ -27,6 +27,7 @@ dataset_args = {
     "advbench": ("walledai/AdvBench", ),
     # "aya-redteaming": ("walledai/AyaRedTeaming", "default", "english"),
     #"xstest": ("walledai/XSTest"),   
+    "catqa": ("walledai/CatHarmfulQA", "default", "en")
 }
 
 for language in ["arabic", "english", "filipino", "french", "hindi", "russian", "serbian", "spanish"]:
@@ -41,12 +42,19 @@ if __name__ == "__main__":
                         choices=["llama3.1-8b", "llama3-8b", "llama2-7b",
                                  "gemma2-9b", "gemma-1.1-7b", "gemma-7b",
                                  "mistral-nemo-12b", "mistral-7b", "mixtral-8x7b",
-                                 "qwen2-7b", "qwen2-1.5b", "qwen2-0.5b",
+                                 "phi3-mini",
+                                 "qwen2-7b", "qwen2-1.5b", "qwen2-0.5b", "qwen-1.5-7b",
                                  "yi-1.5-9b", "yi-1.5-6b"],
                         help="Model to use as SUT")
     
     parser.add_argument("-d", "--dataset", default="harmbench",
-                        choices=["harmbench", "advbench", "aya-redteaming"],
+                        choices=[
+                            "harmbench", 
+                            "advbench",
+                            "catqa",
+                            "aya-redteaming"] + [
+                            f"aya-{language[:2]}" for language in ["arabic", "english", "filipino", "french", "hindi", "russian", "serbian", "spanish"]
+                            ],
                         help="(Prompt-based) Dataset to test")
     
     parser.add_argument("-f", "--filename", default="",
@@ -139,6 +147,8 @@ if __name__ == "__main__":
         # no unsloth model
         # sut = None
         raise NotImplementedError
+    elif llm_name == "phi3-mini":
+        sut = HF_LLM("unsloth/Phi-3-mini-4k-instruct-bnb-4bit", **sut_kwargs)
     
     # Qwen Models
     elif llm_name == "qwen2-7b":
@@ -147,6 +157,10 @@ if __name__ == "__main__":
         sut = HF_LLM("unsloth/Qwen2-1.5B-Instruct-bnb-4bit", **sut_kwargs)
     elif llm_name == "qwen2-0.5b":
         sut = HF_LLM("unsloth/Qwen2-0.5B-Instruct-bnb-4bit", **sut_kwargs)
+    elif llm_name == "qwen-1.5-7b":
+        sut = HF_LLM("Qwen/Qwen1.5-7B-Chat-GPTQ-Int4", 
+                     **{**sut_kwargs,
+                        "model_kwargs": dict(torch_dtype="auto")})
     
     # Yi Models
     elif llm_name == "yi-1.5-9b":
