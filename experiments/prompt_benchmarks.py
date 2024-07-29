@@ -213,7 +213,7 @@ if __name__ == "__main__":
 
             if (i+1) % interval == 0:
                 with open(output_filename, "w") as f:
-                    json.dump(logs, f, indent=4)
+                    json.dump(logs, f, indent=4, ensure_ascii=False)
                 
                 if verbose:
                     print("Saved", len(logs), "logs to", output_filename)
@@ -225,6 +225,6 @@ if __name__ == "__main__":
             print("Final score:", round(running_score/len(logs), 3))
         
         with open(output_filename, "w") as f:
-            json.dump(logs, f, indent=4)
+            json.dump(logs, f, indent=4, ensure_ascii=False)
             if verbose:
                 print("Saved", len(logs), "logs to", output_filename)
