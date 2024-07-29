@@ -42,7 +42,7 @@ if __name__ == "__main__":
                                  "gemma2-9b", "gemma-1.1-7b", "gemma-7b",
                                  "mistral-nemo-12b", "mistral-7b", "mixtral-8x7b",
                                  "qwen2-7b", "qwen2-1.5b", "qwen2-0.5b",
-                                 "yi-1.5-6b"],
+                                 "yi-1.5-9b", "yi-1.5-6b"],
                         help="Model to use as SUT")
     
     parser.add_argument("-d", "--dataset", default="harmbench",
@@ -113,7 +113,8 @@ if __name__ == "__main__":
         sut = HF_LLM("unsloth/Meta-Llama-3.1-8B-Instruct-bnb-4bit", **sut_kwargs)
     elif llm_name == "llama3-8b":
         sut = HF_LLM("unsloth/llama-3-8b-Instruct-bnb-4bit", **sut_kwargs)
-    elif llm_name == "llama2-7b": # no unsloth model
+    elif llm_name == "llama2-7b":
+        # loading in 16 bit rn
         sut = HF_LLM("meta-llama/Llama-2-7b-chat-hf", **sut_kwargs)
     
     # Gemma Models
@@ -130,11 +131,13 @@ if __name__ == "__main__":
     elif llm_name == "mistral-7b":
         sut = HF_LLM("unsloth/mistral-7b-instruct-v0.3-bnb-4bit", **sut_kwargs)
     elif llm_name == "mixtral-8x7b":
+        # uses model quantized by ybelkada
         sut = HF_LLM("ybelkada/Mixtral-8x7B-Instruct-v0.1-bnb-4bit", **sut_kwargs)
         
     # Phi Models
-    elif llm_name == "phi3-small": # no unsloth model
-        sut = None
+    elif llm_name == "phi3-small":
+        # no unsloth model
+        # sut = None
         raise NotImplementedError
     
     # Qwen Models
@@ -146,8 +149,11 @@ if __name__ == "__main__":
         sut = HF_LLM("unsloth/Qwen2-0.5B-Instruct-bnb-4bit", **sut_kwargs)
     
     # Yi Models
+    elif llm_name == "yi-1.5-9b":
+        # loading in 16 bit rn
+        sut = HF_LLM("01-ai/Yi-1.5-9B-Chat-16K", **sut_kwargs)
     elif llm_name == "yi-1.5-6b":
-        sut = HF_LLM("unsloth/Yi-1.5-6B-bnb-4bit", **sut_kwargs)
+        sut = HF_LLM("01-ai/Yi-6B-Chat-4bits", **sut_kwargs)
     
 
     # =====================================================
@@ -196,7 +202,7 @@ if __name__ == "__main__":
                     json.dump(logs, f, indent=4)
                 
                 if verbose:
-                    print("Saved", i+1, "logs to", output_filename)
+                    print("Saved", len(logs), "logs to", output_filename)
     except KeyboardInterrupt:
         pass
     finally:
@@ -204,7 +210,7 @@ if __name__ == "__main__":
             print("\n\n\n---------")
             print("Final score:", round(running_score/len(logs), 3))
         
-        with open(output_filename, "w+") as f:
+        with open(output_filename, "w") as f:
             json.dump(logs, f, indent=4)
             if verbose:
-                print("Saved", i+1, "logs to", output_filename)
+                print("Saved", len(logs), "logs to", output_filename)
