@@ -63,6 +63,6 @@ class OnnxInference(InferenceSession):
         
         preds = self.run(None, {input_name: X_input})
         probs = preds[1]
-        probs_harmful = [prob[1] for prob in probs]
+        probs_harmful = [prob[1] if len(prob) > 1 else prob[0] for prob in probs]
         return probs_harmful
     
