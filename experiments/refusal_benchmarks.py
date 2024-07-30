@@ -181,7 +181,7 @@ if __name__ == "__main__":
     try:
         for i, sample in tqdm(enumerate(samples)):
             prompt = template(sample)
-            response = sut(prompt)
+            response = sut(prompt, max_new_tokens=10)
 
             judge_output, score = judge(response, int(sample.label == "safe"))
             
