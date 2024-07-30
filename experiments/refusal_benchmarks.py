@@ -186,11 +186,12 @@ if __name__ == "__main__":
             judge_output, score = judge(response, int(sample.label == "safe"))
             
             logs.append({
-                "sample": sample.prompt, # all are by default prompt datasets
+                "sample": sample.prompt,
+                "label": sample.label,
                 "prompt": prompt,
                 "response": response,
-                "judge_output": judge_output,
-                "score": score # True if safe, False if unsafe
+                "judge_output": "safe" if judge_output.predicted else "unsafe",
+                "score": score # True if judge_output matches label
             })
             
             if score:
