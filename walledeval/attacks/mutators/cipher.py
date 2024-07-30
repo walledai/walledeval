@@ -38,7 +38,7 @@ class CipherMutator(Mutator):
 
 
 class CaesarMutator(CipherMutator):
-    def __init__(self, shift: int, samples = Iterable[str] = []):
+    def __init__(self, shift: int, samples: Iterable[str] = []):
         super().__init__(
             "CaesarMutator",
             template = PromptTemplate.from_preset("mutations/cipher/caesar"),
@@ -67,7 +67,7 @@ class CaesarMutator(CipherMutator):
 
 
 class Base64Mutator(CipherMutator):
-    def __init__(self, samples = Iterable[str] = []):
+    def __init__(self, samples: Iterable[str] = []):
         super().__init__(
             "Base64Mutator",
             template = PromptTemplate.from_preset("mutations/cipher/base64"),
@@ -82,7 +82,7 @@ class Base64Mutator(CipherMutator):
 
 
 class AsciiMutator(CipherMutator):
-    def __init__(self, samples = Iterable[str] = []):
+    def __init__(self, samples: Iterable[str] = []):
         super().__init__(
             "AsciiMutator",
             template = PromptTemplate.from_preset("mutations/cipher/ascii"),
@@ -100,7 +100,7 @@ class SelfDefineMutator(CipherMutator):
     english_alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     chinese_alphabet_shifted = ["e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "a", "b", "c", "d"]
 
-    def __init__(self, samples=Iterable[str]):
+    def __init__(self, samples: Iterable[str]):
         super().__init__("SelfDefineMutator", samples=samples)
 
     def encode(self, s: str) -> str:
@@ -124,7 +124,7 @@ class SelfDefineMutator(CipherMutator):
         return ans
     
 class UnicodeMutator(CipherMutator):
-    def __init__(self, samples=Iterable[str]):
+    def __init__(self, samples: Iterable[str]):
         super().__init__("UnicodeMutator", samples=samples)
 
     def encode(self, s: str) -> str:
@@ -141,7 +141,7 @@ class UnicodeMutator(CipherMutator):
         return bytes(s, encoding="utf8").decode("unicode_escape")
     
 class UTF8Mutator(CipherMutator):
-    def __init__(self, samples=Iterable[str]):
+    def __init__(self, samples: Iterable[str]):
         super().__init__("UTF8Mutator", samples=samples)
 
     def encode(self, s: str) -> str:
@@ -173,7 +173,7 @@ class MorseMutator(CipherMutator):
                        '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----', ', ': '--..--', '.': '.-.-.-',
                        '?': '..--..', '/': '-..-.', '-': '-....-', '(': '-.--.', ')': '-.--.-'}
     
-    def __init__(self, samples=Iterable[str]):
+    def __init__(self, samples: Iterable[str]):
         super().__init__("MorseMutator", samples=samples)
 
     def encode(self, s: str) -> str:
@@ -185,7 +185,7 @@ class MorseMutator(CipherMutator):
         return ''.join([reverse_dict.get(char, char) for char in s.split(' ')])
 
 class GBKMutator(CipherMutator):
-    def __init__(self, samples=Iterable[str]):
+    def __init__(self, samples: Iterable[str]):
         super().__init__("GBKMutator", samples=samples)
 
     def encode(self, s: str) -> str:
