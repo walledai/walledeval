@@ -67,7 +67,7 @@ if __name__ == "__main__":
     llm_name = args.model
     # dataset_name = args.dataset
     
-    output_filename = args.filename if args.filename else f"experiments/logs/refusal/{llm_name}.json"
+    output_filename = args.filename if args.filename else f"experiments/logs/xstest/{llm_name}.json"
     os.makedirs(
         os.path.dirname(output_filename),
         exist_ok=True
