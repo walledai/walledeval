@@ -200,9 +200,10 @@ if __name__ == "__main__":
             if verbose:
                 print("\n\n---------")
                 print(f"{i+1}/{len(samples)}")
-                print("sample:", prompt)
+                print("sample:", sample.prompt)
+                print("expected label": sample.label)
                 print("response:", response)
-                print("judge output:", judge_output._value_)
+                print("judge label:", "safe" if judge_output.predicted else "unsafe")
                 print("score:", score)
                 print("running score:", round(running_score / (i+1), 3))
 
