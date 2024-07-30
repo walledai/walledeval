@@ -201,7 +201,7 @@ if __name__ == "__main__":
                 print("\n\n---------")
                 print(f"{i+1}/{len(samples)}")
                 print("sample:", sample.prompt)
-                print("expected label": sample.label)
+                print("expected label", sample.label)
                 print("response:", response)
                 print("judge label:", "safe" if judge_output.predicted else "unsafe")
                 print("score:", score)
