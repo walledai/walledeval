@@ -1,6 +1,6 @@
-model_id: dsaidgovsg/lionguard-public_harm-v1.0
+model_id: govtech/lionguard-v1
 model_type: ridge
-config_file: lionguard-public_harm.onnx
+config_file: models/lionguard-public_harm.onnx
 tokenizer: BAAI/bge-large-en-v1.5
 embedding_model: BAAI/bge-large-en-v1.5
 max_length: 512
