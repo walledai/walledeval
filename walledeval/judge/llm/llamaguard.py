@@ -46,5 +46,5 @@ class LlamaGuardJudge(LLMGuardJudge):
         
         super().__init__(self.model_id, llm, 
                          template=PromptTemplate.from_preset(f"judges/{template_preset}"), 
-                         llm_instruct=True)
+                         use_chat_template=True)
     
