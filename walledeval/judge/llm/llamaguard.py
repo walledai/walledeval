@@ -17,7 +17,8 @@ __all__ = [
 class LlamaGuardJudge(LLMGuardJudge):
     _VERSIONS = [
         "meta-llama/LlamaGuard-7b",
-        "meta-llama/Meta-Llama-Guard-2-8B"
+        "meta-llama/Meta-Llama-Guard-2-8B",
+        "meta-llama/Llama-Guard-3-8B"
     ]   
     
     def __init__(self, version: Union[int, str], 
@@ -29,7 +30,7 @@ class LlamaGuardJudge(LLMGuardJudge):
             if version < 0 or version > len(self._VERSIONS):
                 raise ValueError(f"Invalid Version {version}")
             
-            self.model_id = self._VERSIONS[(version+1) % 2]
+            self.model_id = self._VERSIONS[(version-1) % 3]
         elif isinstance(version, str):
             self.model_id = version
 
