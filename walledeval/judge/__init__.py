@@ -19,7 +19,8 @@ from walledeval.judge.toxicity import (
 from walledeval.judge.huggingface import (
     HFTextClassificationJudge,
     GPTFuzzJudge, UnitaryJudge,
-    RobertaToxicityJudge
+    RobertaToxicityJudge,
+    PromptGuardJudge
 )
 
 # Windows does not support CodeShield so we use this as a bypass
@@ -42,7 +43,8 @@ __all__ = [
     "StringMatchingJudge",
     "HFTextClassificationJudge",
     "GPTFuzzJudge", "UnitaryJudge",
-    "RobertaToxicityJudge"
+    "RobertaToxicityJudge",
+    "PromptGuardJudge"
 ]
 
 if "CodeShieldJudge" in globals():
