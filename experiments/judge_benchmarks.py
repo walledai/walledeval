@@ -114,7 +114,8 @@ if __name__ == "__main__":
     }
 
     if judge_name.startswith("llamaguard"):
-        judge = LlamaGuardJudge(int(judge_name[-1]), model_kwargs=model_kwargs, device_map="auto")
+        version = int(judge_name[-1]) if judge_name[-1].isnumeric() else 1
+        judge = LlamaGuardJudge(version, model_kwargs=model_kwargs, device_map="auto")
     
     elif judge_name == "walledguard":
         judge = WalledGuardJudge(model_kwargs=model_kwargs, device_map="auto")
@@ -158,7 +159,7 @@ if __name__ == "__main__":
             logs.append({
                 "prompt": prompt,
                 "label": label,
-                "output": output._value_,
+                "output": output,
                 "predicted": pred,
                 "score": score
             })
