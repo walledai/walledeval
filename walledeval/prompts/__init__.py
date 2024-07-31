@@ -3,7 +3,7 @@
 from walledeval.prompts.core import (
     AbstractPromptTemplate,
     BasePromptTemplate, BaseConversationTemplate,
-    PromptTemplate
+    PromptTemplate, Param
 )
 from walledeval.prompts.mcq import (
     MultipleChoiceTemplate, FewShotMCQTemplate
@@ -17,7 +17,7 @@ __all__ = [
     "AbstractPromptTemplate",
     "BasePromptTemplate",
     "BaseConversationTemplate",
-    "PromptTemplate",
+    "PromptTemplate", "Param",
     "DefaultPromptTemplate",
     "QuestionTemplate",
     "SystemAssistedTemplate",

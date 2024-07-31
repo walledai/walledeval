@@ -13,7 +13,7 @@ from walledeval.types import *
 __all__ = [
     "AbstractPromptTemplate",
     "BasePromptTemplate", "BaseConversationTemplate", 
-    "PromptTemplate"
+    "PromptTemplate", "Param"
 ]
 
 
@@ -212,7 +212,9 @@ class PromptTemplate(AbstractPromptTemplate):
     @classmethod
     def from_preset(cls, name: str = "mcq/default"):
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
-        return cls.from_yaml(str(yaml_fp))
+        
+        if yaml_fp.exists():
+            return cls.from_yaml(str(yaml_fp))
 
     def format(self, input: object = None, **kwargs):
         params = {}
