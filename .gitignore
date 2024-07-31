@@ -167,3 +167,5 @@ cython_debug/
 .vscode/
 
 notebooks/Process Datasets.ipynb
+
+experiments/logs/*/*.json

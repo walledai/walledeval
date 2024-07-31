@@ -4,7 +4,7 @@ from string import Template
 from abc import ABC, abstractmethod
 from pydantic import BaseModel
 from pathlib import Path
-import yaml
+import yaml, json
 import enum
 from typing import Optional, TypeVar
 
@@ -70,13 +70,29 @@ class BaseConversationTemplate(Template, AbstractPromptTemplate):
         
         self.messages = messages
         
-        Template.__init__(self, str(self.messages))
+        Template.__init__(self, json.dumps(self.messages))
+        
+        self.messages = [
+            {
+                "role": Template(message["role"]),
+                "content": Template(message["content"])
+            }
+            for message in self.messages
+        ]
     
     def format(self, **kwds) -> list[Message]:
         return [
-            Message(**it)
-            for it in eval(self.safe_substitute(**kwds))
+            Message(
+                role = message["role"].safe_substitute(**kwds),
+                content = message["content"].safe_substitute(**kwds)
+            ) for message in self.messages
         ]
+        
+        
+        # return [
+        #     Message(**it)
+        #     for it in json.loads(self.safe_substitute(**kwds))
+        # ]
 
 
 T = TypeVar('T')
@@ -129,11 +145,10 @@ class PromptTemplate(AbstractPromptTemplate):
             if key in kwargs:
                 optional[key].default = kwargs[key]
             
-        
-        
     @classmethod
-    def from_preset(cls, name: str = "mcq/default"):
-        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+    def from_yaml(cls, filename: str):
+        yaml_fp = Path(filename)
+        
         yaml_text = yaml_fp.read_text(encoding="utf-8")
         config = yaml.safe_load(yaml_text)
         
@@ -192,6 +207,12 @@ class PromptTemplate(AbstractPromptTemplate):
             required_params,
             optional_params
         )
+
+
+    @classmethod
+    def from_preset(cls, name: str = "mcq/default"):
+        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+        return cls.from_yaml(str(yaml_fp))
 
     def format(self, input: object = None, **kwargs):
         params = {}

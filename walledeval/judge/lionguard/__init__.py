@@ -44,9 +44,8 @@ class LionGuardJudge(Judge[None, float, bool]):
             raise NotImplementedError(f"Model type '{self.type}' not implement yet.")
     
     @classmethod
-    def from_preset(cls, name: str = "beta"):
-        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
-        yaml_text = yaml_fp.read_text(encoding="utf-8")
+    def from_yaml(cls, filename: str):
+        yaml_text = Path(filename).resolve().read_text(encoding="utf-8")
         config = yaml.safe_load(yaml_text)
         
         return cls(
@@ -58,6 +57,11 @@ class LionGuardJudge(Judge[None, float, bool]):
             max_length = int(config.get("max_length", 512)),
             batch_size = int(config.get("batch_size", 32))
         )
+    
+    @classmethod
+    def from_preset(cls, name: str = "beta"):
+        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+        return cls.from_yaml(str(yaml_fp))
 
     def embed(self, prompt: str):
         # TODO: Implement Batching

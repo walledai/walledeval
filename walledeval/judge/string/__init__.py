@@ -25,6 +25,18 @@ class StringMatchingJudge(Judge[None, list[StringMatch], bool]):
         self.must_match_all = must_match_all
         self.must_mismatch_all = must_mismatch_all
         self.caseless = caseless
+        
+    @classmethod
+    def from_yaml(cls, filename: str):
+        yaml_text = Path(filename).resolve().read_text(encoding="utf-8")
+        yaml_dict: dict = yaml.safe_load(yaml_text)
+        
+        return cls(
+            name=filename,
+            must_match_all=yaml_dict.get("must_match_all", []),
+            must_mismatch_all=yaml_dict.get("must_mismatch_all", []),
+            caseless=yaml_dict.get("caseless", False)
+        )
     
     @classmethod
     def from_preset(cls, name: str = "beta"):
@@ -65,4 +77,4 @@ class StringMatchingJudge(Judge[None, list[StringMatch], bool]):
         return errors
     
     def score(self, output: list[StringMatch]) -> bool:
-        return len(output)
+        return len(output) == 0

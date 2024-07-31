@@ -7,13 +7,19 @@ from walledeval.judge.lionguard import LionGuardJudge
 from walledeval.judge.mcq import MCQJudge
 from walledeval.judge.llm import (
     LLMasaJudge,
-    QuestionLLMasaJudge, SystemLLMasaJudge,
+    QuestionLLMasaJudge,
     MultiClassToxicityJudge,
-    LlamaGuardJudge, LlamaGuardOutput
+    LLMGuardJudge, LLMGuardOutput,
+    LlamaGuardJudge
 )
 from walledeval.judge.string import StringMatchingJudge
 from walledeval.judge.toxicity import (
     ToxicityModelJudge
+)
+from walledeval.judge.huggingface import (
+    HFTextClassificationJudge,
+    GPTFuzzJudge, UnitaryJudge,
+    RobertaToxicityJudge
 )
 
 # Windows does not support CodeShield so we use this as a bypass
@@ -28,11 +34,15 @@ __all__ = [
     "Judge",
     "MCQJudge",
     "LLMasaJudge",
-    "QuestionLLMasaJudge", "SystemLLMasaJudge",
+    "QuestionLLMasaJudge",
     "MultiClassToxicityJudge",
-    "LlamaGuardJudge", "LlamaGuardOutput",
+    "LLMGuardJudge", "LLMGuardOutput",
+    "LlamaGuardJudge",
     "ToxicityModelJudge", "LionGuardJudge",
-    "StringMatchingJudge"
+    "StringMatchingJudge",
+    "HFTextClassificationJudge",
+    "GPTFuzzJudge", "UnitaryJudge",
+    "RobertaToxicityJudge"
 ]
 
 if "CodeShieldJudge" in globals():

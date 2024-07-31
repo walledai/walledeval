@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "walledeval"
-version = "0.1.0"
+version = "0.2.0"
 description = "An open-source toolkit to test LLMs against jailbreaks and unprecedented harms."
 license = "MIT"
-authors = ["Rishabh Bhardwaj", "Prannaya Gupta <prannayagupta@programmer.net>"]
+authors = ["Rishabh Bhardwaj", "Prannaya Gupta <prannayagupta@programmer.net>", "Yau Le Qi", "Low Hao Han", "Lee I-Shiang", "Teoh Yu Xin", "Koh Jia Hng"]
 readme = "README.md"
 repository = "https://github.com/walledai/walledeval"
 keywords = ["NLP", "deep learning", "transformer", "language model", "jailbreaking", "red-teaming"]
@@ -33,11 +33,13 @@ xgboost = "^2.1.0"
 scikit-learn = "^1.5.0"
 codeshield = "^1.0.1"
 numpy = "<2"
-llama-cpp-python = "^0.2.81"
 together = "^1.2.1"
 cohere = "^5.5.8"
 groq = "^0.9.0"
 onnxruntime = "^1.18.1"
+inflect = "^7.3.1"
+art = "^6.2"
+pyyaml = "^6.0"
 
 [tool.poetry.group.dev.dependencies]  
 pytest = "^7.4"  
