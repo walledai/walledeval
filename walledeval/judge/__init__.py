@@ -11,7 +11,8 @@ from walledeval.judge.llm import (
     MultiClassToxicityJudge,
     LLMGuardJudge, LLMGuardOutput,
     LLMGuardBuilder,
-    LlamaGuardJudge
+    LlamaGuardJudge,
+    WalledGuardJudge
 )
 from walledeval.judge.string import StringMatchingJudge
 from walledeval.judge.toxicity import (
@@ -40,7 +41,7 @@ __all__ = [
     "MultiClassToxicityJudge",
     "LLMGuardJudge", "LLMGuardOutput",
     "LLMGuardBuilder",
-    "LlamaGuardJudge",
+    "LlamaGuardJudge", "WalledGuardJudge",
     "ToxicityModelJudge", "LionGuardJudge",
     "StringMatchingJudge",
     "HFTextClassificationJudge",
