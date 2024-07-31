@@ -145,19 +145,20 @@ if __name__ == "__main__":
     try:
         for i, sample in tqdm(enumerate(samples)):
             prompt = template(sample)
-            output, pred = judge(prompt, max_new_tokens=10)
+            output, pred = judge(prompt)
 
             if isinstance(sample, RefusalMCQ):
-                label = sample.label == "safe"
+                label = sample.label
             else:
-                label = False
+                label = "unsafe"
 
+            pred = "safe" if pred else "unsafe"
             score = pred == label
             
             logs.append({
                 "prompt": prompt,
                 "label": label,
-                "output": output,
+                "output": output._value_,
                 "predicted": pred,
                 "score": score
             })
