@@ -59,7 +59,7 @@ class LionGuardJudge(Judge[None, float, bool]):
         )
     
     @classmethod
-    def from_preset(cls, name: str = "beta"):
+    def from_preset(cls, name: str = "binary"):
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
         return cls.from_yaml(str(yaml_fp))
 
