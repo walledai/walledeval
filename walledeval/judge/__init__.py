@@ -16,6 +16,11 @@ from walledeval.judge.string import StringMatchingJudge
 from walledeval.judge.toxicity import (
     ToxicityModelJudge
 )
+from walledeval.judge.huggingface import (
+    HFTextClassificationJudge,
+    GPTFuzzJudge, UnitaryJudge,
+    RobertaToxicityJudge
+)
 
 # Windows does not support CodeShield so we use this as a bypass
 try:
@@ -34,7 +39,10 @@ __all__ = [
     "LLMGuardJudge", "LLMGuardOutput",
     "LlamaGuardJudge",
     "ToxicityModelJudge", "LionGuardJudge",
-    "StringMatchingJudge"
+    "StringMatchingJudge",
+    "HFTextClassificationJudge",
+    "GPTFuzzJudge", "UnitaryJudge",
+    "RobertaToxicityJudge"
 ]
 
 if "CodeShieldJudge" in globals():
