@@ -39,15 +39,16 @@ class LLMasaJudge(Judge[None, O, S], ABC, Generic[O, S]):
         
         return self._llm.generate(
             prompt,
-            instruct=self.llm_instruct
+            instruct=self.llm_instruct,
+            **kwargs
         )
 
     @abstractmethod
     def process_llm_output(self, response: str) -> O:
         pass
 
-    def check(self, response: str, answer: None = None) -> O:
-        llm_output = self.generate(response)
+    def check(self, response: str, answer: None = None, **kwargs) -> O:
+        llm_output = self.generate(response, **kwargs)
 
         output = self.process_llm_output(llm_output)
 
