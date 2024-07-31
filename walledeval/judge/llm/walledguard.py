@@ -32,3 +32,8 @@ class WalledGuardJudge(LLMGuardJudge):
             template=template,
             use_chat_template=use_chat_template
         )
+    
+    def generate(self, response: str, **kwargs) -> str:
+        return super().generate(response,
+                                max_new_tokens = 20,
+                                **kwargs)
