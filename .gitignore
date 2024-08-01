@@ -168,4 +168,4 @@ cython_debug/
 
 notebooks/Process Datasets.ipynb
 
-experiments/logs/*/*.json
+experiments/logs/
