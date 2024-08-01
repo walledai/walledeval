@@ -88,10 +88,16 @@ class _HuggingFaceDataset(Dataset[T], ABC):
         )
     
     @classmethod
+    def from_list(cls, name: str, lst: list[dict]):
+        dataset = datasets.Dataset.from_list(lst)
+        return cls(name, dataset)
+    
+    @classmethod
     def from_csv(cls, filenames: Union[str, list[str]], **csv_kwargs):
+        filenames = [filenames] if isinstance(filenames, str) else filenames
         dataset = load_dataset(
             "csv", 
-            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            data_files=filenames,
             **csv_kwargs
         )['train']
         
@@ -102,9 +108,10 @@ class _HuggingFaceDataset(Dataset[T], ABC):
     
     @classmethod
     def from_json(cls, filenames: Union[str, list[str]], **json_kwargs):
+        [filenames] if isinstance(filenames, str) else filenames
         dataset = load_dataset(
             "json", 
-            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            data_files=filenames,
             **json_kwargs
         )['train']
         
@@ -158,6 +165,12 @@ class _HuggingFaceDatasetAlias:
             name, config, split, self.model, **ds_kwargs
         )
     
+    @classmethod
+    def from_list(cls, name: str, lst: list[dict]):
+        return HuggingFaceDataset.from_list(
+            name, lst
+        )
+    
     def from_csv(self, filenames: Union[str, list[str]], **csv_kwargs):
         return HuggingFaceDataset.from_csv(
             filenames, self.model, **csv_kwargs
@@ -202,6 +215,11 @@ class HuggingFaceDataset(_HuggingFaceDataset):
             dataset,
             model
         )
+    
+    @classmethod
+    def from_list(cls, name: str, lst: list[dict], model: type = Prompt):
+        dataset = datasets.Dataset.from_list(lst)
+        return cls(name, dataset, model)
     
     @classmethod
     def from_csv(cls, filenames: Union[str, list[str]], model: type = Prompt, **csv_kwargs):
