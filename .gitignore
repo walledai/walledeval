@@ -169,3 +169,5 @@ cython_debug/
 notebooks/Process Datasets.ipynb
 
 experiments/logs/
+
+.obsidian/
