@@ -31,10 +31,18 @@ class LLMasaJudge(Judge[None, O, S], ABC, Generic[O, S]):
         self._llm = self._llm.set_system_prompt(system_prompt)
         
     def generate(self, response: str, **kwargs) -> str:
+        inputs = {}
+        
+        if "response" in self._template.params and "prompt" in self._template.params:
+            inputs["prompt"] = ""
+            inputs["response"] = response
+        elif "response" in self._template.params:
+            inputs["response"] = response
+        elif "prompt" in self._template.params:
+            inputs["prompt"] = response
+        
         prompt = self._template.format(
-            response = response,
-            prompt = "" if "response" in self._template.params else response,
-            **kwargs
+            **inputs
         )
         
         return self._llm.generate(
