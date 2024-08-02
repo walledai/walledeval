@@ -10,7 +10,7 @@ __all__ = ["LLM"]
 class LLM(ABC):
     def __init__(self, name: str,
                  system_prompt: str = "",
-                 type: Optional[Union[LLMType, int]] = LLMType.NEITHER):
+                 type: Optional[Union[LLMType, int]] = LLMType.INSTRUCT):
         self.name = name
         self.system_prompt = system_prompt
 
