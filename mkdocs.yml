@@ -109,6 +109,8 @@ nav:
     - "Prompt Benchmarking": quickstart/prompts.md
     - "MCQ Benchmarking": quickstart/mcq.md
     - "Judge Benchmarking": quickstart/judges.md
+    - "Prompt Template Database": quickstart/templates.md
+    - "Automated Red Teaming": quickstart/auto-red-teaming.md
   - Components:
     - Dataset: components/dataset.md
     - LLM: components/llm.md
