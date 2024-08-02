@@ -108,6 +108,7 @@ nav:
     - "Getting Started": quickstart/index.md
     - "Prompt Benchmarking": quickstart/prompts.md
     - "MCQ Benchmarking": quickstart/mcq.md
+    - "Judge Benchmarking": quickstart/judges.md
   - Components:
     - Dataset: components/dataset.md
     - LLM: components/llm.md

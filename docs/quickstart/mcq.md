@@ -9,7 +9,7 @@ Some safety datasets (e..g [WMDP](https://www.wmdp.ai/) and [BBQ](https://aclant
 
 Here's how you can do this easily in WalledEval!
 
-```python title="mcq_quickstart.py" linenums="1" hl_lines="21 24 27 30 36 37 38"
+```python title="mcq_quickstart.py" linenums="1" hl_lines="21 24 27 30 36 37 38 44"
 from walledeval.data import HuggingFaceDataset
 from walledeval.types import MultipleChoiceQuestion
 from walledeval.prompts import PromptTemplate
