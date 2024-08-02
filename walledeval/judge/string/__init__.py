@@ -51,7 +51,12 @@ class StringMatchingJudge(Judge[None, list[StringMatch], bool]):
             must_mismatch_all=yaml_dict.get("must_mismatch_all", []),
             caseless=yaml_dict.get("caseless", False)
         )
-        
+
+    @staticmethod
+    def list_presets() -> tuple[str]:
+        yaml_fp = Path(__file__).resolve().parent / "presets"
+        paths = yaml_fp.glob("*.yaml")
+        return tuple(path.stem for path in paths)
 
     def check(self, response: str, answer: None = None) -> list[StringMatch]:
         text = response.casefold() if self.caseless else response

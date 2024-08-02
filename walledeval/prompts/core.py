@@ -207,14 +207,19 @@ class PromptTemplate(AbstractPromptTemplate):
             required_params,
             optional_params
         )
-
+    
+    @staticmethod
+    def exists_preset(name: str):
+        yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
+        return yaml_fp.exists()
 
     @classmethod
-    def from_preset(cls, name: str = "mcq/default"):
+    def from_preset(cls, name: str = "prompt"):
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
         
         if yaml_fp.exists():
             return cls.from_yaml(str(yaml_fp))
+        raise NameError(f"Preset '{name}' not found.")
 
     def format(self, input: object = None, **kwargs):
         params = {}

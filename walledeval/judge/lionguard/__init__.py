@@ -6,8 +6,7 @@ import numpy as np
 from pathlib import Path
 
 from transformers import (
-    AutoTokenizer, AutoModel,
-    AutoModelForSequenceClassification
+    AutoTokenizer, AutoModel
 )
 from huggingface_hub import hf_hub_download
 
@@ -62,6 +61,12 @@ class LionGuardJudge(Judge[None, float, bool]):
     def from_preset(cls, name: str = "binary"):
         yaml_fp = Path(__file__).resolve().parent / f"presets/{name}.yaml"
         return cls.from_yaml(str(yaml_fp))
+    
+    @staticmethod
+    def list_presets() -> tuple[str]:
+        yaml_fp = Path(__file__).resolve().parent / "presets"
+        paths = yaml_fp.glob("*.yaml")
+        return tuple(path.stem for path in paths)
 
     def embed(self, prompt: str):
         # TODO: Implement Batching
