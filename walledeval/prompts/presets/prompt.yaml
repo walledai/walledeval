@@ -1,0 +1,7 @@
+name: prompt
+source: None
+type: prompt
+template: '$prompt'
+params:
+- name: prompt
+  type: str
