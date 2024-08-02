@@ -12,8 +12,10 @@
         <meta name="author" content="WalledEval Team">
       
       
-        <link rel="canonical" href="https://walledai.github.io/walledeval/llm/supporting_your_own/">
+        <link rel="canonical" href="https://walledai.github.io/walledeval/components/llm/">
       
+      
+        <link rel="prev" href="../dataset/">
       
       
       
@@ -22,7 +24,7 @@
     
     
       
-        <title>Supporting your own LLMs - WalledEval Documentation</title>
+        <title>LLM - WalledEval Documentation</title>
       
     
     
@@ -76,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#supporting-your-own-llms" class="md-skip">
+        <a href="#llms" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Supporting your own LLMs
+              LLM
             
           </span>
         </div>
@@ -240,11 +242,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../components/dataset/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../dataset/" class="md-tabs__link">
           
   
   Components
@@ -412,23 +416,28 @@
       
   
   
+    
   
   
+  
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -439,7 +448,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Components
@@ -453,7 +462,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../components/dataset/" class="md-nav__link">
+      <a href="../dataset/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -471,10 +480,19 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../components/llm/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -483,6 +501,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -528,7 +547,7 @@
                   
 
   
-    <a href="https://github.com/walledai/walledeval/edit/main/docs/llm/supporting_your_own.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/walledai/walledeval/edit/main/docs/components/llm.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -537,41 +556,96 @@
     
       
     
-    <a href="https://github.com/walledai/walledeval/raw/main/docs/llm/supporting_your_own.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/walledai/walledeval/raw/main/docs/components/llm.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
     </a>
   
 
 
-<h1 id="supporting-your-own-llms">Supporting your own LLMs<a class="headerlink" href="#supporting-your-own-llms" title="Permanent link">&para;</a></h1>
-<p>Assuming one cannot put up their models on HuggingFace Hub, they can also define their own classes to add support for their own LLMs using the abstract <code>llm.LLM</code> class. </p>
-<p>To support your own LLMs, you can extend this class and implement the following methods:</p>
-<ul>
-<li><code>__init__</code>: Instantiates the LLM, calls superclass instantiation</li>
-<li><code>complete(text: str, max_new_tokens: int = 256, temperature: float = 0.0) -&gt; str</code>: Completion of text string</li>
-<li><code>chat(text: Messages, max_new_tokens: int = 256, temperature: float = 0.0) -&gt; str</code>: Allows chatting</li>
-</ul>
-<p>Here is an example of a dummy class defined to inherit the <code>LLM</code> class, which only supports next-token prediction.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">walledeval.llm</span> <span class="kn">import</span> <span class="n">LLM</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span> <span class="nn">walledeval.types</span> <span class="kn">import</span> <span class="n">LLMType</span><span class="p">,</span> <span class="n">Messages</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">class</span> <span class="nc">DummyLLM</span><span class="p">(</span><span class="n">LLM</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;DummyLLM&quot;</span><span class="p">,</span> <span class="n">system_prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">LLMType</span><span class="o">.</span><span class="n">BASE</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                 <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                 <span class="n">max_new_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span> 
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                 <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="k">return</span> <span class="n">text</span><span class="p">[:</span><span class="n">max_new_tokens</span><span class="p">]</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">def</span> <span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>             <span class="n">text</span><span class="p">:</span> <span class="n">Messages</span><span class="p">,</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>             <span class="n">max_new_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>             <span class="n">temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;DummyLLM does not support chat completion!&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<h1 id="llms">LLMs<a class="headerlink" href="#llms" title="Permanent link">&para;</a></h1>
+<p>WalledEval's LLM architecture aims to support various kinds of LLMs. These LLMs are used as <strong>systems-under-test (SUTs)</strong>, which allows generating question answers and prompt outputs. Below is a list of model families we attempt to support.</p>
+<table>
+<thead>
+<tr>
+<th>Model Family</th>
+<th>Supported Versions</th>
+<th>WalledEval Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://platform.openai.com/docs/overview">GPT</a></td>
+<td>3.5 Turbo, 4, 4 Turbo, 4o</td>
+<td><code>llm.OpenAI</code></td>
+</tr>
+<tr>
+<td><a href="https://docs.anthropic.com/en/docs/about-claude/models">Claude</a></td>
+<td>Sonnet 3.5, Opus 3, Sonnet 3, Haiku 3</td>
+<td><code>llm.Claude</code></td>
+</tr>
+<tr>
+<td><a href="https://ai.google.dev/">Gemini</a></td>
+<td>1.5 Flash, 1.5 Pro, 1.0 Pro</td>
+<td><code>llm.Gemini</code></td>
+</tr>
+<tr>
+<td><a href="https://cohere.com/command">Cohere Command</a></td>
+<td>R+, R, Base, Light</td>
+<td><code>llm.Cohere</code></td>
+</tr>
+</tbody>
+</table>
+<p>We also support a large variety of connectors to other major LLM runtimes, like HuggingFace and TogetherAI. Below is a list of some of the many connectors present in WalledEval.</p>
+<table>
+<thead>
+<tr>
+<th>Connector</th>
+<th>Connector Type</th>
+<th>WalledEval Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://huggingface.co/models">HuggingFace</a></td>
+<td>Local, runs LLM on computer</td>
+<td><code>llm.HF_LLM</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/ggerganov/llama.cpp"><code>llama.cpp</code></a></td>
+<td>Local, runs LLM on computer</td>
+<td><code>llm.Llama</code></td>
+</tr>
+<tr>
+<td><a href="https://www.together.ai/">Together</a></td>
+<td>Online, makes API calls</td>
+<td><code>llm.Together</code></td>
+</tr>
+<tr>
+<td><a href="https://groq.com/">Groq</a></td>
+<td>Online, makes API calls</td>
+<td><code>llm.Groq</code></td>
+</tr>
+<tr>
+<td><a href="https://www.anyscale.com/">Anyscale</a></td>
+<td>Online, makes API calls</td>
+<td><code>llm.Anyscale</code></td>
+</tr>
+<tr>
+<td><a href="https://octo.ai/">OctoAI</a></td>
+<td>Online, makes API calls</td>
+<td><code>llm.OctoAI</code></td>
+</tr>
+<tr>
+<td><a href="https://azure.microsoft.com/en-us/products/ai-services/openai-service">Azure OpenAI</a></td>
+<td>Online, makes API calls</td>
+<td><code>llm.AzureOpenAI</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>HF_LLM</code> is an example of a LLM class that loads models from HuggingFace. Here, we load Unsloth's 4-bit-quantized Llama 3 8B model as follows. The type is essentially used to indicate that we are loading an instruction-tuned model so it does inference based on that piece of information. It is important that we do this because we don't want the model to autocomplete responses to the prompt, but instead complete chat responses to the prompt.</p>
+<p>We can then prompt this LLM using the <code>chat</code> method, and we have tried to get it to generate a response the same way a Swiftie would.</p>
+<p>WalledEval attempts</p>
 
 
 
@@ -657,6 +731,28 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../dataset/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Dataset">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Dataset
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
     
   
   <div class="md-footer-meta md-typeset">
