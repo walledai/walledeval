@@ -11,11 +11,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://walledai.github.io/walledeval/quickstart/</loc>
-         <lastmod>2024-08-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://walledai.github.io/walledeval/components/dataset/</loc>
          <lastmod>2024-08-02</lastmod>
          <changefreq>daily</changefreq>
@@ -52,6 +47,21 @@
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/supporting_your_own/</loc>
+         <lastmod>2024-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://walledai.github.io/walledeval/quickstart/</loc>
+         <lastmod>2024-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://walledai.github.io/walledeval/quickstart/mcq/</loc>
+         <lastmod>2024-08-02</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://walledai.github.io/walledeval/quickstart/prompts/</loc>
          <lastmod>2024-08-02</lastmod>
          <changefreq>daily</changefreq>
     </url>
