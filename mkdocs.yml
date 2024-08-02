@@ -1,87 +1,112 @@
+# Copyright (c) 2016-2023 Martin Donath <martin.donath@squidfunk.com>
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+
+# Project information
 site_name: WalledEval Documentation
+site_url: https://walledai.github.io/walledeval
+site_author: WalledEval Team
+site_description: >-
+  The complete technical documentation for WalledEval, a utility to test LLMs against jailbreaks and unprecedented harms.
 
+# Repository
+repo_name: walledai/walledeval
+repo_url: https://github.com/walledai/walledeval
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Walled AI
+
+# Theme
 theme:
-    name: "material"
-
-    features:
-        - navigation.tabs
-        - search.suggest
-        - search.share
-
-    # 404 page
-    static_templates:
-        - 404.html
-
-    # Necessary for search to work properly
-    include_search_page: false
-    search_index_only: true
-
-    # Default values, taken from mkdocs_theme.yml
-    language: en
-    font:
-        text: Roboto
-        code: Roboto Mono
-    favicon: assets/favicon.png
-    icon:
-        logo: material/robot
-
-    palette:
-        - media: "(prefers-color-scheme: dark)"
-          scheme: slate
-          primary: black
-          toggle:
-              icon: material/toggle-switch
-              name: Switch to light mode
-        - media: "(prefers-color-scheme: light)"
-          scheme: default
-          primary: black
-          toggle:
-              icon: material/toggle-switch-off-outline
-              name: Switch to dark mode
+  name: material
+  features:
+    - search.suggest
+    - search.share
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+    - content.tooltips
+    - navigation.tabs
+    - navigation.top
+    - navigation.footer
+  icon:
+    logo: material/robot
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  language: en
 
 extra_css:
-    - stylesheets/style.css
+  - stylesheets/style.css
 
+# Plugins
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+  - git-committers:
+      repository: walledai/walledeval
+      branch: main
+# Extensions
 markdown_extensions:
-    - pymdownx.highlight:
-          anchor_linenums: true
-    - pymdownx.inlinehilite
-    - pymdownx.snippets
-    - pymdownx.superfences
-    - tables
-    - admonition
-    - pymdownx.details
-    - pymdownx.superfences
-    - pymdownx.emoji:
-          emoji_index: !!python/name:materialx.emoji.twemoji
-          emoji_generator: !!python/name:materialx.emoji.to_svg
-    - pymdownx.arithmatex:
-          generic: true
-    - attr_list
-    - md_in_html
-    - pymdownx.tabbed:
-          alternate_style: true
-
-extra_javascript:
-    - javascripts/mathjax.js
-    - https://polyfill.io/v3/polyfill.min.js?features=es6
-    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - admonition
+  - attr_list
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.keys
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 nav:
-    - Home: 
-        - Home: index.md
-        - Installation: installation.md
-        - "Quick Start": quickstart.md
-    - "LLM":
-        - Overview: llm/index.md
-        - "LLM Types": llm/llm_types.md
-        - "Input Types": llm/input_types.md
-        - "HuggingFace LLM Support": llm/huggingface.md
-        - "Other API Support": llm/other_api.md
-        - "Supporting your own LLMs": llm/supporting_your_own.md
-
-plugins:
-    - search
+  - Home: 
+    - Home: index.md
+    - Installation: installation.md
+    - "Quick Start": quickstart.md
+  - Components:
+    - Dataset: components/dataset.md
+    - LLM: components/llm.md
 
 extra:
     social:
@@ -89,5 +114,3 @@ extra:
           link: https://github.com/walledai/walledeval
         - icon: fontawesome/brands/linkedin
           link: https://www.linkedin.com/company/walled-ai/
-
-copyright: Copyright &copy; 2024 Walled AI
