@@ -79,6 +79,7 @@ plugins:
 markdown_extensions:
   - admonition
   - attr_list
+  - md_in_html
   - footnotes
   - toc:
       permalink: true
@@ -103,7 +104,10 @@ nav:
   - Home: 
     - Home: index.md
     - Installation: installation.md
-    - "Quick Start": quickstart.md
+  - "Getting Started":
+    - "Getting Started": quickstart/index.md
+    - "Prompt Benchmarking": quickstart/prompts.md
+    - "MCQ Benchmarking": quickstart/mcq.md
   - Components:
     - Dataset: components/dataset.md
     - LLM: components/llm.md
