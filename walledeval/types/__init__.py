@@ -11,6 +11,7 @@ from walledeval.types.inputs import (
     JudgeQuestioningPrompt,
     SystemAssistedPrompt,
     InjectionPrompt,
+    SafetyPrompt,
     MultipleChoiceQuestion,
     MultipleResponseQuestion,
     OpenEndedQuestion
@@ -25,6 +26,7 @@ __all__ = [
     "JudgeQuestioningPrompt",
     "SystemAssistedPrompt",
     "InjectionPrompt",
+    "SafetyPrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion",

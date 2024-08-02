@@ -8,6 +8,7 @@ __all__ = [
     "JudgeQuestioningPrompt",
     "SystemAssistedPrompt",
     "InjectionPrompt",
+    "SafetyPrompt",
     "MultipleChoiceQuestion",
     "MultipleResponseQuestion",
     "OpenEndedQuestion"
@@ -32,6 +33,10 @@ class SystemAssistedPrompt(Prompt):
 
 class InjectionPrompt(SystemAssistedPrompt, JudgeQuestioningPrompt):
     pass
+
+
+class SafetyPrompt(Prompt):
+    label: str
 
 
 class Question(BaseModel):
