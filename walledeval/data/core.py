@@ -1,4 +1,4 @@
-# walledeval/benchmark/core.py
+# walledeval/data/core.py
 
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, Optional, Union
@@ -7,28 +7,11 @@ from pydantic import BaseModel
 from datasets import load_dataset
 import datasets
 
-from walledeval.types import (
-    MultipleChoiceQuestion, MultipleResponseQuestion, 
-    OpenEndedQuestion,
-    Prompt,
-    AutocompletePrompt,
-    SystemAssistedPrompt,
-    JudgeQuestioningPrompt,
-    InjectionPrompt,
-    Range
-)
+from walledeval.types import Prompt, Range
 from walledeval.util import process_range
 
 __all__ = [
-    "Dataset", "HuggingFaceDataset",
-    "MultipleChoiceDataset",
-    "MultipleResponseDataset",
-    "OpenEndedDataset",
-    "PromptDataset",
-    "AutocompleteDataset",
-    "SystemAssistedDataset",
-    "JudgeQuestioningDataset",
-    "InjectionDataset"
+    "Dataset", "HuggingFaceDataset"
 ]
 
 T = TypeVar('T')
@@ -59,67 +42,6 @@ class _HuggingFaceDataset(Dataset[T], ABC):
     def __init__(self, name: str, dataset: datasets.Dataset):
         super().__init__(name)
         self.dataset = dataset
-
-    @classmethod
-    def from_hub(cls, name: str,
-                 config: Optional[str] = None,
-                 split: str = "DEFAULT",
-                 **ds_kwargs):
-        dataset = load_dataset(name, config, **ds_kwargs)
-        
-        splits = tuple(dataset.keys())
-        
-        if split in splits:
-            dataset = dataset[split]
-        elif split == "DEFAULT":
-            if "train" in splits:
-                dataset = dataset["train"]
-            elif "test" in splits:
-                dataset = dataset["test"]
-            else:
-                split = splits[0]
-                dataset = dataset[split]
-        else:
-            raise NameError(f"Requested split '{split}' not found in dataset {name}/{config}, select one of {splits}")
-        
-        return cls(
-            name + ("/" + config if config else "") + ("/" + split if split != "DEFAULT" else ""), 
-            dataset
-        )
-    
-    @classmethod
-    def from_list(cls, name: str, lst: list[dict]):
-        dataset = datasets.Dataset.from_list(lst)
-        return cls(name, dataset)
-    
-    @classmethod
-    def from_csv(cls, filenames: Union[str, list[str]], **csv_kwargs):
-        filenames = [filenames] if isinstance(filenames, str) else filenames
-        dataset = load_dataset(
-            "csv", 
-            data_files=filenames,
-            **csv_kwargs
-        )['train']
-        
-        return cls(
-            filenames[0],
-            dataset
-        )
-    
-    @classmethod
-    def from_json(cls, filenames: Union[str, list[str]], **json_kwargs):
-        filenames = [filenames] if isinstance(filenames, str) else filenames
-        dataset = load_dataset(
-            "json", 
-            data_files=filenames,
-            **json_kwargs
-        )['train']
-        
-        return cls(
-            filenames[0],
-            dataset
-        )
-        
 
     @abstractmethod
     def convert(self, sample: dict) -> T:
@@ -264,66 +186,3 @@ class HuggingFaceDataset(_HuggingFaceDataset):
         })
 
 
-class MultipleChoiceDataset(_HuggingFaceDataset[MultipleChoiceQuestion]):
-    def convert(self, sample: dict) -> MultipleChoiceQuestion:
-        return MultipleChoiceQuestion(
-            question=sample["question"],
-            choices=sample["choices"],
-            answer=sample["answer"]
-        )
-
-
-class MultipleResponseDataset(
-    _HuggingFaceDataset[MultipleResponseQuestion]
-):
-    def convert(self, sample: dict) -> MultipleResponseQuestion:
-        return MultipleResponseQuestion(
-            question=sample["question"],
-            choices=sample["choices"],
-            answers=sample["answers"]
-        )
-
-
-class OpenEndedDataset(_HuggingFaceDataset[OpenEndedQuestion]):
-    def convert(self, sample: dict) -> OpenEndedQuestion:
-        return OpenEndedQuestion(
-            question=sample["question"]
-        )
-
-
-class PromptDataset(_HuggingFaceDataset[Prompt]):
-    def convert(self, sample: dict) -> Prompt:
-        return Prompt(
-            prompt=sample["prompt"]
-        )
-
-
-class AutocompleteDataset(_HuggingFaceDataset[AutocompletePrompt]):
-    def convert(self, sample: dict) -> AutocompletePrompt:
-        return AutocompletePrompt(
-            prompt=sample["prompt"]
-        )
-
-
-class SystemAssistedDataset(_HuggingFaceDataset[SystemAssistedPrompt]):
-    def convert(self, sample: dict) -> SystemAssistedPrompt:
-        return SystemAssistedPrompt(
-            prompt=sample["prompt"],
-            system=sample["system"]
-        )
-
-
-class JudgeQuestioningDataset(_HuggingFaceDataset[JudgeQuestioningPrompt]):
-    def convert(self, sample: dict) -> JudgeQuestioningPrompt:
-        return JudgeQuestioningPrompt(
-            prompt=sample["prompt"],
-            judge_question=sample["judge"]
-        )
-
-
-class InjectionDataset(_HuggingFaceDataset[InjectionPrompt]):
-    def convert(self, sample: dict) -> InjectionPrompt:
-        return SystemAssistedPrompt(
-            prompt=sample["prompt"],
-            system=sample["system"]
-        )

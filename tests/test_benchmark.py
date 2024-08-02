@@ -1,11 +1,11 @@
-from walledeval.data import MultipleChoiceDataset
+from walledeval.data import HuggingFaceDataset
 from walledeval.types import MultipleChoiceQuestion
 
 WMDP_BIO = None
 
 def test_loading():
     global WMDP_BIO
-    WMDP_BIO = MultipleChoiceDataset.from_hub("cais/wmdp", "wmdp-bio", split="test")
+    WMDP_BIO = HuggingFaceDataset[MultipleChoiceQuestion].from_hub("cais/wmdp", "wmdp-bio", split="test")
     
     assert WMDP_BIO.name == "cais/wmdp/wmdp-bio"
     
