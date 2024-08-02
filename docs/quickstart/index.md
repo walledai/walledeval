@@ -1,3 +1,6 @@
+---
+hide: '["toc"]'
+---
 # Getting Started
 
 WalledEval can serve **four** major functions, namely the following:
@@ -12,7 +15,7 @@ WalledEval can serve **four** major functions, namely the following:
 
     [:octicons-arrow-right-24: Prompt Benchmarking](prompts.md)
 
--   :material-library-outline:{ .lg .middle }  __LLM Knowledge__
+-   :material-book-check-outline:{ .lg .middle }  __LLM Knowledge__
 
     ---
 

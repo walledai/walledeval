@@ -1,3 +1,6 @@
+---
+hide: '["toc"]'
+---
 # Prompt Benchmarking
 
 Most safety datasets aim to test LLMs on their creativity / restraint in generating responses to custom unsafe/safe queries. The general requirements for testing an LLM on Prompt Benchmarks is as follows:

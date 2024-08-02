@@ -1,3 +1,6 @@
+---
+hide: '["toc"]'
+---
 # MCQ Benchmarking
 
 Some safety datasets (e..g [WMDP](https://www.wmdp.ai/) and [BBQ](https://aclanthology.org/2022.findings-acl.165/)) are designed to test LLMs on any harmful knowledge or inherent biases that they may possess. These datasets are largely formatted in multiple-choice question (**MCQ**) format, hence why we choose to call them MCQ Benchmarks. The general requirements for testing an LLM on MCQ Benchmarks is as follows:

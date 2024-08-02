@@ -1,3 +1,6 @@
+---
+hide: '["toc"]'
+---
 # Judge Benchmarking
 
 Beyond just LLMs, some datasets are designed to benchmark judges and identify if they are able to accurately classify questions as **safe** or **unsafe**. The general requirements for testing an LLM on Judge Benchmarks is as follows:
@@ -8,7 +11,7 @@ Beyond just LLMs, some datasets are designed to benchmark judges and identify if
 
 Here's how you can do this easily in WalledEval!
 
-```python title="judge_quickstart.py" linenums="1" hl_lines="25 28 38 39 45"
+```python title="judge_quickstart.py" linenums="1" hl_lines="25 28 38 39 46"
 from walledeval.data import HuggingFaceDataset
 from walledeval.types import SafetyPrompt
 from walledeval.judge import WalledGuardJudge
