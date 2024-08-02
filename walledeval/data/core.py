@@ -87,10 +87,9 @@ class _HuggingFaceDatasetAlias:
             name, config, split, self.model, **ds_kwargs
         )
     
-    @classmethod
-    def from_list(cls, name: str, lst: list[dict]):
+    def from_list(self, name: str, lst: list[dict]):
         return HuggingFaceDataset.from_list(
-            name, lst
+            name, lst, self.model
         )
     
     def from_csv(self, filenames: Union[str, list[str]], **csv_kwargs):
