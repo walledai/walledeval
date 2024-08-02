@@ -108,7 +108,7 @@ class _HuggingFaceDataset(Dataset[T], ABC):
     
     @classmethod
     def from_json(cls, filenames: Union[str, list[str]], **json_kwargs):
-        [filenames] if isinstance(filenames, str) else filenames
+        filenames = [filenames] if isinstance(filenames, str) else filenames
         dataset = load_dataset(
             "json", 
             data_files=filenames,
@@ -223,9 +223,10 @@ class HuggingFaceDataset(_HuggingFaceDataset):
     
     @classmethod
     def from_csv(cls, filenames: Union[str, list[str]], model: type = Prompt, **csv_kwargs):
+        filenames = [filenames] if isinstance(filenames, str) else filenames
         dataset = load_dataset(
             "csv", 
-            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            data_files=filenames,
             **csv_kwargs
         )['train']
         
@@ -237,9 +238,10 @@ class HuggingFaceDataset(_HuggingFaceDataset):
     
     @classmethod
     def from_json(cls, filenames: Union[str, list[str]], model: type = Prompt, **json_kwargs):
+        filenames = [filenames] if isinstance(filenames, str) else filenames
         dataset = load_dataset(
             "json", 
-            data_files=[filenames] if isinstance(filenames, str) else filenames,
+            data_files=filenames,
             **json_kwargs
         )['train']
         
