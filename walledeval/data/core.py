@@ -139,7 +139,15 @@ class HuggingFaceDataset(_HuggingFaceDataset):
         )
     
     @classmethod
-    def from_list(cls, name: str, lst: list[dict], model: type = Prompt):
+    def from_list(cls, name: str, 
+                  lst: list[Union[dict, str]], 
+                  model: type = Prompt):
+        lst = [
+            it
+            if isinstance(it, dict)
+            else {"prompt": it} 
+            for it in lst
+        ]
         dataset = datasets.Dataset.from_list(lst)
         return cls(name, dataset, model)
     
