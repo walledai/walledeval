@@ -56,7 +56,7 @@ if __name__ == "__main__":
                         help="Number of runs before saving")
 
     parser.add_argument("-n", "--num", 
-                        type=int, default=1, 
+                        type=int, default=0, 
                         help="Number of samples to test")
 
     args = parser.parse_args()
@@ -114,7 +114,8 @@ if __name__ == "__main__":
     # ================================================================
 
     tactics = [
-        "autodan/revise", "masterkey/rephrase",
+        #"autodan/revise", 
+        "masterkey/rephrase",
         "renellm/alter-sentence-structure",
         "renellm/change-style",
         "renellm/insert-meaningless-characters",
