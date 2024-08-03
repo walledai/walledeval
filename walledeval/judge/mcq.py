@@ -21,7 +21,7 @@ class MCQJudge(Judge[int, MCQOutput, bool]):
     def check(self, response: str, answer: int) -> MCQOutput:
         # response is simply the output from the model
 
-        response = re.sub(r'[^\w\s_]+', '', response)
+        response = re.sub(r'[^\w]+', '', response)
         if response.lower().startswith("answer"):
             response = response[6:].strip()
         if response.lower().startswith("boxed"):
