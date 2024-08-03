@@ -103,9 +103,10 @@ cse[0]
 
 ## Loading a List
 
-Of course, this is not the only way to load data. If you have any other inputs, one of the easiest ways to load it into our system is to simply read it into a **list of dictionaries**. Here is an example:
+Of course, this is not the only way to load data. If you have any other inputs, one of the easiest ways to load it into our system is to simply read it into a **list of dictionaries** and **list of strings**. Here is an example:
 
 ```python linenums="45"
+# load list of dictionaries
 raw_data = [
     {"prompt": "what's up"},
     {"prompt": "hey!"},
@@ -116,6 +117,18 @@ dummy_dataset = HuggingFaceDataset[Prompt].from_list("dummy", raw_data)
 
 dummy_dataset.name
 # "dummy"
+
+dummy_dataset[0]
+# Prompt(prompt="what's up")
+
+# load list of strings
+raw_data = [
+	"what's up",
+	"hey!",
+	"why is the world so curle"
+]
+
+dummy_dataset = HuggingFaceDataset[Prompt].from_list("dummy", raw_data)
 
 dummy_dataset[0]
 # Prompt(prompt="what's up")

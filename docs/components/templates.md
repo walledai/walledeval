@@ -1,8 +1,4 @@
-# Prompt Template Database
-
-Beyond general 
-
-With the advent of LLMs being used for mutation, inference and judges, prompt templates have become a recurring feature in various parts of the general evaluation framework. Sadly, since [`promptsource`](https://github.com/bigscience-workshop/promptsource), there hasn't been much effort made in compiling a large variety of prompt templates in one centralised system. This is where our **prompt database** comes in! WalledEval compiles prompts from many, many papers in prior literature to consolidate a huge database to choose from.
+# Prompt Templates
 
 WalledEval strives to provide a method to build easy-to-use templates for researchers and testers alike to use for all kinds of different tasks. Whether it be a template to [automatically mutate prompts](auto-red-teaming.md) or to [prompt LLMs to perform like judges](quickstart/judges.md), prompt templates take up a major portion of 
 
