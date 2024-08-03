@@ -26,7 +26,7 @@ from walledeval.attacks.wildteaming import WildTeamingAttack
 dataset_args = {
     "harmbench": ("walledai/HarmBench", "standard"),
     "advbench": ("walledai/AdvBench", ),
-    "xstest": ("walledai/XSTest"),
+    "xstest": ("walledai/XSTest", ),
 }
 
 if __name__ == "__main__":
@@ -37,7 +37,7 @@ if __name__ == "__main__":
                         help="Model to use")
 
     parser.add_argument("-d", "--dataset", 
-                        default="harmbench", choices=["harmbench", "advbench"], help="(Prompt-based) Dataset to test")
+                        default="harmbench", choices=["harmbench", "advbench", "xstest"], help="(Prompt-based) Dataset to test")
 
     parser.add_argument("-f", "--filename", 
                         default="", help="Place to store logs")
@@ -52,7 +52,7 @@ if __name__ == "__main__":
                         help="Print running logs", action="store_true")
 
     parser.add_argument("-i", "--interval", 
-                        type=int, default=1, 
+                        type=int, default=100, 
                         help="Number of runs before saving")
 
     parser.add_argument("-n", "--num", 
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     tactics = [
         #"autodan/revise", 
-        "masterkey/rephrase",
+        #"masterkey/rephrase",
         "renellm/alter-sentence-structure",
         "renellm/change-style",
         "renellm/insert-meaningless-characters",
