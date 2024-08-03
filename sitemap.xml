@@ -16,7 +16,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://walledai.github.io/walledeval/components/judges/</loc>
+         <lastmod>2024-08-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://walledai.github.io/walledeval/components/llm/</loc>
+         <lastmod>2024-08-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://walledai.github.io/walledeval/components/templates/</loc>
          <lastmod>2024-08-03</lastmod>
          <changefreq>daily</changefreq>
     </url>
