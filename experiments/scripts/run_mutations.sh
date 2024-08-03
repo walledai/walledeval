@@ -1,0 +1,2 @@
+python experiments/mutation_generation.py -d harmbench -m mistral-7b -v > runs/mutations-harmbench-mistral.log 2> runs/mutations-harmbench-mistral.log
+python experiments/mutation_generation.py -d harmbench -m llama2-7b-uncensored -v > runs/mutations-harmbench-llama2.log 2> runs/mutations-harmbench-llama2.log
