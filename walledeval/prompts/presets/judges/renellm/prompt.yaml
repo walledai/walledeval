@@ -1,4 +1,4 @@
-name: judges/renellm-prompt
+name: judges/renellm/prompt
 source: https://github.com/NJUNLP/ReNeLLM/blob/main/defense/harm_classifier_defense.py
 type: prompt
 template: |

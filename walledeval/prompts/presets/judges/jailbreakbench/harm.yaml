@@ -1,4 +1,4 @@
-name: judges/jailbreakbench-harm
+name: judges/jailbreakbench/harm
 source: https://github.com/JailbreakBench/jailbreakbench/blob/main/src/jailbreakbench/classifier.py
 type: prompt
 template: |
