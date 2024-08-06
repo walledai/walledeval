@@ -10,7 +10,7 @@ Automated Red-Teaming allows users to automatically generate mutated malicious p
 
  Here's how you can do this easily in WalledEval!
 
-```python title="auto_red_teaming_quickstart.py" linenums="1" hl_lines="25 28 38 39 46"
+```python title="auto_red_teaming_quickstart.py" linenums="1" hl_lines="23 33"
 import torch
 from walledeval.data import HuggingFaceDataset
 from walledeval.llm import HF_LLM
@@ -20,16 +20,16 @@ from walledeval.attacks.mutators import GenerativeMutator
 dataset = HuggingFaceDataset.from_hub("walledai/HarmBench", "standard")
 samples = dataset.sample(5)
 
-llm = HF_LLM("unsloth/mistral-7b-instruct-v0.3-bnb-4bit", device_map="auto", model_kwargs=dict(torch_dtype=torch.bfloat16))
+llm = HF_LLM("unsloth/mistral-7b-instruct-v0.3-bnb-4bit", device_map="auto")
 
 tactics = [
+    "past-tense", "future-tense",
     "renellm/alter-sentence-structure",
     "renellm/change-style",
     "renellm/insert-meaningless-characters",
     "renellm/misspell-sensitive-words",
     "renellm/paraphrase-fewer-words",
-    "renellm/translation",
-    "future-tense", "past-tense"
+    "renellm/translation"
 ]
 
 mutators = {
@@ -44,10 +44,10 @@ for sample in samples:
     prompt = sample.prompt
     for j, (name, mutator) in enumerate(mutators.items()):
         mutated_sample = mutator.mutate(prompt)
-    mutated.append({
-        "mutator": name,
-        "prompt": mutated_sample
-    })
+        mutated.append({
+            "mutator": name,
+            "prompt": mutated_sample
+        })
 
 mutated[0]
 # {'mutator': 'past-tense',
