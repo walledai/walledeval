@@ -26,6 +26,7 @@ __all__ = [
     "Claude", "OpenAI",
     "Gemini",
     "AzureOpenAI",
+    "Bedrock",
     "Together", "Anyscale",
     "OctoAI", "Groq",
 ]
