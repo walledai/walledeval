@@ -25,8 +25,10 @@
 
 ## 🛠️ Installation and Set-Up
 
-### Installing from PyPI
-
+<details>
+<summary>
+<h3>Installing from PyPI</h3>
+</summary>
 Yes, we have published WalledEval on PyPI! To install WalledEval and all its dependencies, the easiest method would be to use `pip` to query PyPI. This should, by default, be present in your Python installation. To, install run the following command in a terminal or Command Prompt / Powershell:
 
 ```bash
@@ -41,9 +43,12 @@ $ python -m pip install walledeval
 
 Here too, `python` or `pip` might be replaced with `py` or `python3` and `pip3` depending on the OS and installation configuration. If you have any issues with this, it is always helpful to consult 
 [Stack Overflow](https://stackoverflow.com/).
+</details>
 
-### Installing from Source
-
+<details>
+<summary>
+<h3>Installing from Source</h3>
+</summary>
 To install from source, you need to get the following:
 
 #### Git
@@ -81,8 +86,12 @@ $ poetry shell
 ```
 
 You can run the above script to enter a specialized shell to run commands within the virtual environment, including accessing the Python version with all the required dependencies to use WalledEval at its finest!
+</details>
 
-### Notes during Installation
+<details>
+<summary>
+<h3>Notes during Installation</h3>
+</summary>
 
 Some features in our library are NOT ACCESSIBLE via the base dependencies installed in WalledEval. This is due to various dependency mismatches. Here is a list of what is not accessible and how you can use them.
 
@@ -92,7 +101,7 @@ Some features in our library are NOT ACCESSIBLE via the base dependencies instal
 | `judge.CodeShieldJudge` | [`codeshield`](https://github.com/meta-llama/PurpleLlama/tree/main/CodeShield), which is by default installed but can only be accessed on a Unix-based OS |
 
 <!-- To add the rest of them here soon -->
-
+</details>
 
 ## 💻 Getting Started
 
