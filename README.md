@@ -313,21 +313,19 @@ logs[0]["score"] # True if correct, False if wrong
 
 
 
+## 🖊️ Citing WalledEval
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```bibtex
+@misc{gupta2024walledeval,
+      title={WalledEval: A Comprehensive Safety Evaluation Toolkit for Large Language Models}, 
+      author={Prannaya Gupta and Le Qi Yau and Hao Han Low and I-Shiang Lee and Hugo Maximus Lim and Yu Xin Teoh and Jia Hng Koh and Dar Win Liew and Rishabh Bhardwaj and Rajat Bhardwaj and Soujanya Poria},
+      year={2024},
+      eprint={2408.03837},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2408.03837}, 
+}
+```
 
 
 <!-- 
