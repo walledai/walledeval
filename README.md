@@ -29,6 +29,7 @@
 <summary>
 <h3>Installing from PyPI</h3>
 </summary>
+
 Yes, we have published WalledEval on PyPI! To install WalledEval and all its dependencies, the easiest method would be to use `pip` to query PyPI. This should, by default, be present in your Python installation. To, install run the following command in a terminal or Command Prompt / Powershell:
 
 ```bash
@@ -49,6 +50,7 @@ Here too, `python` or `pip` might be replaced with `py` or `python3` and `pip3` 
 <summary>
 <h3>Installing from Source</h3>
 </summary>
+
 To install from source, you need to get the following:
 
 #### Git
@@ -178,6 +180,7 @@ logs[0]["score"] # True if safe, False if unsafe
 <summary>
 <h3>Flow 2: Judge Benchmarking</h3>
 </summary>
+
 Beyond just LLMs, some datasets are designed to benchmark judges and identify if they are able to accurately classify questions as **safe** or **unsafe**. The general requirements for testing an LLM on Judge Benchmarks is as follows:
 
 - **Prompts** - a compilation of prompts and/or responses from LLMs to judge
@@ -247,6 +250,7 @@ logs[0]["score"] # True if correct, False if wrong
 <summary>
 <h3>Flow 3: MCQ Benchmarking<h3>
 </summary>
+
 Some safety datasets (e..g [WMDP](https://www.wmdp.ai/) and [BBQ](https://aclanthology.org/2022.findings-acl.165/)) are designed to test LLMs on any harmful knowledge or inherent biases that they may possess. These datasets are largely formatted in multiple-choice question (**MCQ**) format, hence why we choose to call them MCQ Benchmarks. The general requirements for testing an LLM on MCQ Benchmarks is as follows:
 
 - **MCQ Questions**: a compilation of questions, choices and answer rows
