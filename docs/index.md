@@ -11,6 +11,10 @@
 
 ## 🔥Announcements
 
+> Our Technical Report is out [here](https://arxiv.org/abs/2408.03837)! Have a read to learn more about WalledEval's technical framework and our _flows_.
+
+> Excited to release our Singapore-specific exaggerated safety benchmark, [SGXSTest](https://huggingface.co/datasets/walledai/SGXSTest)! SGXSTest is composed of 100 samples of adversarially safe questions, in addition to their contrasting unsafe counterparts.
+
 >  Excited to announce the release of the community version of our guardrails: [WalledGuard](https://huggingface.co/walledai/walledguard-c)! **WalledGuard** comes in two versions: **Community** and **Advanced+**. We are releasing the community version under the Apache-2.0 License. To get access to the advanced version, please contact us at [admin@walled.ai](mailto:admin@walled.ai).
 
 > Excited to partner with The IMDA Singapore AI Verify Foundation to build robust AI safety and controllability measures!
