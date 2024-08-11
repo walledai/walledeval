@@ -2,92 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://walledai.github.io/walledeval/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/installation/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/components/dataset/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/components/judges/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/components/llm/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/components/templates/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/huggingface/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/input_types/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/llm_types/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/other_api/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/llm/supporting_your_own/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/auto-red-teaming/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/judges/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/mcq/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/prompts/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://walledai.github.io/walledeval/quickstart/refusal/</loc>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://walledai.github.io/walledeval/quickstart/templates/</loc>
-         <lastmod>2024-08-09</lastmod>
+         <lastmod>2024-08-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
