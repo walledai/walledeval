@@ -302,7 +302,7 @@ logs = []
 for sample in dataset:
     prompt = template(sample)
     response = llm(prompt)
-    judge_output, score = judge(response)
+    judge_output, score = judge(response, sample.answer)
     
     logs.append({
 	    "sample": sample.model_dump(),
